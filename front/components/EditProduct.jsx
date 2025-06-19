@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useSearchParams } from "react-router-dom";
-import axios from "axios";
+import api from "../src/services/api";
 
 function EditProduct() {
   const { id } = useParams();
@@ -11,13 +11,13 @@ function EditProduct() {
   const category = searchParams.get("category");
 
   useEffect(() => {
-    axios
+    api
       .get(`/api/products/${id}?category=${category}`)
       .then((res) => {
         setProduct(res.data);
         setFormData(res.data);
       })
-      .catch((err) => console.error("שגיאה בטעינת מוצר:", err));
+      .catch((err) => console.error("שגיאה בטעינת מוצר:", err.message));
   }, [id, category]);
 
   const handleChange = (e) => {
@@ -30,12 +30,12 @@ function EditProduct() {
     formDataImage.append("image", file);
 
     try {
-      const res = await axios.post("/api/upload", formDataImage, {
+      const res = await api.post("/api/upload", formDataImage, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setFormData((prev) => ({ ...prev, image: res.data.imageUrl }));
     } catch (error) {
-      console.error("שגיאה בהעלאת תמונה:", error);
+      console.error("שגיאה בהעלאת תמונה:", error.message);
       alert("העלאת התמונה נכשלה");
     }
   };
@@ -93,7 +93,7 @@ function EditProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/products/${id}?category=${category}`, formData, {
+      await api.put(`/api/products/${id}?category=${category}`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -101,7 +101,7 @@ function EditProduct() {
       alert("המוצר עודכן בהצלחה");
       navigate("/");
     } catch (error) {
-      console.error("שגיאה בעדכון המוצר:", error);
+      console.error("שגיאה בעדכון המוצר:", error.message);
       alert("אירעה שגיאה בעדכון");
     }
   };
@@ -270,6 +270,7 @@ function EditProduct() {
             </button>
           </div>
         ))}
+
         <button
           type="button"
           className="btn btn-outline-success mb-3"

@@ -1,7 +1,6 @@
-import React from "react";
-import { useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import api from "../src/services/api"; // ✅ ייבוא במקום axios
 
 function Register() {
   const [form, setForm] = useState({
@@ -26,7 +25,7 @@ function Register() {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/auth/register", form);
+      await api.post("/api/auth/register", form); // ✅ שימוש ב־api
       setMsg("נרשמת בהצלחה! ניתן להתחבר.");
     } catch (err) {
       setMsg(err.response?.data?.msg || "שגיאה בהרשמה");

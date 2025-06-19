@@ -8,15 +8,16 @@ function CustomDevelopment() {
 
       <div className="row align-items-center mb-5">
         <div className="col-lg-6 mb-4 mb-lg-0">
-          {/* וידאו - החלף את הקישור ל-YouTube או קובץ MP4 תקף */}
-          <div className="ratio ratio-16x9 shadow rounded-4">
-            <iframe
+          {/* החלפת iframe ב־<video> */}
+          <div className="shadow rounded-4 overflow-hidden">
+            <video
+              controls
+              className="w-100 rounded-4"
               src="https://res.cloudinary.com/dt5nnq3ew/video/upload/v1750326919/Tailor-Made_formulas_hu1aaz.mp4"
-              title="פיתוח אישי"
-              allowFullScreen
-            ></iframe>
+            />
           </div>
         </div>
+
         <div className="col-lg-6">
           <div className="bg-light p-4 rounded-4 shadow-sm">
             <p>
@@ -34,7 +35,6 @@ function CustomDevelopment() {
             </p>
             <p className="fw-bold">דברו איתנו.</p>
 
-            {/* כפתור יצירת קשר (אפשר לקשר לטופס, וואטסאפ וכו') */}
             <a href="/contact" className="btn btn-primary mt-3">
               יצירת קשר
             </a>

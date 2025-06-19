@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useUser } from "../hooks/UserContext";
 import { useNavigate } from "react-router-dom";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+
 const categoryMap = {
-  skinquality: "איכות ומרקם האור",
+  skinquality: "איכות ומרקם העור",
   hairloss: "התקרחות גברית",
   weightloss: "ירידה במשקל",
   acne: "אקנה",
@@ -12,47 +12,45 @@ const categoryMap = {
   pigmentation: "פיגמנטציה",
   antiaging: "אנטי אייג'ינג",
   rehabilitation: "שיקום העור לאחר טיפולים",
-  
-
 };
+
 const subcategoryMap = {
   skinquality: {
-    psoriazis: "פסוריאזיס",
+    psoriasis: "פסוריאזיס",
     acne: "אקנה",
     pigmentation: "פיגמנטציה",
-    antiaiging: "אנטי אייג'ינג",
+    antiaging: "אנטי אייג'ינג",
   },
 };
+
 function AdminProducts() {
   const { user } = useUser();
   const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState(null);
   const [showSubcategories, setShowSubcategories] = useState(false);
 
   useEffect(() => {
     if (!user || user.role !== "admin") {
       navigate("/");
     }
-  }, [user]);
+  }, [user, navigate]);
 
-  
   const handleCategoryClick = (category) => {
     if (category === "skinquality") {
       setShowSubcategories((prev) => !prev);
     } else {
-      navigate(`/${category}`);
+      navigate(`/admin/products/${category}`);
     }
   };
 
   const handleSubcategoryClick = (subcategory) => {
-    navigate(`/${subcategory}`);
+    navigate(`/admin/products/${subcategory}`);
   };
 
   return (
     <div className="container mt-5" dir="rtl">
       <h2 className="mb-4 text-center">ניהול מוצרים לפי קטגוריה</h2>
 
-      <div className="mb-4 d-flex flex-column align-items-center">
+      <div className="d-flex flex-column align-items-center">
         {Object.entries(categoryMap).map(([key, label]) => (
           <div key={key} className="w-100 text-center">
             <button
@@ -60,11 +58,11 @@ function AdminProducts() {
               onClick={() => handleCategoryClick(key)}
             >
               <span>{label}</span>
-              {key === "skinquality" ? (
+              {key === "skinquality" && (
                 <span>
                   {showSubcategories ? <FaChevronUp /> : <FaChevronDown />}
                 </span>
-              ) : null}
+              )}
             </button>
 
             {key === "skinquality" && showSubcategories && (

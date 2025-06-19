@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useUser } from "../hooks/UserContext";
-import { useSearchParams } from "react-router-dom";
 import api from "../src/services/api";
-
 
 function AddProduct() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category");
   const { user } = useUser();
+
   const [formData, setFormData] = useState({
     name: "",
     category: category || "",
@@ -90,7 +88,7 @@ function AddProduct() {
     const data = new FormData();
     data.append("image", file);
     try {
-      const res = await axios.post("/api/upload", data);
+      const res = await api.post("/api/upload", data);
       setFormData((prev) => ({ ...prev, image: res.data.imageUrl }));
     } catch (err) {
       console.error("שגיאה בהעלאת תמונה:", err);
@@ -101,15 +99,11 @@ function AddProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(
-        `/api/products?category=${category}`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      await api.post(`/api/products?category=${category}`, formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       alert("המוצר נוסף בהצלחה");
       navigate("/admin/products");
     } catch (err) {
@@ -117,7 +111,7 @@ function AddProduct() {
       alert("שגיאה בהוספה");
     }
   };
-  localStorage.setItem("token", user?.token);
+
   return (
     <div className="container mt-5" dir="rtl">
       <h2>הוספת מוצר חדש</h2>
@@ -131,6 +125,7 @@ function AddProduct() {
             onChange={handleChange}
           />
         </div>
+
         <div className="mb-3">
           <label className="form-label">קטגוריה</label>
           <input
@@ -140,6 +135,7 @@ function AddProduct() {
             onChange={handleChange}
           />
         </div>
+
         <div className="mb-3">
           <label className="form-label">תת קטגוריה</label>
           <input
@@ -149,6 +145,7 @@ function AddProduct() {
             onChange={handleChange}
           />
         </div>
+
         <div className="mb-3">
           <label className="form-label">תיאור מקוצר</label>
           <textarea
@@ -158,6 +155,7 @@ function AddProduct() {
             onChange={handleChange}
           />
         </div>
+
         <div className="mb-3">
           <label className="form-label">תיאור מלא</label>
           <textarea

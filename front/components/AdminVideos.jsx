@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useUser } from "../hooks/UserContext";
+import api from "../src/services/api";
 
 function AdminVideos() {
   const { user } = useUser();
@@ -14,10 +14,10 @@ function AdminVideos() {
 
   const fetchVideos = async () => {
     try {
-      const res = await axios.get("/api/videos");
+      const res = await api.get("/api/videos");
       setVideos(res.data);
     } catch (err) {
-      console.error("שגיאה בטעינת סרטונים:", err);
+      console.error("שגיאה בטעינת סרטונים:", err.message);
     }
   };
 
@@ -28,7 +28,7 @@ function AdminVideos() {
     formData.append("video", videoFile);
 
     try {
-      await axios.post("/api/videos", formData, {
+      await api.post("/api/videos", formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "multipart/form-data",
@@ -38,7 +38,7 @@ function AdminVideos() {
       setVideoFile(null);
       fetchVideos();
     } catch (err) {
-      console.error("שגיאה בהעלאת וידאו:", err);
+      console.error("שגיאה בהעלאת וידאו:", err.message);
       alert("שגיאה בהעלאת וידאו");
     } finally {
       setUploading(false);
@@ -48,14 +48,14 @@ function AdminVideos() {
   const handleDelete = async (id) => {
     if (!window.confirm("למחוק את הסרטון?")) return;
     try {
-      await axios.delete(`/api/videos/${id}`, {
+      await api.delete(`/api/videos/${id}`, {
         headers: {
           Authorization: `Bearer ${user?.token}`,
         },
       });
       fetchVideos();
     } catch (err) {
-      console.error("שגיאה במחיקת וידאו:", err);
+      console.error("שגיאה במחיקת וידאו:", err.message);
     }
   };
 
@@ -64,8 +64,8 @@ function AdminVideos() {
       <h2 className="mb-4">ניהול סרטונים</h2>
 
       <div className="mb-4">
-        <label htmlFor="videoUrl" className="form-label">
-          העלת סרטון
+        <label htmlFor="videoFile" className="form-label">
+          העלאת סרטון
         </label>
         <input
           type="file"

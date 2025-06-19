@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useUser } from "../hooks/UserContext";
+import api from "../src/services/api";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Pencil, Trash, Plus, Info } from "react-bootstrap-icons";
 
@@ -23,10 +23,10 @@ function ProductListByCategory() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/products?category=${category}`)
+    api
+      .get(`/api/products?category=${category}`)
       .then((res) => setProducts(res.data))
-      .catch((err) => console.error("שגיאה בקבלת נתונים:", err));
+      .catch((err) => console.error("שגיאה בקבלת נתונים:", err.message));
   }, [category]);
 
   const handleEdit = (productId) => {
@@ -36,17 +36,14 @@ function ProductListByCategory() {
   const handleDelete = async (productId) => {
     if (!window.confirm("האם את בטוחה שברצונך למחוק את המוצר?")) return;
     try {
-      await axios.delete(
-        `http://localhost:5000/api/products/${productId}?category=${category}`,
-        {
-          headers: {
-            Authorization: `Bearer ${user?.token}`,
-          },
-        }
-      );
+      await api.delete(`/api/products/${productId}?category=${category}`, {
+        headers: {
+          Authorization: `Bearer ${user?.token}`,
+        },
+      });
       setProducts((prev) => prev.filter((p) => p._id !== productId));
     } catch (err) {
-      console.error("שגיאה במחיקת מוצר:", err);
+      console.error("שגיאה במחיקת מוצר:", err.message);
       alert("אירעה שגיאה בעת המחיקה");
     }
   };

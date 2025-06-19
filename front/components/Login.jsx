@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useUser } from "../hooks/UserContext";
-import { jwtDecode } from "jwt-decode";
+import api from "../src/services/api"; // ✅ שימוש ב־baseURL
 
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -22,14 +21,11 @@ function Login() {
     e.preventDefault();
     setMsg("");
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        form
-      );
-      console.log("🔐 תגובת התחברות:", res.data); // ← בדיקה
+      const res = await api.post("/api/auth/login", form);
+      console.log("🔐 תגובת התחברות:", res.data);
 
-      login(res.data.token); 
-      navigate("/"); 
+      login(res.data.token);
+      navigate("/");
     } catch (err) {
       setMsg(err.response?.data?.msg || "שגיאה בהתחברות");
     }

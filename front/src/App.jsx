@@ -28,12 +28,10 @@ function App() {
         <Route path="/:category" element={<ProductListByCategory />} />
         <Route path="/:category/:id" element={<ProductPage />} />
         <Route path="/research" element={<ResearchLibrary />} />
-
         <Route path="/contact" element={<Contact />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/products" element={<AdminProducts />} />
         <Route path="/admin/edit/:id" element={<EditProduct />} />
-
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

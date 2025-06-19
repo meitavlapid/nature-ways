@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useUser } from "../hooks/UserContext";
+import Loader from "../components/Loader";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Trash, Upload } from "react-bootstrap-icons";
 
+const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 function ResearchLibrary() {
-  const { isAdmin } = useUser();
+  const { isAdmin, user } = useUser();
   const [researchList, setResearchList] = useState([]);
   const [uploading, setUploading] = useState(false);
+  const [title, setTitle] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchResearch();
@@ -15,10 +20,13 @@ function ResearchLibrary() {
 
   const fetchResearch = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/research");
+      setLoading(true);
+      const res = await axios.get(`${API}/api/research`);
       setResearchList(res.data);
     } catch (err) {
       console.error("שגיאה בקבלת מחקרים:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -27,14 +35,16 @@ function ResearchLibrary() {
     if (!file) return;
     const formData = new FormData();
     formData.append("pdf", file);
+    formData.append("title", title);
     setUploading(true);
     try {
-      await axios.post("http://localhost:5000/api/research/upload", formData, {
+      await axios.post(`${API}/api/research/upload`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
+      setTitle("");
       await fetchResearch();
     } catch (err) {
       console.error("שגיאה בהעלאת מחקר:", err);
@@ -47,7 +57,7 @@ function ResearchLibrary() {
   const handleDelete = async (id) => {
     if (!window.confirm("למחוק את המחקר?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/research/${id}`, {
+      await axios.delete(`${API}/api/research/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -57,7 +67,6 @@ function ResearchLibrary() {
       console.error("שגיאה במחיקת מחקר:", err);
     }
   };
-  console.log("טוקן:", localStorage.getItem("token"));
 
   return (
     <div className="container py-5" dir="rtl">
@@ -65,6 +74,13 @@ function ResearchLibrary() {
 
       {isAdmin && (
         <div className="text-end mb-4">
+          <input
+            type="text"
+            placeholder="כותרת למחקר"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="form-control mb-2"
+          />
           <label className="btn btn-outline-primary">
             <Upload className="mb-1" /> העלאת מחקר חדש
             <input
@@ -75,10 +91,13 @@ function ResearchLibrary() {
               disabled={uploading}
             />
           </label>
+          {uploading && <p className="text-muted mt-2">מעלה קובץ...</p>}
         </div>
       )}
 
-      {researchList.length === 0 ? (
+      {loading ? (
+        <Loader />
+      ) : researchList.length === 0 ? (
         <p className="text-center">אין מחקרים להצגה.</p>
       ) : (
         <div className="row g-4">

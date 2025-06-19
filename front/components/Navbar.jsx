@@ -22,7 +22,7 @@ function Navbar() {
             <img
               src="https://res.cloudinary.com/dt5nnq3ew/image/upload/v1750344062/logo_ul47xl.png"
               alt="לוגו האתר"
-              className="logo"
+              className="logo-img"
             />
           </Link>
         </div>
@@ -121,7 +121,7 @@ function Navbar() {
             )}
 
             {user ? (
-              <li className="nav-item d-flex align-items-center">
+              <li className="nav-item">
                 <span className="user-greeting">שלום {user.name}</span>
                 <button className="btn btn-outline-danger" onClick={logout}>
                   התנתק

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import axios from "axios";
 import api from "../src/services/api";
 import "../css/Home.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -22,7 +21,6 @@ function Home() {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    axios;
     api
       .get("/api/images")
       .then((res) => setImages(res.data))
@@ -30,7 +28,7 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    axios
+    api
       .get("/api/videos")
       .then((res) => setVideos(res.data))
       .catch((err) => console.error("שגיאה בטעינת סרטונים:", err));

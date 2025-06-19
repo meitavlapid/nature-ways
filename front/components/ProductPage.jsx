@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { useUser } from "../hooks/UserContext";
+import api from "../src/services/api"; // ✅ שימוש במקום axios
 import "bootstrap/dist/css/bootstrap.min.css";
+import Loader from "./Loader";
 
 function ProductPage() {
   const { id, category } = useParams();
@@ -11,17 +12,18 @@ function ProductPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/products/${id}?category=${category}`)
+    api
+      .get(`/api/products/${id}?category=${category}`)
       .then((res) => setProduct(res.data))
       .catch((err) => {
-        console.error("שגיאה בקבלת פרטי מוצר:", err);
+        console.error("שגיאה בקבלת פרטי מוצר:", err.message);
         alert("המוצר לא נמצא");
         navigate(`/${category}`);
       });
   }, [id, category, navigate]);
 
-  if (!product) return <div className="text-center py-5">טוען...</div>;
+  if (!product) return <Loader />;
+
 
   return (
     <div className="container py-4" dir="rtl">

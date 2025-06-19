@@ -18,34 +18,39 @@ function Admin() {
       <h2 className="mb-4">ניהול המערכת</h2>
 
       <div className="row">
-        <div className="col-md-6 mb-4">
-          <div className="card shadow-sm">
-            <div className="card-body">
+        {/* ניהול מוצרים */}
+        <div className="col-md-4 mb-4">
+          <div className="card shadow-sm h-100">
+            <div className="card-body d-flex flex-column">
               <h5 className="card-title">ניהול מוצרים</h5>
               <p className="card-text">צפייה, עריכה והוספה של מוצרים.</p>
-              <Link to="/admin/products" className="btn btn-primary">
+              <Link to="/admin/products" className="btn btn-primary mt-auto">
                 לניהול מוצרים
               </Link>
             </div>
           </div>
         </div>
 
-        <div className="col-md-6 mb-4">
-          <div className="card shadow-sm">
-            <div className="card-body">
+        {/* ניהול משתמשים */}
+        <div className="col-md-4 mb-4">
+          <div className="card shadow-sm h-100">
+            <div className="card-body d-flex flex-column">
               <h5 className="card-title">משתמשים רשומים</h5>
               <p className="card-text">צפייה וניהול משתמשים רשומים.</p>
-              <button className="btn btn-secondary">לניהול משתמשים</button>
+              <Link to="/admin/users" className="btn btn-secondary mt-auto">
+                לניהול משתמשים
+              </Link>
             </div>
           </div>
         </div>
+
         {/* ניהול סרטונים */}
         <div className="col-md-4 mb-4">
-          <div className="card shadow-sm">
-            <div className="card-body">
+          <div className="card shadow-sm h-100">
+            <div className="card-body d-flex flex-column">
               <h5 className="card-title">ניהול סרטונים</h5>
               <p className="card-text">הוספה ומחיקה של סרטונים לעמוד הבית.</p>
-              <Link to="/admin/videos" className="btn btn-success">
+              <Link to="/admin/videos" className="btn btn-success mt-auto">
                 לניהול סרטונים
               </Link>
             </div>
