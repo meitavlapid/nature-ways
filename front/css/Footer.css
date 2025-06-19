@@ -1,0 +1,28 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #f0f0f0;
+  direction: rtl;
+ margin: 50px 0 auto;
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+}
+
+.footer-right a {
+  margin: 0 8px;
+  font-size: 24px;
+  color: #333;
+}
+
+.footer-center .footer-logo {
+  height: 70px;
+}
+
+.footer-left p {
+  margin: 2px 0;
+  text-align: right;
+}
+
