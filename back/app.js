@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const uploadRoutes = require("./routes/upload");
 const researchRoutes = require("./routes/research");
+const imageRoutes = require("./routes/images");
 
 const authRoutes = require("./routes/auth");
 const productsRoutes = require("./routes/products");
@@ -20,7 +21,7 @@ app.use("/api/research", researchRoutes);
 
 app.use("/api/upload", uploadRoutes);
 app.use("/api/videos", videoRoutes);
-app.use("/api/images", require("./routes/images"));
+app.use("/api/images", imageRoutes);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productsRoutes);

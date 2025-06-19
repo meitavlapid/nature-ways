@@ -22,7 +22,8 @@ function Home() {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    axios
+    axios;
+    api
       .get("/api/images")
       .then((res) => setImages(res.data))
       .catch((err) => console.error("שגיאה בטעינת תמונות:", err));

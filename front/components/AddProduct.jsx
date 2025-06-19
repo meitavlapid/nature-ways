@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../hooks/UserContext";
 import { useSearchParams } from "react-router-dom";
+import api from "../src/services/api";
+
 
 function AddProduct() {
   const navigate = useNavigate();
@@ -100,7 +102,7 @@ function AddProduct() {
     e.preventDefault();
     try {
       await axios.post(
-        `http://localhost:5000/api/products?category=${category}`,
+        `/api/products?category=${category}`,
         formData,
         {
           headers: {
