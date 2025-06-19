@@ -20,6 +20,7 @@ app.use("/api/research", researchRoutes);
 
 app.use("/api/upload", uploadRoutes);
 app.use("/api/videos", videoRoutes);
+app.use("/api/images", require("./routes/images"));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productsRoutes);
@@ -30,13 +31,12 @@ app.get("/", (req, res) => {
 });
 
 // MongoDB connection
-mongoose
-  .connect(process.env.MONGO_URI || "mongodb://localhost:27017/natureways", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => {
-    console.log("✅ Connected to MongoDB");
+    console.log("Connecting to:", process.env.MONGO_URI);
     app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
   })
   .catch((err) => console.error("❌ MongoDB connection error:", err));

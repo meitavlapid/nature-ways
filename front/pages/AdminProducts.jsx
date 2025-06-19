@@ -7,6 +7,11 @@ const categoryMap = {
   skinquality: "איכות ומרקם האור",
   hairloss: "התקרחות גברית",
   weightloss: "ירידה במשקל",
+  acne: "אקנה",
+  psoriasis: "פסוריאזיס",
+  pigmentation: "פיגמנטציה",
+  antiaging: "אנטי אייג'ינג",
+  rehabilitation: "שיקום העור לאחר טיפולים",
   
 
 };

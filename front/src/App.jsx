@@ -14,6 +14,7 @@ import ProductPage from "../components/ProductPage";
 import ProductListByCategory from "../components/ProductListByCategory";
 import CustomDevelopment from "../pages/CustomDevelopment";
 import ResearchLibrary from "../pages/ResearchLibrary";
+import EditProduct from "../components/EditProduct";
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/products" element={<AdminProducts />} />
+        <Route path="/admin/edit/:id" element={<EditProduct />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

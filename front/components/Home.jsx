@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import axios from "axios";
 
@@ -18,10 +17,16 @@ function Home() {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  
-  
 
+  const [images, setImages] = useState([]);
   const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/api/images")
+      .then((res) => setImages(res.data))
+      .catch((err) => console.error("שגיאה בטעינת תמונות:", err));
+  }, []);
 
   useEffect(() => {
     axios
@@ -30,35 +35,46 @@ function Home() {
       .catch((err) => console.error("שגיאה בטעינת סרטונים:", err));
   }, []);
 
+  const getImageUrl = (key) => {
+    const image = images.find((img) => img.key === key);
+    return image ? image.url : "";
+  };
+
   return (
     <div className="container py-4">
       <h1 className="text-center mb-4">ברוכים הבאים</h1>
 
       {/* תמונה ראשית */}
       <div className="mb-4 text-center">
-        <img
-          className="img-fluid rounded shadow"
-          src="/images/home.png"
-          alt="תמונה ראשית"
-          style={{ maxHeight: "400px", objectFit: "cover" }}
-        />
+        {getImageUrl("home") && (
+          <img
+            className="img-fluid rounded shadow"
+            src={getImageUrl("home")}
+            alt="תמונה ראשית"
+            style={{ maxHeight: "400px", objectFit: "cover" }}
+          />
+        )}
       </div>
 
       {/* שתי תמונות נוספות */}
       <div className="row g-3 mb-5">
         <div className="col-md-6">
-          <img
-            src="/images/nutri_ home.png"
-            className="img-fluid rounded shadow"
-            alt="תמונה 2"
-          />
+          {getImageUrl("nutri") && (
+            <img
+              src={getImageUrl("nutri")}
+              className="img-fluid rounded shadow"
+              alt="תמונה 2"
+            />
+          )}
         </div>
         <div className="col-md-6">
-          <img
-            src="/images/dermo_home.png"
-            className="img-fluid rounded shadow"
-            alt="תמונה 3"
-          />
+          {getImageUrl("dermo") && (
+            <img
+              src={getImageUrl("dermo")}
+              className="img-fluid rounded shadow"
+              alt="תמונה 3"
+            />
+          )}
         </div>
       </div>
 
