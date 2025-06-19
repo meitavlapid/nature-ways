@@ -1,0 +1,93 @@
+.product-bg {
+  background-image: url("https://res.cloudinary.com/dt5nnq3ew/image/upload/v1750354610/background_product_mtz6lc.png");
+  background-size:cover;
+  background-position: left;
+  background-repeat: no-repeat;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.13);
+  height: 100%;
+  width: 100%;
+
+  }
+
+/* טיפוגרפיה */
+.product-bg h2 {
+  font-weight: 700;
+  color: #333;
+  margin-top: 7rem;
+  margin-right: 2rem;
+}
+
+.product-bg h5 {
+  margin-top: 1.5rem;
+  font-weight: 600;
+  color: #2d2d2d;
+  margin-right: 2rem;
+}
+
+.product-bg p,
+.product-bg li {
+  color: #444;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-right: 2rem;
+}
+
+/* תמונה */
+.product-bg img {
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  margin-top: 15rem;
+}
+
+/* כפתורים */
+.product-bg .btn-warning,
+.product-bg .btn-secondary {
+  font-weight: 500;
+}
+
+.product-bg .btn-warning {
+  background-color: #f3c96b;
+  border: none;
+  color: #333;
+}
+
+.product-bg .btn-warning:hover {
+  background-color: #e6b74d;
+  color: white;
+}
+.btn-custom-back {
+  background-color: #6c9a8b;
+  color: white;
+  border: none;
+}
+.btn-custom-back:hover {
+  background-color: #5d8c7b;
+}
+
+/* ===== רספונסיבי ===== */
+@media (max-width: 768px) {
+  .product-bg {
+    padding: 1rem;
+  }
+
+  .product-bg h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .product-bg img {
+    max-height: 220px;
+    margin-bottom: 1rem;
+  }
+
+  .product-bg ul {
+    padding-right: 1rem;
+  }
+
+  .product-bg .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}

@@ -15,6 +15,7 @@ import ProductListByCategory from "../components/ProductListByCategory";
 import CustomDevelopment from "../pages/CustomDevelopment";
 import ResearchLibrary from "../pages/ResearchLibrary";
 import EditProduct from "../components/EditProduct";
+import ScrollToTopButton from "../components/ScrollToTopButton";
 
 function App() {
   return (
@@ -35,6 +36,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
+      <ScrollToTopButton />
+
       <Footer />
     </>
   );
