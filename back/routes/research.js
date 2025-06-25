@@ -17,23 +17,28 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => {
-    const rawTitle = req.body.title?.trim() || file.originalname.split(".")[0];
-    const ext = file.originalname.split(".").pop();
-
-    const cleanTitle = rawTitle
-      .replace(/\s+/g, "_") // רווחים ל־_
-      .replace(/[^a-zA-Z0-9_]/g, "");
-      
-
-    if (!cleanTitle) {
+    try {
+      const rawTitle = req.body.title?.trim() || file.originalname.split(".")[0];
+      const ext = file.originalname.split(".").pop();
+      const cleanTitle = rawTitle
+        .replace(/\s+/g, "_")
+        .replace(/[^\w\-א-ת]/g, "")
+        .replace(/_+/g, "_")
+        .replace(/^_+|_+$/g, "");
+  
+      console.log("🔤 public_id:", cleanTitle, "ext:", ext);
+  
       return {
         folder: "researches",
         resource_type: "raw",
-        public_id: `file_${Date.now()}`, // שם ברירת מחדל
+        public_id: cleanTitle || `file_${Date.now()}`,
         format: ext,
       };
+    } catch (err) {
+      console.error("❌ שגיאה ביצירת public_id:", err);
+      throw err;
     }
-  },
+  }
 });
 const upload = multer({ storage });
 
