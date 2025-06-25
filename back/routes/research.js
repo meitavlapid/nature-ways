@@ -17,24 +17,23 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => {
-    const title = req.body.title || file.originalname.split(".")[0];
-    const ext = file.originalname.split(".").pop(); // סיומת אמיתית מהקובץ
-    const cleanTitle = title
-      .trim()
-      .replace(/\s+/g, "_")
-      .replace(/[^\w\-א-ת]/g, "")
-      .replace(/_+/g, "_") // לא יותר מדי _
+    const rawTitle = req.body.title?.trim() || file.originalname.split(".")[0];
+    const ext = file.originalname.split(".").pop();
+
+    const cleanTitle = rawTitle
+      .replace(/\s+/g, "_") // רווחים ל־_
+      .replace(/[^\w\-א-ת]/g, "") // מסיר סימנים
+      .replace(/_+/g, "_") // לא כפול _
       .replace(/^_+|_+$/g, ""); // בלי _ בהתחלה/סוף
 
     return {
       folder: "researches",
       resource_type: "raw",
-      public_id: cleanTitle || `file_${Date.now()}`, // בלי סיומת!
-      format: ext, // מוסיף את הסיומת לקובץ
+      public_id: cleanTitle || `file_${Date.now()}`, // שם ברירת מחדל
+      format: ext,
     };
   },
 });
-
 const upload = multer({ storage });
 
 // GET – כל המחקרים
