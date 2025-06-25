@@ -22,13 +22,17 @@ const storage = new CloudinaryStorage({
 
     const cleanTitle = rawTitle
       .replace(/\s+/g, "_") // רווחים ל־_
+      .replace(/[^a-zA-Z0-9_]/g, "");
+      
 
-    return {
-      folder: "researches",
-      resource_type: "raw",
-      public_id: cleanTitle || `file_${Date.now()}`, // שם ברירת מחדל
-      format: ext,
-    };
+    if (!cleanTitle) {
+      return {
+        folder: "researches",
+        resource_type: "raw",
+        public_id: `file_${Date.now()}`, // שם ברירת מחדל
+        format: ext,
+      };
+    }
   },
 });
 const upload = multer({ storage });
