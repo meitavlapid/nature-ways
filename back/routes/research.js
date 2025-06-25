@@ -18,16 +18,17 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => {
     try {
-      const rawTitle = req.body.title?.trim() || file.originalname.split(".")[0];
+      const rawTitle =
+        req.body.title?.trim() || file.originalname.split(".")[0];
       const ext = file.originalname.split(".").pop();
       const cleanTitle = rawTitle
-        .replace(/\s+/g, "_")
-        .replace(/[^\w\-א-ת]/g, "")
-        .replace(/_+/g, "_")
-        .replace(/^_+|_+$/g, "");
-  
+        .replace(/\s+/g, "_") // רווחים → _
+        .replace(/[^א-תa-zA-Z0-9_\-]/g, "") // כל תו שהוא לא אות/מספר/קווים – יימחק
+        .replace(/_+/g, "_") // לא יותר מדי _
+        .replace(/^_+|_+$/g, ""); // בלי _ בתחילת/סוף
+
       console.log("🔤 public_id:", cleanTitle, "ext:", ext);
-  
+
       return {
         folder: "researches",
         resource_type: "raw",
