@@ -22,7 +22,9 @@ const storage = new CloudinaryStorage({
     const cleanTitle = title
       .trim()
       .replace(/\s+/g, "_")
-      .replace(/[^\w\-א-ת]/g, ""); // מוודא שם חוקי
+      .replace(/[^\w\-א-ת]/g, "")
+      .replace(/_+/g, "_") // לא יותר מדי _
+      .replace(/^_+|_+$/g, ""); // בלי _ בהתחלה/סוף
 
     return {
       folder: "researches",

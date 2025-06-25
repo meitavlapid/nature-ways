@@ -33,10 +33,18 @@ function ResearchLibrary() {
   const handleUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
+
+    if (!title.trim()) {
+      alert("נא להזין כותרת למחקר לפני העלאה");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("pdf", file);
-    formData.append("title", title);
+    formData.append("title", title.trim());
+
     setUploading(true);
+
     try {
       await axios.post(`${API}/api/research/upload`, formData, {
         headers: {
@@ -53,6 +61,7 @@ function ResearchLibrary() {
       setUploading(false);
     }
   };
+  
 
   const handleDelete = async (id) => {
     if (!window.confirm("למחוק את המחקר?")) return;
