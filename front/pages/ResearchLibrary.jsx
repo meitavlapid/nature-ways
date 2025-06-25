@@ -114,7 +114,9 @@ function ResearchLibrary() {
                   <div className="mb-3">
                     <p>להורדת הקובץ:</p>
                     <a
-                      href={fileUrl}
+                      href={`https://res.cloudinary.com/<CLOUD_NAME>/raw/upload/fl_attachment:${encodeURIComponent(
+                        research.title || "מחקר"
+                      )}/${fileUrl.split("/").pop()}`}
                       download
                       target="_blank"
                       rel="noopener noreferrer"

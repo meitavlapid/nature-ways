@@ -19,6 +19,10 @@ const storage = new CloudinaryStorage({
   params: {
     folder: "researches",
     resource_type: "raw",
+    public_id: (req, file) => {
+      const title = req.body.title || file.originalname.split(".")[0];
+      return title.replace(/\s+/g, "_");
+    },
   },
 });
 
