@@ -16,16 +16,20 @@ cloudinary.config({
 // אחסון עם Cloudinary
 const storage = new CloudinaryStorage({
   cloudinary,
-  params: {
-    folder: "researches",
-    resource_type: "raw",
-    public_id: (req, file) => {
-      const title = req.body.title || file.originalname.split(".")[0];
-      const cleanTitle = title.replace(/\s+/g, "_").replace(/[^\w\-א-ת]/g, "");
-      return cleanTitle;
-    },
+  params: async (req, file) => {
+    const rawTitle = req.body.title || file.originalname || "unnamed";
+    const cleanTitle = rawTitle
+      .trim()
+      .replace(/\s+/g, "_")
+      .replace(/[^\w\-א-ת]/g, "");
+    return {
+      folder: "researches",
+      resource_type: "raw",
+      public_id: cleanTitle || `file_${Date.now()}`,
+    };
   },
 });
+
 
 const upload = multer({ storage });
 
@@ -70,10 +74,7 @@ router.delete("/:id", authenticateToken, requireAdmin, async (req, res) => {
 
     const fileUrl = research.fileUrl;
 
-    // 🔍 חילוץ נתיב נכון למחיקה, ללא v###
-    const match = research.fileUrl.match(
-      /upload\/(?:v\d+\/)?(.+)\.(pdf|doc|docx)$/
-    );
+    const match = research.fileUrl.match(/upload\/(?:v\d+\/)?(.+)$/);
 
     console.log("📄 fileUrl:", fileUrl);
 

@@ -114,15 +114,10 @@ function ResearchLibrary() {
                   <div className="mb-3">
                     <p>להורדת הקובץ:</p>
                     <a
-                      href={fileUrl.replace(
-                        "/upload/",
-                        `/upload/fl_attachment:${encodeURIComponent(
-                          research.title || "מחקר"
-                        )}/`
-                      )}
-                      download
+                      href={fileUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      download={research.title || "מסמך"}
                       className="btn btn-outline-primary btn-sm"
                     >
                       הורדה
