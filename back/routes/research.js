@@ -17,21 +17,21 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => {
-    const title = req.body.title || file.originalname || "unnamed";
-    const ext = file.originalname.split(".").pop(); // נניח docx
+    const title = req.body.title || file.originalname.split(".")[0];
+    const ext = file.originalname.split(".").pop(); // סיומת אמיתית מהקובץ
     const cleanTitle = title
       .trim()
       .replace(/\s+/g, "_")
-      .replace(/[^\w\-א-ת]/g, "");
+      .replace(/[^\w\-א-ת]/g, ""); // מוודא שם חוקי
 
     return {
       folder: "researches",
       resource_type: "raw",
-      public_id: `${cleanTitle}.${ext}`, // כולל סיומת!
+      public_id: cleanTitle || `file_${Date.now()}`, // בלי סיומת!
+      format: ext, // מוסיף את הסיומת לקובץ
     };
   },
 });
-
 
 const upload = multer({ storage });
 
@@ -45,12 +45,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-// POST – העלאת PDF
+// POST –
 router.post(
   "/upload",
   authenticateToken,
   requireAdmin,
-  upload.single("pdf"), // ודא שה-input בשם הזה
+  upload.single("pdf"), 
   async (req, res) => {
     try {
       console.log("Received file:", req.file);
@@ -84,7 +84,7 @@ router.delete("/:id", authenticateToken, requireAdmin, async (req, res) => {
       return res.status(400).json({ error: "לא ניתן לחלץ public_id מהקישור" });
     }
 
-    const publicId = match[1]; // ← יהיה "researches/tkfgxwyqmyqyzezm1wiv"
+    const publicId = match[1];
     console.log("🗑️ publicId למחיקה:", publicId);
 
     const result = await cloudinary.uploader.destroy(publicId, {
