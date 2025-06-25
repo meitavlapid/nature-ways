@@ -18,17 +18,21 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => {
     try {
+      console.log("📥 title from req.body:", req.body.title);
+      console.log("📁 file.originalname:", file.originalname);
+  
       const rawTitle =
         req.body.title?.trim() || file.originalname.split(".")[0];
       const ext = file.originalname.split(".").pop();
+  
       const cleanTitle = rawTitle
-        .replace(/\s+/g, "_") // רווחים → _
-        .replace(/[^א-תa-zA-Z0-9_\-]/g, "") // כל תו שהוא לא אות/מספר/קווים – יימחק
-        .replace(/_+/g, "_") // לא יותר מדי _
-        .replace(/^_+|_+$/g, ""); // בלי _ בתחילת/סוף
-
-      console.log("🔤 public_id:", cleanTitle, "ext:", ext);
-
+        .replace(/\s+/g, "_")
+        .replace(/[^א-תa-zA-Z0-9_\-]/g, "")
+        .replace(/_+/g, "_")
+        .replace(/^_+|_+$/g, "");
+  
+      console.log("🔤 final public_id:", cleanTitle, "ext:", ext);
+  
       return {
         folder: "researches",
         resource_type: "raw",
@@ -40,7 +44,7 @@ const storage = new CloudinaryStorage({
       throw err;
     }
   }
-});
+});  
 const upload = multer({ storage });
 
 // GET – כל המחקרים
