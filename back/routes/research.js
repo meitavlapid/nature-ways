@@ -45,6 +45,8 @@ const storage = new CloudinaryStorage({
     }
   }
 });  
+
+
 const upload = multer({ storage });
 
 // GET – כל המחקרים
@@ -62,7 +64,7 @@ router.post(
   "/upload",
   authenticateToken,
   requireAdmin,
-  upload.single("pdf"), 
+  upload.fields([{ name: "pdf", maxCount: 1 }]),
   async (req, res) => {
     try {
       console.log("Received file:", req.file);
