@@ -85,7 +85,7 @@ function ResearchLibrary() {
             <Upload className="mb-1" /> העלאת מחקר חדש
             <input
               type="file"
-              accept="application/pdf"
+              accept=".pdf,.doc,.docx"
               onChange={handleUpload}
               hidden
               disabled={uploading}

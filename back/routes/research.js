@@ -19,7 +19,6 @@ const storage = new CloudinaryStorage({
   params: {
     folder: "researches",
     resource_type: "raw",
-    format: async () => "pdf",
   },
 });
 
@@ -67,7 +66,10 @@ router.delete("/:id", authenticateToken, requireAdmin, async (req, res) => {
     const fileUrl = research.fileUrl;
 
     // 🔍 חילוץ נתיב נכון למחיקה, ללא v###
-    const match = research.fileUrl.match(/upload\/(?:v\d+\/)?(.+)\.pdf$/);
+    const match = research.fileUrl.match(
+      /upload\/(?:v\d+\/)?(.+)\.(pdf|doc|docx)$/
+    );
+
     console.log("📄 fileUrl:", fileUrl);
 
     if (!match || !match[1]) {

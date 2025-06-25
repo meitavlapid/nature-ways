@@ -1,20 +1,33 @@
+.container {
+  width: 100%;
+  padding: 2rem;
+  direction: rtl;
+  margin: 0 auto;
+  background: #f8f8f8;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 3rem auto;
+  
+}
+
 .product-bg {
   background-image: url("https://res.cloudinary.com/dt5nnq3ew/image/upload/v1750354610/background_product_mtz6lc.png");
-  background-size:cover;
-  background-position: left;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
+  padding: 2rem;
+  border: 1px solid #e0e0e0;
   border-radius: 1rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.13);
-  height: 100%;
-  width: 100%;
-
-  }
+}
 
 /* טיפוגרפיה */
 .product-bg h2 {
   font-weight: 700;
   color: #333;
-  margin-top: 7rem;
+  margin-top: 12rem;
   margin-right: 2rem;
 }
 

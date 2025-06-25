@@ -25,7 +25,7 @@ function ProductPage() {
   if (!product) return <Loader />;
 
   return (
-    <div className="container py-4" dir="rtl">
+    <div className="container" dir="rtl">
       <div className="product-bg">
         <div className="d-flex justify-content-between">
           <button className="btn btn-custom-back" onClick={() => navigate(-1)}>
@@ -47,7 +47,6 @@ function ProductPage() {
           <div className="col-lg-7">
             <h2>{product.name}</h2>
             <p className="lead text-muted">{product.shortDescription}</p>
-           
 
             <div>
               <h5>תיאור מלא:</h5>
@@ -116,12 +115,7 @@ function ProductPage() {
           </div>
 
           <div className="col-lg-5 text-center">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="img-fluid"
-             
-            />
+            <img src={product.image} alt={product.name} className="img-fluid" />
           </div>
         </div>
       </div>
