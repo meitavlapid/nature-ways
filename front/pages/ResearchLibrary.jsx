@@ -8,7 +8,7 @@ import { Trash, Upload } from "react-bootstrap-icons";
 const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 function ResearchLibrary() {
-  const { isAdmin, user } = useUser();
+  const { isAdmin } = useUser();
   const [researchList, setResearchList] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [title, setTitle] = useState("");
@@ -101,28 +101,41 @@ function ResearchLibrary() {
         <p className="text-center">אין מחקרים להצגה.</p>
       ) : (
         <div className="row g-4">
-          {researchList.map((research) => (
-            <div className="col-md-6" key={research._id}>
-              <div className="card shadow-sm rounded-4 p-3 h-100">
-                <h5 className="mb-3">{research.title || "מסמך מחקר"}</h5>
-                <div className="ratio ratio-4x3 mb-3">
-                  <iframe
-                    src={research.fileUrl}
-                    title="research-pdf"
-                    frameBorder="0"
-                  ></iframe>
+          {researchList.map((research) => {
+            const fileUrl = research.fileUrl;
+            const fileName = research.title || "מסמך";
+
+            return (
+              <div className="col-md-6" key={research._id}>
+                <div className="card shadow-sm rounded-4 p-3 h-100">
+                  <h5 className="mb-3">{fileName}</h5>
+
+                  {/* רק כפתור להורדת הקובץ */}
+                  <div className="mb-3">
+                    <p>להורדת הקובץ:</p>
+                    <a
+                      href={fileUrl}
+                      download
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-outline-primary btn-sm"
+                    >
+                      הורדה
+                    </a>
+                  </div>
+
+                  {isAdmin && (
+                    <button
+                      className="btn btn-danger btn-sm"
+                      onClick={() => handleDelete(research._id)}
+                    >
+                      <Trash className="mb-1" /> מחיקה
+                    </button>
+                  )}
                 </div>
-                {isAdmin && (
-                  <button
-                    className="btn btn-danger btn-sm"
-                    onClick={() => handleDelete(research._id)}
-                  >
-                    <Trash className="mb-1" /> מחיקה
-                  </button>
-                )}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>
