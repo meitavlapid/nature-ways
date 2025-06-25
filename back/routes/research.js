@@ -17,15 +17,17 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => {
-    const rawTitle = req.body.title || file.originalname || "unnamed";
-    const cleanTitle = rawTitle
+    const title = req.body.title || file.originalname || "unnamed";
+    const ext = file.originalname.split(".").pop(); // נניח docx
+    const cleanTitle = title
       .trim()
       .replace(/\s+/g, "_")
       .replace(/[^\w\-א-ת]/g, "");
+
     return {
       folder: "researches",
       resource_type: "raw",
-      public_id: cleanTitle || `file_${Date.now()}`,
+      public_id: `${cleanTitle}.${ext}`, // כולל סיומת!
     };
   },
 });
