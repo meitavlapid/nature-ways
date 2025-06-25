@@ -21,7 +21,8 @@ const storage = new CloudinaryStorage({
     resource_type: "raw",
     public_id: (req, file) => {
       const title = req.body.title || file.originalname.split(".")[0];
-      return title.replace(/\s+/g, "_");
+      const cleanTitle = title.replace(/\s+/g, "_").replace(/[^\w\-א-ת]/g, "");
+      return cleanTitle;
     },
   },
 });
