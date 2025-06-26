@@ -90,6 +90,7 @@ router.post(
         originalName,
         fileUrl,
         public_id,
+        imageUrl,
       });
       await research.save();
 
