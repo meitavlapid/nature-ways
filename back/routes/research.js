@@ -19,7 +19,11 @@ const rawStorage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => {
     let rawTitle = "";
-    if (req.body && typeof req.body.title === "string" && req.body.title.trim()) {
+    if (
+      req.body &&
+      typeof req.body.title === "string" &&
+      req.body.title.trim()
+    ) {
       rawTitle = req.body.title.trim();
     } else {
       rawTitle = file.originalname.split(".")[0];
@@ -54,7 +58,6 @@ const imageStorage = new CloudinaryStorage({
     resource_type: "image",
   },
 });
-
 const uploadRaw = multer({ storage: rawStorage });
 const uploadImage = multer({ storage: imageStorage });
 
@@ -83,7 +86,10 @@ router.post(
       const originalName = file.originalname;
 
       const fileUrl = file.path;
-      const public_id = file.filename; // ← שומר את full public_id כולל 'researches/שם_הקובץ.docx'
+      const public_id = file.filename;
+      const imageUrl = req.body.imageUrl && req.body.imageUrl !== "undefined"
+        ? req.body.imageUrl
+        : "";
 
       const research = new Research({
         title,
@@ -102,6 +108,21 @@ router.post(
     }
   }
 );
+router.post("/upload-image", uploadImage.single("image"), async (req, res) => {
+  try {
+    if (!req.file) {
+      console.log("❌ לא התקבל קובץ בכלל");
+      return res.status(400).json({ error: "לא התקבל קובץ" });
+    }
+    console.log("📦 קובץ שהתקבל:", req.file);
+    const imageUrl = req.file.path;
+    res.json({ imageUrl });
+  } catch (err) {
+    console.error("שגיאה בהעלאת תמונה:", err);
+    res.status(500).json({ error: "שגיאה בהעלאת תמונה" });
+  }
+});
+
 // DELETE – כולל מחיקת PDF מ־Cloudinary
 
 router.delete("/:id", authenticateToken, requireAdmin, async (req, res) => {
@@ -135,14 +156,6 @@ router.delete("/:id", authenticateToken, requireAdmin, async (req, res) => {
     res.status(500).json({ error: "שגיאה במחיקה", details: err.message });
   }
 });
-router.post("/upload-image", uploadImage.single("image"), async (req, res) => {
-  try {
-    const imageUrl = req.file.path;
-    res.json({ imageUrl });
-  } catch (err) {
-    console.error("שגיאה בהעלאת תמונה:", err);
-    res.status(500).json({ error: "שגיאה בהעלאת תמונה" });
-  }
-});
+
 
 module.exports = router;

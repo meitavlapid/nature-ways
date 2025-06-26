@@ -91,16 +91,14 @@ function ResearchLibrary() {
 
       if (imageFile) {
         const imageData = new FormData();
-        imageData.append("image", imageFile);
-        imageData.append("upload_preset", "your_upload_preset"); // ← החלף לפי Cloudinary שלך
-        imageData.append("folder", "research-images");
+        imageData.append("image", imageFile); // ✅ השם חייב להיות בדיוק כמו ב־uploadImage.single("image")
 
         const imageRes = await axios.post(
           `${API}/api/research/upload-image`,
           imageData
         );
 
-        imageUrl = imageRes.data.secure_url;
+        imageUrl = imageRes.data.imageUrl; // 👈 אל תשכח ש־backend מחזיר { imageUrl }
         formData.append("imageUrl", imageUrl);
       }
 
