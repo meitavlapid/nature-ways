@@ -20,13 +20,26 @@ const storage = new CloudinaryStorage({
 
 const upload = multer({ storage });
 
+// העלאת תמונה
 router.post("/", upload.single("image"), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: "קובץ לא התקבל" });
   }
-  res.json({ imageUrl: req.file.path });
+  res.json({
+    imageUrl: req.file.path,
+    public_id: req.file.filename, // שמירה לזיהוי עתידי
+  });
 });
-  
 
+// מחיקת תמונה לפי public_id
+router.delete("/:public_id", async (req, res) => {
+  try {
+    const { public_id } = req.params;
+    const result = await cloudinary.uploader.destroy(`products/${public_id}`);
+    res.json({ message: "תמונה נמחקה", result });
+  } catch (err) {
+    res.status(500).json({ error: "שגיאה במחיקת תמונה" });
+  }
+});
 
 module.exports = router;

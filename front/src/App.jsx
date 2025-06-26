@@ -18,7 +18,6 @@ import EditProduct from "../components/EditProduct";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import About from "../pages/About";
 
-
 function App() {
   return (
     <>

@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { getPage, updatePage } from "../src/services/aboutService";
+import {
+  getPage,
+  updatePage,
+  uploadImageToGallery,
+  deleteImageFromGallery,
+} from "../src/services/aboutService";
 
 import { useUser } from "../hooks/UserContext";
 import "../css/About.css";
@@ -10,7 +15,14 @@ function About() {
   const [content, setContent] = useState(null);
 
   useEffect(() => {
-    getPage("about").then(setContent);
+    getPage("about").then((data) => {
+      if (data) {
+        if (!Array.isArray(data.teamImages)) {
+          data.teamImages = ["", "", ""];
+        }
+        setContent(data);
+      }
+    });
   }, []);
 
   const handleChange = (key, value) => {
@@ -55,23 +67,60 @@ function About() {
           />
 
           {/* לוגו */}
+          {content.img && <img src={content.img} alt="לוגו" width="100" />}
           <input
-            type="text"
-            value={content.img}
-            onChange={(e) => handleChange("img", e.target.value)}
+            type="file"
+            accept="image/*"
+            onChange={async (e) => {
+              const file = e.target.files[0];
+              if (file) {
+                const uploaded = await uploadImageToGallery(file, "about");
+                handleChange("img", uploaded.url);
+              }
+            }}
           />
 
           {/* תמונות צוות */}
           <p>תמונות צוות:</p>
-          {content.teamImages.map((img, idx) => (
-            <input
-              key={idx}
-              type="text"
-              value={img}
-              onChange={(e) => handleImageChange(idx, e.target.value)}
-              placeholder={`קישור תמונה ${idx + 1}`}
-            />
-          ))}
+          <div className="team-photos-inputs">
+            {content.teamImages.map((img, idx) => (
+              <div key={idx} className="team-image-item">
+                {img && (
+                  <img src={img} alt={`חבר צוות ${idx + 1}`} width="80" />
+                )}
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={async (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      const uploaded = await uploadImageToGallery(
+                        file,
+                        "about"
+                      );
+                      handleImageChange(idx, uploaded.url);
+                    }
+                  }}
+                />
+
+                {img && (
+                  <button
+                    className="delete-btn"
+                    onClick={async () => {
+                      const publicId = img.split("/").pop().split(".")[0];
+                      await deleteImageFromGallery(publicId);
+                      const updated = [...content.teamImages];
+                      updated[idx] = "";
+                      setContent((prev) => ({ ...prev, teamImages: updated }));
+                    }}
+                  >
+                    🗑
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
 
           <textarea
             value={content.tagline}
@@ -84,7 +133,7 @@ function About() {
           <h1>{content.heading}</h1>
           <p>{content.paragraph1}</p>
 
-          <img src={content.img} alt="לוגו" />
+          {content.img && <img src={content.img} alt="לוגו" />}
 
           <p>{content.paragraph2}</p>
           <p>{content.paragraph3}</p>
@@ -92,9 +141,9 @@ function About() {
           <div className="about-team">
             <p>זה הצוות שגורם לכל הקסם הזה לקרות:</p>
             <div className="team-photos">
-              {content.teamImages.map((img, i) => (
-                <img key={i} src={img} alt={`חבר צוות ${i + 1}`} />
-              ))}
+              {content.teamImages.map((img, i) =>
+                img ? <img key={i} src={img} alt={`חבר צוות ${i + 1}`} /> : null
+              )}
             </div>
           </div>
 
