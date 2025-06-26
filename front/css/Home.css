@@ -9,10 +9,9 @@ img {
   height: auto;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  object-fit: contain;
+  object-fit: fill;
   max-height: 400px;
   margin-bottom: 1rem;
-  background-color: #8A5A42;
 }
 
 /* שורת התמונות הנוספות – ברירת מחדל: זו לצד זו */
