@@ -16,7 +16,7 @@ function Navbar() {
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top ">
-      <div className="container">
+     
         <div className="logo">
           <Link className="navbar-brand" to="/">
             <img
@@ -143,7 +143,6 @@ function Navbar() {
             )}
           </ul>
         </div>
-      </div>
     </nav>
   );
 }

@@ -6,17 +6,13 @@
   background: #f8f8f8;
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin: 3rem auto;
-  
 }
 
 .product-bg {
-  background-image: url("https://res.cloudinary.com/dt5nnq3ew/image/upload/v1750354610/background_product_mtz6lc.png");
   width: 100%;
   height: 100%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  background-color: #f4ede2;
+
   padding: 2rem;
   border: 1px solid #e0e0e0;
   border-radius: 1rem;
@@ -25,10 +21,8 @@
 
 /* טיפוגרפיה */
 .product-bg h2 {
-  font-weight: 700;
-  color: #333;
-  margin-top: 12rem;
-  margin-right: 2rem;
+  margin: 2rem 0;
+  align-items: center;
 }
 
 .product-bg h5 {
@@ -48,35 +42,11 @@
 
 /* תמונה */
 .product-bg img {
-  max-height: 400px;
-  object-fit: contain;
+    object-fit: contain;
   border-radius: 0.5rem;
-  margin-top: 15rem;
-}
+  }
 
-/* כפתורים */
-.product-bg .btn-warning,
-.product-bg .btn-secondary {
-  font-weight: 500;
-}
-
-.product-bg .btn-warning {
-  background-color: #f3c96b;
-  border: none;
-  color: #333;
-}
-
-.product-bg .btn-warning:hover {
-  background-color: #e6b74d;
-  color: white;
-}
-.btn-custom-back {
-  background-color: #6c9a8b;
-  color: white;
-  border: none;
-}
-.btn-custom-back:hover {
-  background-color: #5d8c7b;
+/
 }
 
 /* ===== רספונסיבי ===== */

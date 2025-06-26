@@ -11,3 +11,42 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+/* ברירת מחדל כללית לפסקאות, תיאורים ותפריטים */
+s body,
+p,
+li,
+span,
+nav,
+footer {
+  font-family: "Heebo", sans-serif;
+}
+
+/* כותרות ראשיות ובולטות */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Alef", sans-serif;
+}
+
+button,
+.btn {
+  cursor: pointer;
+  background-color: #4e643b;
+  color: #f4ede2;
+  border: none;
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover,
+.btn:hover {
+  background-color: #D7B98B;
+  color: #000;
+  border: none;
+  transition: background-color 0.3s ease;
+}

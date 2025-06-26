@@ -29,11 +29,11 @@ function ProductPage() {
       <div className="product-bg">
         <div className="d-flex justify-content-between">
           <button className="btn btn-custom-back" onClick={() => navigate(-1)}>
-            ← חזרה
+            חזרה
           </button>
           {isAdmin && (
             <button
-              className="btn btn-warning"
+              className="btn"
               onClick={() =>
                 navigate(`/admin/edit/${product._id}?category=${category}`)
               }
@@ -43,9 +43,9 @@ function ProductPage() {
           )}
         </div>
 
-        <div className="row g-5 align-items-start">
-          <div className="col-lg-7">
-            <h2>{product.name}</h2>
+        <div className="row mt-4">
+          <div className="col-md-6 mb-4">
+            <h2 className=" text-center">{product.name}</h2>
             <p className="lead text-muted">{product.shortDescription}</p>
 
             <div>

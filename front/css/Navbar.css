@@ -1,174 +1,97 @@
-/* =============== בסיס ה־Navbar =============== */
-.navbar {
+/* רקע כללי לניווט */
+nav {
   display: flex;
-  background: linear-gradient(to left, #f8fafb, #edf1f2);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.04);
-  border-bottom: 1px solid #e0e0e0;
-  padding: 0.7rem 1rem;
-  transition: background 0.3s ease;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  padding: 1rem 2rem;
   direction: rtl;
-  margin: 0 auto;
-  width: 100%;
-  height: 100%;
-  font-size: 90%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-/* סידור פנימי */
-.navbar .container {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  height: 100%;
-  width: 100%;
-}
+/* סידור פנימי של הלוגו והתפריט */
 
-/* לוגו */
-.logo {
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-  height: auto;
+/* הלוגו */
+.logo img {
+ height: 100px;
   width: auto;
-  transition: transform 0.3s ease;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  position: relative;
-  left: 50px;
-}
-
-.logo-img {
-  cursor: pointer;
-  height: 10vh;
-  width: 16vw;
-  transition: transform 0.3s ease;
-  border-radius: 12px;
+  max-height: 400px;
+  background-color: #ffffff00;
 }
 
 /* תפריט ניווט */
-.navbar-collapse {
-  flex-grow: 1;
-  text-align: center;
-}
-
-.navbar-nav {
+ul {
   display: flex;
-  justify-content: center;
-  margin: 0;
-  width: 90%;
-  height: auto;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 1.5rem;
+ 
+  font-size: 1rem;
 }
 
-.navbar-nav .nav-link {
-  color: #2e3a59;
-  font-weight: 500;
-  padding: 0.6rem 1.1rem;
-  border-radius: 8px;
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-}
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-  background-color: #e0f0ea;
-  color: #157347;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  height: 8vh;
+ul li {
+  position: relative;
 }
 
-/* תפריט דרופדאון */
-.navbar-nav .dropdown-menu {
-  min-width: 100%;
-  text-align: center;
-  margin-top: 0.5rem;
-  border-radius: 12px;
-  background: linear-gradient(to left, #f8fafb, #edf1f2);
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-  padding: 0.5rem 0;
+/* תפריט נפתח */
+ul li ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #fff;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 999;
 }
-.navbar-nav .dropdown-menu.show {
+
+ul li:hover ul {
   display: block;
 }
-.navbar-nav .dropdown-item {
-  color: #444;
-  font-size: 0.95rem;
-  padding: 0.5rem 1rem;
-  transition: transform 0.2s ease;
-}
-.navbar-nav .dropdown-item:hover {
-  background-color: #e0f0ea;
-  color: #0f5132;
+
+/* קישורים */
+a {
+  text-decoration: none;
+  color: #1d1d1d;
+  transition: color 0.3s;
 }
 
-/* ברכת שלום */
-.user-greeting {
-  font-weight: bold;
-  color: #18c072;
-  font-size: 1rem;
-  transition: all 0.2s ease;
-  text-align: center;
-  justify-content: start;
-  width: 100%;
-  height: 50%;
-  display: flex;
-  align-items: start;
+a:hover {
+  color: #007a73;
 }
 
-/* כפתורי התחברות / התנתקות */
-.btn-outline-danger,
-.btn-outline-secondary {
-  font-size: 0.85rem;
-  padding: 0.35rem 0.8rem;
-  border-radius: 999px;
-  font-weight: 500;
-  margin-top: 0.5rem;
-  transition: all 0.2s ease;
-  border: 1px solid #dc3545;
-  color: #dc3545;
-  background-color: transparent;
-}
-.btn-outline-danger:hover {
-  background-color: #dc3545;
-  color: #fff;
-  border-color: #dc3545;
-}
-
-/* כפתור תפריט במובייל */
-.navbar-toggler {
+/* כפתור התנתקות */
+button {
   border: none;
-  background-color: transparent;
-  order: 3;
-}
-.navbar-toggler:focus {
-  box-shadow: none;
+  background: #dc3545;
+  color: #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-family: "Heebo", sans-serif;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
-/* =============== מובייל =============== */
-@media (max-width: 991px) {
-  .custom-collapse {
-    position: fixed;
-    top: 60px;
-    right: 0;
-    width: 85vw;
-    background-color: #ffffff;
-    padding: 1.5rem;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-    z-index: 1050;
-    overflow-y: auto;
-    transition: transform 0.3s ease-in-out;
-  }
+button:hover {
+  background: #c82333;
+}
 
-  .navbar-nav {
+/* ברספונסיביות */
+@media (max-width: 768px) {
+  .container {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+    align-items: center;
   }
 
-  .navbar-nav .nav-link {
-    padding: 0.5rem 0;
-    width: 100%;
+  ul {
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1rem;
   }
 
-  .user-greeting {
-    margin-bottom: 0.5rem;
+  .logo {
+    margin-bottom: 1rem;
   }
 }

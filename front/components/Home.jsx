@@ -40,43 +40,22 @@ function Home() {
   };
 
   return (
-    <div className="container py-4">
-      <h1 className="text-center mb-4">ברוכים הבאים</h1>
+    <div className="container">
 
-      {/* תמונה ראשית */}
-      <div className="mb-4 text-center">
-        {getImageUrl("home") && (
-          <img
-            className="img-fluid rounded shadow"
-            src={getImageUrl("home")}
-            alt="תמונה ראשית"
-            style={{ maxHeight: "400px", objectFit: "cover" }}
-          />
-        )}
-      </div>
+  {/* תמונה ראשית */}
+  {getImageUrl("home") && (
+    <img src={getImageUrl("home")} alt="תמונה ראשית" />
+  )}
 
-      {/* שתי תמונות נוספות */}
-      <div className="row g-3 mb-5">
-        <div className="col-md-6">
-          {getImageUrl("nutri") && (
-            <img
-              src={getImageUrl("nutri")}
-              className="img-fluid rounded shadow"
-              alt="תמונה 2"
-            />
-          )}
-        </div>
-        <div className="col-md-6">
-          {getImageUrl("dermo") && (
-            <img
-              src={getImageUrl("dermo")}
-              className="img-fluid rounded shadow"
-              alt="תמונה 3"
-            />
-          )}
-        </div>
-      </div>
-
+  {/* שתי תמונות נוספות */}
+  <div className="image-row">
+    {getImageUrl("nutri") && (
+      <img src={getImageUrl("nutri")} alt="תמונה 2" />
+    )}
+    {getImageUrl("dermo") && (
+      <img src={getImageUrl("dermo")} alt="תמונה 3" />
+    )}
+  </div>
       {/* קרוסלת סרטונים */}
       {videos.length > 0 && (
         <div className="video-carousel">

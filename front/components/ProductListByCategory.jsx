@@ -76,28 +76,17 @@ function ProductListByCategory() {
                   src={product.image || `/images/${category}-default.jpg`}
                   className="card-img-top"
                   alt={product.name}
-                  style={{ objectFit: "cover", height: "200px" }}
+                  style={{ objectFit: "cover" }}
                 />
                 <div className="card-body d-flex flex-column">
-                  <h5 className="card-title">{product.name}</h5>
-                  <p className="card-text small text-muted">
+                  <h5 className="card-title text-center">{product.name}</h5>
+                  <p className="card-text small text-muted text-center">
                     {product.shortDescription}
                   </p>
 
-                  {product.activeIngredients?.length > 0 && (
-                    <ul className="list-unstyled small ps-3">
-                      {product.activeIngredients.slice(0, 3).map((item, i) => (
-                        <li key={i}>• {item}</li>
-                      ))}
-                    </ul>
-                  )}
-
-                  <div className="mt-auto text-end">
-                    <Link
-                      to={`/${category}/${product._id}`}
-                      className="btn btn-outline-primary btn-sm me-2"
-                    >
-                      <Info className="mb-1" /> לפרטים
+                  <div className="btn-container mt-auto d-flex justify-content-center">
+                    <Link to={`/${category}/${product._id}`} className="btn">
+                      לקרוא עליי עוד
                     </Link>
 
                     {isAdmin && (
