@@ -18,7 +18,7 @@ function About() {
     getPage("about").then((data) => {
       if (data) {
         if (!Array.isArray(data.teamImages)) {
-          data.teamImages = ["", "", ""];
+          data.teamImages = ["", "", ""]; // ברירת מחדל
         }
         setContent(data);
       }

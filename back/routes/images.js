@@ -42,6 +42,8 @@ router.get("/", async (req, res) => {
  * POST /api/images
  * העלאת תמונה ושמירה במסד
  */
+const About = require("../models/About"); // נדרש בראש הקובץ
+
 router.post("/", upload.single("image"), async (req, res) => {
   try {
     const { key } = req.body;
@@ -58,8 +60,18 @@ router.post("/", upload.single("image"), async (req, res) => {
 
     await newImage.save();
 
+    // 👇 אם התמונה שייכת לדף about — נעדכן את img במסמך
+    if (key === "about") {
+      await About.findOneAndUpdate(
+        { key: "about" },
+        { img: req.file.path },
+        { new: true }
+      );
+    }
+
     res.status(201).json({ message: "תמונה נשמרה", image: newImage });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: "שגיאה בהעלאה" });
   }
 });
