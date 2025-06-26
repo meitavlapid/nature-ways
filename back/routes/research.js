@@ -14,40 +14,49 @@ cloudinary.config({
 });
 
 // אחסון עם Cloudinary
-const storage = new CloudinaryStorage({
+// אחסון למסמכים (PDF, DOCX)
+const rawStorage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => {
-    try {
-      console.log("📥 title from req.body:", req.body.title);
-      console.log("📁 file.originalname:", file.originalname);
-  
-      const rawTitle =
-        req.body.title?.trim() || file.originalname.split(".")[0];
-      const ext = file.originalname.split(".").pop();
-  
-      const cleanTitle = rawTitle
-        .replace(/\s+/g, "_")
-        .replace(/[^א-תa-zA-Z0-9_\-]/g, "")
-        .replace(/_+/g, "_")
-        .replace(/^_+|_+$/g, "");
-  
-      console.log("🔤 final public_id:", cleanTitle, "ext:", ext);
-  
-      return {
-        folder: "researches",
-        resource_type: "raw",
-        public_id: cleanTitle || `file_${Date.now()}`,
-        format: ext,
-      };
-    } catch (err) {
-      console.error("❌ שגיאה ביצירת public_id:", err);
-      throw err;
+    let rawTitle = "";
+    if (req.body && typeof req.body.title === "string" && req.body.title.trim()) {
+      rawTitle = req.body.title.trim();
+    } else {
+      rawTitle = file.originalname.split(".")[0];
     }
-  }
-});  
 
+    let cleanTitle = rawTitle
+      .replace(/\s+/g, "_")
+      .replace(/[^א-תa-zA-Z0-9_\-]/g, "")
+      .replace(/_+/g, "_")
+      .replace(/^_+|_+$/g, "");
 
-const upload = multer({ storage });
+    if (cleanTitle.length > 40) {
+      cleanTitle = cleanTitle.substring(0, 40);
+    }
+
+    const ext = file.originalname.split(".").pop();
+
+    return {
+      folder: "researches",
+      resource_type: "raw",
+      public_id: cleanTitle || `file_${Date.now()}`,
+      format: ext,
+    };
+  },
+});
+
+// אחסון לתמונות
+const imageStorage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "research-images",
+    resource_type: "image",
+  },
+});
+
+const uploadRaw = multer({ storage: rawStorage });
+const uploadImage = multer({ storage: imageStorage });
 
 // GET – כל המחקרים
 router.get("/", async (req, res) => {
@@ -64,23 +73,34 @@ router.post(
   "/upload",
   authenticateToken,
   requireAdmin,
-  upload.fields([{ name: "pdf", maxCount: 1 }]),
+  uploadRaw.fields([{ name: "pdf", maxCount: 1 }]),
   async (req, res) => {
     try {
-      console.log("Received file:", req.file);
-      const fileUrl = req.file.path;
-      const title = req.body.title || req.file.originalname;
-      const research = new Research({ fileUrl, title });
+      const file = req.files?.pdf?.[0];
+      if (!file) return res.status(400).json({ error: "לא הועלה קובץ" });
+
+      const title = req.body.title?.trim() || file.originalname;
+      const originalName = file.originalname;
+
+      const fileUrl = file.path;
+      const public_id = file.filename; // ← שומר את full public_id כולל 'researches/שם_הקובץ.docx'
+
+      const research = new Research({
+        title,
+        originalName,
+        fileUrl,
+        public_id,
+      });
       await research.save();
+
+      console.log("✅ מחקר הועלה:", { title, fileUrl });
       res.status(201).json(research);
-      console.log("req.file =", req.file);
     } catch (err) {
-      console.error("שגיאה בהעלאה:", err);
+      console.error("❌ שגיאה בהעלאה:", err);
       res.status(500).json({ error: "שגיאה בהעלאה", detail: err.message });
     }
   }
 );
-
 // DELETE – כולל מחיקת PDF מ־Cloudinary
 
 router.delete("/:id", authenticateToken, requireAdmin, async (req, res) => {
@@ -112,6 +132,15 @@ router.delete("/:id", authenticateToken, requireAdmin, async (req, res) => {
   } catch (err) {
     console.error("❌ שגיאה במחיקה:", err);
     res.status(500).json({ error: "שגיאה במחיקה", details: err.message });
+  }
+});
+router.post("/upload-image", uploadImage.single("image"), async (req, res) => {
+  try {
+    const imageUrl = req.file.path;
+    res.json({ imageUrl });
+  } catch (err) {
+    console.error("שגיאה בהעלאת תמונה:", err);
+    res.status(500).json({ error: "שגיאה בהעלאת תמונה" });
   }
 });
 
