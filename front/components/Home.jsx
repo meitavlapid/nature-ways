@@ -41,21 +41,29 @@ function Home() {
 
   return (
     <div className="container">
+      {/* תמונה ראשית */}
+      {getImageUrl("home") && (
+        <img src={getImageUrl("home")} alt="תמונה ראשית" />
+      )}
 
-  {/* תמונה ראשית */}
-  {getImageUrl("home") && (
-    <img src={getImageUrl("home")} alt="תמונה ראשית" />
-  )}
+      {/* שתי תמונות נוספות */}
+      <div className="image-row">
+        {getImageUrl("nutri") && (
+          <img src={getImageUrl("nutri")} alt="תמונה 2" />
+        )}
+        {getImageUrl("dermo") && (
+          <img src={getImageUrl("dermo")} alt="תמונה 3" />
+        )}
+      </div>
 
-  {/* שתי תמונות נוספות */}
-  <div className="image-row">
-    {getImageUrl("nutri") && (
-      <img src={getImageUrl("nutri")} alt="תמונה 2" />
-    )}
-    {getImageUrl("dermo") && (
-      <img src={getImageUrl("dermo")} alt="תמונה 3" />
-    )}
-  </div>
+      <div className="text-container">
+        <p>עם הזמן הצטברו לא רק מוצרים – גם סיפורים.</p>
+        <p>
+          אספנו בשבילכם רגעים אמיתיים מהשטח ובחרנו לשתף אתכם בכמה מהם – סרטונים
+          אותנטיים שממחישים איך נייצ'ר וויז משתלבת ביום-יום של קליניקות,
+          מטפלים ומטופלים.
+        </p>
+    
       {/* קרוסלת סרטונים */}
       {videos.length > 0 && (
         <div className="video-carousel">
@@ -68,7 +76,7 @@ function Home() {
           </Slider>
         </div>
       )}
-    </div>
+    </div>  </div>
   );
 }
 

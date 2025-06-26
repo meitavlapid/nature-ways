@@ -38,18 +38,7 @@ const Contact = () => {
         אישי – אנחנו כאן בשבילכם.
       </p>
 
-      <div className="contact-info">
-        <p>🏢 נייצ’ר וויז – פתרונות מהטבע</p>
-        <p>📍 חורש האלונים 12, רמת ישי | חלמיש 14, קיסריה</p>
-        <p>📇 ח"פ: 516020898</p>
-        <p>
-          ☎️ טלפון: <a href="tel:0521234567">052-1234567</a>
-        </p>
-        <p>
-          📧 דוא"ל:{" "}
-          <a href="mailto:info@natureways.co.il">info@natureways.co.il</a>
-        </p>
-      </div>
+      
 
       <form onSubmit={handleSubmit} className="contact-form">
         <label htmlFor="fullname">שם מלא:</label>
@@ -100,6 +89,11 @@ const Contact = () => {
           <p className="error-message">אירעה שגיאה. נסה שוב מאוחר יותר.</p>
         )}
       </form>
+      <div className="contact-info">
+        <p> נייצ’ר וויז – פתרונות מהטבע |
+         השקדים 1, קרית טבעון |
+         ח"פ: 516020898</p>
+      </div>
     </div>
   );
 };

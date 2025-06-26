@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import * as bootstrap from "bootstrap";
 import { useUser } from "../hooks/UserContext";
+import { FaWhatsapp, FaUserCircle } from "react-icons/fa";
 import "../css/Navbar.css";
 
 function Navbar() {
   const location = useLocation();
-  const { user, logout } = useUser();
+  const { user } = useUser();
 
   useEffect(() => {
     const navbarCollapse = document.getElementById("navbarNavDropdown");
@@ -15,134 +16,77 @@ function Navbar() {
   }, [location]);
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top ">
-     
+    <nav className="navbar sticky-top">
+      <div className="container">
+        {/* צד ימין: לוגו */}
         <div className="logo">
-          <Link className="navbar-brand" to="/">
+          <Link to="/">
             <img
               src="https://res.cloudinary.com/dt5nnq3ew/image/upload/v1750344062/logo_ul47xl.png"
               alt="לוגו האתר"
-              className="logo-img"
             />
           </Link>
         </div>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown"
-          aria-expanded="false"
-          aria-label="תפריט ניווט"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
 
-        <div
-          className="collapse navbar-collapse custom-collapse"
-          id="navbarNavDropdown"
-        >
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link className="nav-link" to="/">
-                עמוד הבית
-              </Link>
-            </li>
-
-            <li className="nav-item dropdown">
-              <span
-                className="nav-link"
-                role="button"
-                data-bs-toggle="dropdown"
-              >
-                איכות ומרקם העור
-              </span>
-              <ul className="dropdown-menu">
+        {/* מרכז */}
+        <div className="nav-center">
+          <ul>
+            <li className="dropdown">
+              <span>מוצרים</span>
+              <ul >
                 <li>
-                  <Link className="dropdown-item" to="/psoriasis">
-                    פסוריאזיס
-                  </Link>
+                  <Link to="/psoriasis">פסוריאזיס</Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/antiaging">
-                    אנטי אייג'ינג
-                  </Link>
+                  <Link to="/antiaging">אנטי אייג'ינג</Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/acne">
-                    אקנה
-                  </Link>
+                  <Link to="/acne">אקנה</Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/pigmentation">
-                    פיגמנטציה
-                  </Link>
+                  <Link to="/pigmentation">פיגמנטציה</Link>
+                </li>
+                <li>
+                  <Link to="/hairloss">התקרחות</Link>
+                </li>
+                <li>
+                  <Link to="/rehabilitation">שיקום העור</Link>
+                </li>
+                <li>
+                  <Link to="/weightloss">הרזייה וחיטוב</Link>
+                </li>
+                <li>
+                  <Link to="/customdevelopment">פיתוח אישי</Link>
                 </li>
               </ul>
             </li>
-
-            <li className="nav-item">
-              <Link className="nav-link" to="/hairloss">
-                התקרחות גברית/נשית
-              </Link>
+            <li>
+              <Link to="/research">תוכן ומחקר</Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/rehabilitation">
-                שיקום העור
-              </Link>
+            <li>
+              <Link to="/contact">צור קשר</Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/weightloss">
-                הרזייה וחיטוב הגוף{" "}
-              </Link>
+            <li>
+              <Link to="/about">אודות</Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/customdevelopment">
-                מוצרים פיתוח אישי
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/research">
-                תוכן ומחקר
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/contact">
-                צור קשר
-              </Link>
-            </li>
-
-            {user?.role === "admin" && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/admin">
-                  ניהול המערכת
-                </Link>
-              </li>
-            )}
-
-            {user ? (
-              <li className="nav-item">
-                <span className="user-greeting">שלום {user.name}</span>
-                <button className="btn btn-outline-danger" onClick={logout}>
-                  התנתק
-                </button>
-              </li>
-            ) : (
-              <>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/login">
-                    התחברות
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/register">
-                    הרשמה
-                  </Link>
-                </li>
-              </>
-            )}
           </ul>
         </div>
+
+        {/* צד שמאל: אייקונים */}
+        <div className="nav-icons">
+          <a
+            href="https://wa.me/972501234567"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="צ'אט ווטסאפ"
+          >
+            <FaWhatsapp size={24} color="#25D366" />
+          </a>
+          <Link to={user ? "/profile" : "/login"} title="אזור אישי">
+            <FaUserCircle size={24} color="#333" />
+          </Link>
+        </div>
+      </div>
     </nav>
   );
 }

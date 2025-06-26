@@ -1,10 +1,10 @@
 .contact-container {
     direction: rtl;
     max-width: 600px;
-    margin: 0 auto;
+    margin:2rem auto;
     padding: 2rem;
     font-family: "Arial", sans-serif;
-    background: #f8f8f8;
+    background: #F4EDE2;
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
   }
@@ -37,19 +37,10 @@
     border-radius: 6px;
     font-size: 1rem;
   }
-  
-  .contact-form button {
-    margin-top: 1.5rem;
-    padding: 0.75rem;
-    background-color: #2e8b57;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1.1rem;
-    cursor: pointer;
+  button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+   
   }
   
-  .contact-form button:hover {
-    background-color: #246a45;
-  }
-  
+ 

@@ -114,8 +114,8 @@ function ProductPage() {
             </div>
           </div>
 
-          <div className="col-lg-5 text-center">
-            <img src={product.image} alt={product.name} className="img-fluid" />
+          <div className="col ">
+            <img src={product.image} alt={product.name} className="img" />
           </div>
         </div>
       </div>

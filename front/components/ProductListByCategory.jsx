@@ -86,7 +86,7 @@ function ProductListByCategory() {
 
                   <div className="btn-container mt-auto d-flex justify-content-center">
                     <Link to={`/${category}/${product._id}`} className="btn">
-                      לקרוא עליי עוד
+                      לקרוא עלי עוד
                     </Link>
 
                     {isAdmin && (

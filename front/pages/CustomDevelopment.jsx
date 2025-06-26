@@ -1,13 +1,12 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../css/CustomDevelopment.css";
 
 function CustomDevelopment() {
   return (
-    <div className="container py-5" dir="rtl">
+    <div className="container  " dir="rtl">
       <h1 className="text-center mb-4">מוצרים בפיתוח אישי</h1>
-
-      <div className="row align-items-center mb-5">
-        <div className="col-lg-6 mb-4 mb-lg-0">
+        <div className="d-flex flex-column align-items-center">
           {/* החלפת iframe ב־<video> */}
           <div className="shadow rounded-4 overflow-hidden">
             <video
@@ -16,9 +15,7 @@ function CustomDevelopment() {
               src="https://res.cloudinary.com/dt5nnq3ew/video/upload/v1750326919/Tailor-Made_formulas_hu1aaz.mp4"
             />
           </div>
-        </div>
-
-        <div className="col-lg-6">
+        <div>
           <div className="bg-light p-4 rounded-4 shadow-sm">
             <p>
               אם תמיד רציתם לרקוח פורמולות משלכם, לייצר מוצרים שלא קיימים אצל

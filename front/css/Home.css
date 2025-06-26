@@ -9,7 +9,7 @@ img {
   height: auto;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  object-fit: fill;
+  object-fit: ;
   max-height: 400px;
   margin-bottom: 1rem;
 }
@@ -32,16 +32,23 @@ img {
     max-width: 100%;
   }
 }
-
-
+.text-container {
+  padding: 1rem;
+  direction: rtl;
+  text-align: center;
+  margin-top: 2rem;
+  height: auto;
+  background-color: #f4ede2;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 .video-carousel {
   direction: ltr; /* חיוני כי האתר RTL */
   max-width: 900px;
-  margin: 0 auto;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
 }
-
 .slick-slider {
-  position: relative;
   display: block;
   box-sizing: border-box;
 }
@@ -90,6 +97,16 @@ img {
   width: 40px;
   height: 40px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+button.slick-prev {
+  left:3%;
+}
+
+.slick-next {
+  left: 95%;
 }
 
 .slick-prev::before,
@@ -101,15 +118,6 @@ img {
   width: 40px;
   height: 40px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* מיקום */
-.slick-prev {
-  left: -45px;
-}
-
-.slick-next {
-  right: -45px;
 }
 
 /* רספונסיביות */

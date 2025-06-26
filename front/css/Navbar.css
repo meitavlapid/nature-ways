@@ -1,97 +1,153 @@
-/* רקע כללי לניווט */
-nav {
-  display: flex;
-  width: 100%;
-  border-bottom: 1px solid #ccc;
+/* === עיצוב כללי ל־Navbar === */
+nav.navbar {
+  background: linear-gradient(to left, #f8fafb, #edf1f2);
   padding: 1rem 2rem;
+  border-bottom: 1px solid #ddd;
   direction: rtl;
+  display: flex;
+  align-items: center;
   position: sticky;
   top: 0;
   z-index: 1000;
+  font-family: "Heebo", sans-serif;
 }
 
-/* סידור פנימי של הלוגו והתפריט */
-
-/* הלוגו */
-.logo img {
- height: 100px;
-  width: auto;
-  max-height: 400px;
-  background-color: #ffffff00;
-}
-
-/* תפריט ניווט */
-ul {
+.container {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   flex-wrap: wrap;
-  list-style: none;
-  gap: 1.5rem;
- 
-  font-size: 1rem;
 }
 
-ul li {
+/* === לוגו === */
+.logo img {
+  height: 50px;
+  object-fit: contain;
+}
+
+/* === תפריט מרכזי === */
+.nav-center ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-center li {
   position: relative;
 }
 
-/* תפריט נפתח */
-ul li ul {
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: #fff;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 999;
-}
-
-ul li:hover ul {
-  display: block;
-}
-
-/* קישורים */
-a {
+.nav-center a,
+.nav-center span {
   text-decoration: none;
-  color: #1d1d1d;
-  transition: color 0.3s;
+  color: #333;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
-a:hover {
+.nav-center a:hover,
+.nav-center span:hover {
   color: #007a73;
 }
 
-/* כפתור התנתקות */
-button {
-  border: none;
-  background: #dc3545;
-  color: #fff;
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  font-family: "Heebo", sans-serif;
-  cursor: pointer;
-  transition: background 0.3s;
+/* === תפריט נפתח === */
+.nav-center li ul {
+  display: none;
+  position: absolute;
+  top: 120%;
+  right: 0;
+  min-width: 180px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  padding: 0.5rem 0;
+  z-index: 1000;
+  pointer-events: auto;
 }
 
-button:hover {
-  background: #c82333;
+.nav-center li ul:hover {
+  display: block;
+}
+.nav-center li:hover ul {
+  display: block;
 }
 
-/* ברספונסיביות */
+.nav-center li ul li {
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  transition: background 0.3s, color 0.3s;
+}
+
+.nav-center li ul li a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  font-size: 0.95rem;
+}
+
+.nav-center li ul li:hover {
+  background-color: #f0f5f5;
+}
+
+.nav-center li ul li a:hover {
+  color: #007a73;
+}
+
+/* === אייקונים בצד שמאל === */
+.nav-icons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-icons a {
+  color: inherit;
+  transition: transform 0.2s ease;
+}
+
+.nav-icons a:hover {
+  transform: scale(1.1);
+}
+
+/* === רספונסיביות בסיסית === */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
   }
 
-  ul {
+  .nav-center ul {
     flex-direction: column;
-    gap: 0.8rem;
-    margin-top: 1rem;
+    align-items: center;
+    gap: 1rem;
   }
 
-  .logo {
-    margin-bottom: 1rem;
+  .nav-center li ul {
+    position: static;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    background: transparent;
+  }
+
+  .nav-center li:hover ul {
+    display: none;
+  }
+
+  .nav-center li ul li {
+    padding: 0.3rem 0;
+  }
+
+  .nav-center li ul li a {
+    color: #007a73;
+  }
+
+  .nav-icons {
+    justify-content: center;
   }
 }

@@ -1,0 +1,35 @@
+/* מבנה כללי */
+.container {
+  direction: rtl;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* כותרת */
+h1 {
+  font-family: "Alef", sans-serif;
+  font-size: 2rem;
+  color: #1d1d1d;
+  margin-bottom: 2rem;
+}
+
+/* וידאו */
+video {
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* בלוק טקסט */
+.bg-light {
+  background: #F4EDE2 !important;
+  border: 1px solid #e2e6ea;
+}
+
+.bg-light p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+ 
+  margin-bottom: 1rem;
+}
+

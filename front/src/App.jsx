@@ -16,6 +16,8 @@ import CustomDevelopment from "../pages/CustomDevelopment";
 import ResearchLibrary from "../pages/ResearchLibrary";
 import EditProduct from "../components/EditProduct";
 import ScrollToTopButton from "../components/ScrollToTopButton";
+import About from "../pages/About";
+
 
 function App() {
   return (
@@ -30,11 +32,15 @@ function App() {
         <Route path="/:category/:id" element={<ProductPage />} />
         <Route path="/research" element={<ResearchLibrary />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
+
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/products" element={<AdminProducts />} />
         <Route path="/admin/edit/:id" element={<EditProduct />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        <Route path="*" element={<Home />} />
       </Routes>
       <ScrollToTopButton />
 
