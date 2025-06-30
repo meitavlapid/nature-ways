@@ -48,28 +48,53 @@ function Navbar() {
             {isDropdownOpen && (
               <ul className="dropdown-menu">
                 <li>
-                  <Link to="/psoriasis">פסוריאזיס</Link>
+                  <Link to="/psoriasis" onClick={() => setDropdownOpen(false)}>
+                    פסוריאזיס
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/antiaging">אנטי אייג'ינג</Link>
+                  <Link to="/antiaging" onClick={() => setDropdownOpen(false)}>
+                    אנטי אייג'ינג
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/acne">אקנה</Link>
+                  <Link to="/acne" onClick={() => setDropdownOpen(false)}>
+                    אקנה
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/pigmentation">פיגמנטציה</Link>
+                  <Link
+                    to="/pigmentation"
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    פיגמנטציה
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/hairloss">התקרחות</Link>
+                  <Link to="/hairloss" onClick={() => setDropdownOpen(false)}>
+                    התקרחות
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/rehabilitation">שיקום העור</Link>
+                  <Link
+                    to="/rehabilitation"
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    שיקום העור
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/weightloss">הרזייה וחיטוב</Link>
+                  <Link to="/weightloss" onClick={() => setDropdownOpen(false)}>
+                    הרזייה וחיטוב
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/customdevelopment">פיתוח אישי</Link>
+                  <Link
+                    to="/customdevelopment"
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    פיתוח אישי
+                  </Link>
                 </li>
               </ul>
             )}
