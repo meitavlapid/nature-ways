@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import api from "../src/services/api";
 import "../css/Home.css";
@@ -11,7 +12,7 @@ function Home() {
     dots: true,
     arrows: true,
     infinite: true,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 5000,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -58,7 +59,12 @@ function Home() {
                 <img src={getImageUrl("nutri")} alt="תמונה 2" />
               </div>
               <div className="flip-back">
-                <span>נוטריקוסמטיקה</span>
+                <span>
+                  נוטריקוסמטיקה (Nutricosmetics) היא גישה חדשנית המתבססת על
+                  מחקרים מדעיים המוכיחים כי עור בריא, מוצק וקורן מתחיל מבפנים .
+                  <br />
+                  <Link to="/research"> למאמר המלא </Link>
+                </span>
               </div>
             </div>
           </div>
@@ -70,7 +76,14 @@ function Home() {
                 <img src={getImageUrl("dermo")} alt="תמונה 3" />
               </div>
               <div className="flip-back">
-                <span>דרמוטולוגיה</span>
+                <span>
+                  דרמו-קוסמטיקה (Dermocosmetics) היא גישה מדעית־טיפולית לחידוש
+                  העור, מוצרים דרמוקוסמטיים אינם מסתפקים בשיפור זמני של מראה
+                  העור – אלא משפיעים על מנגנונים ביולוגיים עמוקים, ומיועדים
+                  לטיפול במגוון בעיות.
+                  <br />
+                  <Link to="/research"> למאמר המלא </Link>
+                </span>
               </div>
             </div>
           </div>
@@ -85,18 +98,20 @@ function Home() {
         </p>
 
         {/* קרוסלת סרטונים */}
-        {videos.length > 0 && (
-          <div className="video-carousel">
-            <Slider {...settings}>
-              {videos.map((video) => (
-                <div className="video-slide" key={video._id}>
-                  <video controls src={video.url} width="100%" height="400" />
-                </div>
-              ))}
-            </Slider>
-          </div>
-        )}
-      </div>{" "}
+        <div className="video-wrapper">
+          {videos.length > 0 && (
+            <div className="video-carousel">
+              <Slider {...settings}>
+                {videos.map((video) => (
+                  <div className="video-slide" key={video._id}>
+                    <video controls src={video.url} width="100%" height="400" />
+                  </div>
+                ))}
+              </Slider>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
