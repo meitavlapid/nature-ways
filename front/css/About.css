@@ -1,146 +1,156 @@
-.about {
-    direction: rtl;
-    padding: 2rem;
-    max-width: 900px;
-    margin: 0 auto;
-    background-color: #fefefe;
-    border-radius: 16px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    font-family: 'Assistant', sans-serif;
+.about-container {
+  max-width: 1100px;
+  margin: 4rem auto;
+  padding: 2.5rem;
+  direction: rtl;
+  text-align: right;
+  background-color: #f9f6f0;
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  font-family: "Assistant", sans-serif;
+  color: #333;
+}
+
+.about-container h1 {
+  color: #055033;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 3px solid #7a9c3d;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+.about-container p {
+  margin-bottom: 1.5rem;
+  font-size: 1.15rem;
+  line-height: 1.8;
+}
+button {
+ position: absolute;
+ left:40px;
+
+}
+.about-main-image {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  margin: 2rem auto;
+  display: block;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.about-highlight {
+  background-color: #fff;
+  border-right: 6px solid #7a9c3d;
+  padding: 1.5rem 2rem;
+  margin-top: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.about-highlight h2 {
+  margin-bottom: 1rem;
+  color: #7a9c3d;
+  font-size: 1.4rem;
+}
+
+.about-highlight ul {
+  padding-right: 1.2rem;
+  list-style-type: square;
+  color: #333;
+}
+
+.about-highlight li {
+  margin-bottom: 0.7rem;
+  font-size: 1.05rem;
+}
+
+.about-footer {
+  margin-top: 3rem;
+  font-weight: bold;
+  font-size: 1.15rem;
+  color: #055033;
+  text-align: center;
+}
+
+/* צוות */
+.team-section {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.team-section h2 {
+  color: #055033;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+.team-cards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.team-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 280px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-6px);
+}
+
+.team-card img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 4px solid #7a9c3d;
+}
+
+.team-card h3 {
+  margin-bottom: 0.3rem;
+  color: #222;
+  font-size: 1.2rem;
+}
+
+.team-card h4 {
+  margin-bottom: 1rem;
+  color: #7a9c3d;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.team-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* רספונסיביות */
+@media (max-width: 768px) {
+  .about-container {
+    padding: 1.5rem;
   }
-  
-  .about h1 {
-    color: #00695c;
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-  
-  .about-logo {
-    display: block;
-    max-width: 180px;
-    margin: 1rem auto;
-  }
-  
-  .about p {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    color: #333;
-  }
-  
-  .about-team {
-    margin-top: 2rem;
-    text-align: center;
-  }
-  
-  .team-photos {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-top: 1rem;
-  }
-  
-  .team-photos img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 2px solid #ccc;
-  }
-  
-  .tagline {
-    margin-top: 2rem;
-    padding: 1rem;
-    background: #e0f2f1;
-    border-right: 5px solid #00897b;
-    font-style: italic;
-    color: #004d40;
-    text-align: center;
-  }
-  .about {
-    direction: rtl;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2rem;
-    font-family: "Heebo", sans-serif;
-  }
-  
-  .about h1, .edit-heading {
+
+  .about-container h1 {
     font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    width: 100%;
   }
-  
-  .about p, .edit-paragraph, .edit-tagline {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    width: 100%;
-    line-height: 1.6;
-  }
-  
-  .edit-heading, .edit-paragraph, .edit-tagline {
-    padding: 0.6rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-    background-color: #f9f9f9;
-  }
-  
-  .about-main-image img {
-    max-width: 250px;
-    border-radius: 10px;
-    margin: 1rem 0;
-  }
-  
-  .about-team {
-    margin-top: 2rem;
-  }
-  
-  .team-photos {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  
-  .team-image-item {
-    display: flex;
+
+  .team-cards {
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
   }
-  
-  .team-image-item img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #ccc;
+
+  .team-card {
+    width: 90%;
   }
-  
-  input[type="file"] {
-    margin-top: 0.5rem;
-  }
-  
-  button {
-    padding: 0.5rem 1rem;
-    background-color: #006e7f;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 1rem;
-  }
-  
-  button:hover {
-    background-color: #005f6e;
-  }
-  
-  .delete-btn {
-    background-color: transparent;
-    border: none;
-    color: red;
-    font-size: 1.2rem;
-    cursor: pointer;
-  }
-  
+}

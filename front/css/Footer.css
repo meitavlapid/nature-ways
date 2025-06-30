@@ -2,34 +2,110 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: #8A5A42 1px ;
   background-color: #fff;
+  color: #000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
   direction: rtl;
-  width: 100%;
-  height: 3%;
+  height: 7vh;
   position: sticky;
   bottom: 0;
-  z-index: 1000;
-  margin: 0 auto;
+  left: 0;
+
+  width: 100%;
 }
 
-.footer-left p {
-  text-align: right;
+.footer a {
+  color: #333;
+  font-size: 1rem;
+  margin-left: 1rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+p{
+  color: #333;
+  font-size: 0.5rem;
+  margin-left: 1rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+
 }
 
-.footer-center  {
+.footer-left {
+  flex-direction: column;
+ line-height: 0px;
+}
+
+.footer-left a {
+  color: #333;
+  font-size: 0.5rem;
+margin: 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.footer a:hover {
+  transform: scale(1.2);
+  color:#4E643B;
+}
+
+.footer-right
+ {
   display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
   align-items: center;
-  justify-content: center;
-  height: 100%;
-  margin: 0 auto;
+  text-align: center;
 }
 
 .footer-center img {
-  height: 80px;
+  height:8vh;
   width: auto;
-  object-fit:cover ;
-  max-height: 400px;
-  box-shadow: none;
-  margin: 0 auto;
+  object-fit: cover;
+ 
+}
+
+.footer-center {
+  height:5vh;
+  width: auto;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+
+ .facebook-icon {
+  height: 2vh;
+  width: auto;
+  object-fit: cover;
+  color: rgb(58, 58, 238);
+}
+
+.whatsapp-icon {
+  height: 2vh;
+  width: auto;
+  object-fit: cover;
+  color: #25D366;
+}
+
+.email-icon {
+  height: 2vh;
+  width: auto;
+  object-fit: cover;
+  color:#8A5A42
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer a {
+    margin: 0 0.5rem;
+  }
+
+  .footer-right,
+  .footer-left {
+    flex-direction: row;
+    justify-content: center;
+    margin: 0.5rem 0;
+  }
 }

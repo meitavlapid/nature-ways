@@ -1,28 +1,37 @@
 const express = require("express");
 const router = express.Router();
-const About = require("../models/About");
+const AboutPage = require("../models/About");
 
-// שליפת תוכן הדף
-router.get("/:key", async (req, res) => {
+// GET: שליפת תוכן דף אודות
+router.get("/", async (req, res) => {
   try {
-    const page = await About.findOne({ key: req.params.key });
-    res.json(page);
+    const about = await AboutPage.findOne();
+    res.json(about || {});
   } catch (err) {
-    res.status(500).json({ error: "שגיאה בטעינה" });
+    res.status(500).json({ error: "שגיאת שרת" });
   }
 });
 
-// עדכון תוכן הדף
-router.put("/:key", async (req, res) => {
+// PUT: עדכון תוכן (רק אדמין)
+router.put("/", async (req, res) => {
+  const { paragraphs, imageUrl, teamMembers, highlights, footer } = req.body;
+
   try {
-    const updated = await About.findOneAndUpdate(
-      { key: req.params.key },
-      req.body,
-      { new: true }
-    );
-    res.json(updated);
+    let about = await AboutPage.findOne();
+    if (!about) {
+      about = new AboutPage();
+    }
+
+    about.paragraphs = paragraphs;
+    about.imageUrl = imageUrl;
+    about.teamMembers = teamMembers;
+    about.highlights = highlights;
+    about.footer = footer;
+
+    await about.save();
+    res.json({ message: "עודכן בהצלחה" });
   } catch (err) {
-    res.status(500).json({ error: "שגיאה בעדכון" });
+    res.status(500).json({ error: "שגיאה בעדכון הדף" });
   }
 });
 

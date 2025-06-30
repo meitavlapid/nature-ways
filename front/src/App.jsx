@@ -17,6 +17,7 @@ import ResearchLibrary from "../pages/ResearchLibrary";
 import EditProduct from "../components/EditProduct";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import About from "../pages/About";
+import Aboutedit from "../pages/Aboutedit";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/research" element={<ResearchLibrary />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
+        <Route path="/about/edit" element={<Aboutedit />} />
 
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/products" element={<AdminProducts />} />

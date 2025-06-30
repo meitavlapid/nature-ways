@@ -52,15 +52,17 @@ function ProductListByCategory() {
 
   return (
     <div className="container py-4" dir="rtl">
-      <h1 className="text-center mb-4">{title}</h1>
+      <h1 className="text-center">{title}</h1>
 
       {isAdmin && (
-        <div className="text-end mb-4">
+        <div>
           <button
+            type="button"
+            style={{ top: "80px", left: "20px" }}
             className="btn btn-success"
             onClick={() => navigate(`/admin/add?category=${category}`)}
           >
-            <Plus className="mb-1" /> הוספת מוצר חדש
+            <Plus /> הוספת מוצר חדש
           </button>
         </div>
       )}
@@ -70,7 +72,7 @@ function ProductListByCategory() {
       ) : (
         <div className="row g-4">
           {products.map((product) => (
-            <div className="col-md-6 col-lg-4" key={product._id}>
+            <div className="col-md-6 col-lg-4 px-2" key={product._id}>
               <div className="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
                 <img
                   src={product.image || `/images/${category}-default.jpg`}
@@ -84,14 +86,28 @@ function ProductListByCategory() {
                     {product.shortDescription}
                   </p>
 
-                  <div className="btn-container mt-auto d-flex justify-content-center">
-                    <Link to={`/${category}/${product._id}`} className="btn">
+                  <div className="btn-container d-flex text-center mb-4">
+                    <button
+                      to={`/${category}/${product._id}`}
+                      className="btn"
+                      style={{
+                        bottom: "10px",
+                        left: "60%",
+                        padding: "0.5rem 0.5rem",
+                      }}
+                      onClick={() => navigate(`/${category}/${product._id}`)}
+                    >
                       לקרוא עלי עוד
-                    </Link>
-
+                    </button>
                     {isAdmin && (
                       <>
                         <button
+                          type="button"
+                          style={{
+                            bottom: "10px",
+                            left: "2%",
+                            padding: "0.5rem 0.5rem",
+                          }}
                           className="btn btn-warning btn-sm me-2"
                           onClick={() => handleEdit(product._id)}
                         >
@@ -99,6 +115,11 @@ function ProductListByCategory() {
                         </button>
 
                         <button
+                          style={{
+                            bottom: "10px",
+                            left: "30%",
+                            padding: "0.5rem 0.5rem",
+                          }}
                           className="btn btn-danger btn-sm me-2"
                           onClick={() => handleDelete(product._id)}
                         >

@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
 
-const aboutSchema = new mongoose.Schema({
-  key: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  heading: String,
-  paragraph1: String,
-  paragraph2: String,
-  paragraph3: String,
+const TeamMemberSchema = new mongoose.Schema({
+  name: String,
+  role: String,
+  bio: String,
   img: String,
-  teamImages: [String],
-  tagline: String,
 });
 
-module.exports = mongoose.model("About", aboutSchema);
+const AboutPageSchema = new mongoose.Schema({
+  paragraphs: [String],
+  imageUrl: String,
+  teamMembers: [TeamMemberSchema],
+  highlights: [String],
+  footer: String,
+});
+
+module.exports = mongoose.model("About", AboutPageSchema);

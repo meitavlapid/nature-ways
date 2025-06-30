@@ -1,6 +1,8 @@
 import React from "react";
 import { FaFacebook, FaWhatsapp, FaEnvelope } from "react-icons/fa";
 import "../css/Footer.css";
+import { Link } from "react-router-dom";
+
 
 function Footer() {
   return (
@@ -11,21 +13,21 @@ function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FaFacebook />
+          <FaFacebook className="facebook-icon" />
         </a>
         <a
           href="https://wa.me/yourwhatsappnumber"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FaWhatsapp />
+          <FaWhatsapp className="whatsapp-icon" />
         </a>
         <a
           href="mailto:info@example.com"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FaEnvelope />
+          <FaEnvelope className="email-icon" />
         </a>
       </div>
 
@@ -38,8 +40,10 @@ function Footer() {
       </div>
 
       <div className="footer-left">
-        <p>צור קשר</p>
+       
         <p>© כל הזכויות שמורות</p>
+        
+        <Link to="/">האתר נבנה ע"י ML</Link>
       </div>
     </footer>
   );
