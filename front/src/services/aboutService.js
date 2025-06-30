@@ -1,10 +1,10 @@
 import api from "./api";
 
 // שליפת תוכן דף אודות
-export const getPage = (key) => api.get(`/api/about/${key}`);
+export const getPage = (key) => api.get(`/api/${key}`);
 
 // עדכון תוכן דף אודות
-export const updatePage = (key, data) => api.put(`/api/about/${key}`, data);
+export const updatePage = (key, data) => api.put(`/api/${key}`, data);
 
 // העלאת תמונה ושמירתה במסד עם key (למשל: "about")
 export const uploadImageToGallery = async (file, key) => {
@@ -29,6 +29,6 @@ export const deleteImageFromGallery = async (publicId) => {
 
 // שליפת תמונות לפי key
 export const getImagesByKey = async (key) => {
-  const res = await api.get(`/api/images?key=${key}`);
+  const res = await api.get(`/api/images/${key}`);
   return res.data; // מערך של תמונות
 };

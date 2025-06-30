@@ -1,39 +1,52 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import * as bootstrap from "bootstrap";
 import { useUser } from "../hooks/UserContext";
+import { TbDoorEnter, TbDoorExit } from "react-icons/tb";
 import { FaWhatsapp, FaUserCircle } from "react-icons/fa";
+
 import "../css/Navbar.css";
 
 function Navbar() {
   const location = useLocation();
   const { user } = useUser();
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef();
 
   useEffect(() => {
-    const navbarCollapse = document.getElementById("navbarNavDropdown");
-    const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
-    if (bsCollapse) bsCollapse.hide();
-  }, [location]);
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
 
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+  const logout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
+ 
   return (
     <nav className="navbar sticky-top">
-      <div className="container">
-        {/* צד ימין: לוגו */}
-        <div className="logo">
-          <Link to="/">
-            <img
-              src="https://res.cloudinary.com/dt5nnq3ew/image/upload/v1750344062/logo_ul47xl.png"
-              alt="לוגו האתר"
-            />
-          </Link>
-        </div>
-
-        {/* מרכז */}
-        <div className="nav-center">
-          <ul>
-            <li className="dropdown">
-              <span>מוצרים</span>
-              <ul >
+      {/* צד ימין: לוגו */}
+      <div className="logo">
+        <Link to="/">
+          <img
+            src="https://res.cloudinary.com/dt5nnq3ew/image/upload/v1750344062/logo_ul47xl.png"
+            alt="לוגו האתר"
+          />
+        </Link>
+      </div>
+      {/* מרכז */}
+      <div className="nav-center">
+        <ul>
+          <li className="dropdown" ref={dropdownRef}>
+            <span onClick={() => setDropdownOpen(!isDropdownOpen)}>מוצרים</span>
+            {isDropdownOpen && (
+              <ul className="dropdown-menu">
                 <li>
                   <Link to="/psoriasis">פסוריאזיס</Link>
                 </li>
@@ -59,33 +72,46 @@ function Navbar() {
                   <Link to="/customdevelopment">פיתוח אישי</Link>
                 </li>
               </ul>
-            </li>
-            <li>
-              <Link to="/research">תוכן ומחקר</Link>
-            </li>
-            <li>
-              <Link to="/contact">צור קשר</Link>
-            </li>
-            <li>
-              <Link to="/about">אודות</Link>
-            </li>
-          </ul>
-        </div>
+            )}
+          </li>
+          <li>
+            <Link to="/research">תוכן ומחקר</Link>
+          </li>
+          <li>
+            <Link to="/contact">צור קשר</Link>
+          </li>
+          <li>
+            <Link to="/about">אודות</Link>
+          </li>
+        </ul>
+      </div>
+      {/* צד שמאל: אייקונים */}
+      <div className="nav-icons">
+        <a
+          href="https://wa.me/972501234567"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="צ'אט ווטסאפ"
+        >
+          <FaWhatsapp size={24} color="#25D366" />
+        </a>
 
-        {/* צד שמאל: אייקונים */}
-        <div className="nav-icons">
-          <a
-            href="https://wa.me/972501234567"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="צ'אט ווטסאפ"
-          >
-            <FaWhatsapp size={24} color="#25D366" />
-          </a>
-          <Link to={user ? "/profile" : "/login"} title="אזור אישי">
-            <FaUserCircle size={24} color="#333" />
+        {!user && (
+          <Link to="/login" title="התחברות">
+            <TbDoorEnter size={24} color="#333" />
           </Link>
-        </div>
+        )}
+
+        {user && (
+          <>
+            <Link to="/admin" title="אזור אישי">
+              <FaUserCircle size={24} color="#D7B98B" className="user-icon" />
+            </Link>
+            <Link onClick={logout} title="התנתקות">
+              <TbDoorExit size={24} color="#333" />
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );
