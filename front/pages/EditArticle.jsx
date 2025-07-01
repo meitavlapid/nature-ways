@@ -1,4 +1,3 @@
-// components/EditArticle.jsx
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../src/services/api";
@@ -8,14 +7,17 @@ function EditArticle() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState(null);
+  const [newTag, setNewTag] = useState("");
 
   useEffect(() => {
     api
       .get(`/api/articles/${id}`)
       .then((res) => {
-        setFormData(res.data);
+        const data = res.data;
+        if (!data.tags) data.tags = []; // תמיכה לאחור
+        setFormData(data);
       })
-      .catch((err) => {
+      .catch(() => {
         alert("שגיאה בטעינת המאמר");
       });
   }, [id]);
@@ -46,9 +48,26 @@ function EditArticle() {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setFormData((prev) => ({ ...prev, image: res.data.imageUrl }));
-    } catch (err) {
+    } catch {
       alert("שגיאה בהעלאת תמונה");
     }
+  };
+
+  const handleAddTag = () => {
+    if (newTag.trim() && !formData.tags.includes(newTag.trim())) {
+      setFormData((prev) => ({
+        ...prev,
+        tags: [...prev.tags, newTag.trim()],
+      }));
+      setNewTag("");
+    }
+  };
+
+  const handleRemoveTag = (tagToRemove) => {
+    setFormData((prev) => ({
+      ...prev,
+      tags: prev.tags.filter((t) => t !== tagToRemove),
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -57,7 +76,7 @@ function EditArticle() {
       await api.put(`/api/articles/${id}`, formData);
       alert("המאמר עודכן בהצלחה!");
       navigate("/articles");
-    } catch (err) {
+    } catch {
       alert("שגיאה בעדכון המאמר");
     }
   };
@@ -138,8 +157,29 @@ function EditArticle() {
           required
         />
 
-        <label>תגית</label>
-        <input name="tag" value={formData.tag} onChange={handleChange} />
+        <label>תגיות</label>
+        <div className="tag-input-group">
+          <input
+            type="text"
+            value={newTag}
+            placeholder="הקלד תגית"
+            onChange={(e) => setNewTag(e.target.value)}
+          />
+          <button type="button" onClick={handleAddTag}>
+            הוסף
+          </button>
+        </div>
+
+        <div className="tag-preview">
+          {formData.tags.map((tag, idx) => (
+            <span key={idx} className="tag-label">
+              {tag}
+              <button type="button" onClick={() => handleRemoveTag(tag)}>
+                ✕
+              </button>
+            </span>
+          ))}
+        </div>
 
         <button type="submit">שמור שינויים</button>
       </form>

@@ -19,7 +19,9 @@ function ArticleList() {
   }, []);
 
   const filtered = searchTag
-    ? articles.filter((a) => a.tag?.includes(searchTag))
+    ? articles.filter((a) =>
+        a.tags?.some((t) => t.toLowerCase().includes(searchTag.toLowerCase()))
+      )
     : articles;
 
   const handleDelete = async (id) => {
@@ -62,31 +64,46 @@ function ArticleList() {
         <p>לא נמצאו מאמרים</p>
       ) : (
         <ul>
-          {filtered.map((article) => (
-            <li key={article._id} className="article-item">
-              <Link to={`/articles/${article._id}`}>
-                <h4>{article.title}</h4>
-                <p>{article.summary}</p>
-                {article.tag && <small>תגית: {article.tag}</small>}
-              </Link>
-              {isAdmin && (
-                <div className="admin-actions">
-                  <button
-                    className="btn btn-sm btn-warning me-2"
-                    onClick={() => navigate(`/articles/edit/${article._id}`)}
-                  >
-                    עריכה
-                  </button>
-                  <button
-                    className="btn btn-sm btn-danger"
-                    onClick={() => handleDelete(article._id)}
-                  >
-                    מחיקה
-                  </button>
+          <div className="article-grid">
+            {filtered.map((article) => (
+              <div className="article-card" key={article._id}>
+                <div className="article-tags">
+                  {article.tags?.map((tag, idx) => (
+                    <span key={idx}>{tag}</span>
+                  ))}
                 </div>
-              )}
-            </li>
-          ))}
+                <img src={article.image} alt={article.title} />
+                <div className="article-card-content">
+                  <h4>{article.title}</h4>
+                  <p>{article.summary}</p>
+                  <div className="btn-group">
+                    <Link
+                      to={`/articles/${article._id}`}
+                      className="btn btn-view"
+                    >
+                      לצפייה
+                    </Link>
+                    {isAdmin && (
+                      <>
+                        <Link
+                          to={`/articles/edit/${article._id}`}
+                          className="btn btn-edit"
+                        >
+                          עריכה
+                        </Link>
+                        <button
+                          onClick={() => handleDelete(article._id)}
+                          className="btn btn-delete"
+                        >
+                          מחיקה
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </ul>
       )}
     </div>
