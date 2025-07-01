@@ -28,7 +28,6 @@ function Navbar() {
     window.location.reload();
   };
 
- 
   return (
     <nav className="navbar sticky-top">
       {/* צד ימין: לוגו */}
@@ -100,7 +99,7 @@ function Navbar() {
             )}
           </li>
           <li>
-            <Link to="/research">תוכן ומחקר</Link>
+            <Link to="/articles">תוכן ומחקר</Link>
           </li>
           <li>
             <Link to="/contact">צור קשר</Link>

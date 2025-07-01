@@ -13,11 +13,13 @@ import AdminVideos from "../components/AdminVideos";
 import ProductPage from "../components/ProductPage";
 import ProductListByCategory from "../components/ProductListByCategory";
 import CustomDevelopment from "../pages/CustomDevelopment";
-import ResearchLibrary from "../pages/ResearchLibrary";
 import EditProduct from "../components/EditProduct";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import About from "../pages/About";
 import Aboutedit from "../pages/Aboutedit";
+import ArticlePage from "../pages/ArticlePage";
+import UploadArticle from "../pages/UploadArticle";
+import ArticleList from "../pages/ArticleList";
 
 function App() {
   return (
@@ -30,10 +32,12 @@ function App() {
         <Route path="/customdevelopment" element={<CustomDevelopment />} />
         <Route path="/:category" element={<ProductListByCategory />} />
         <Route path="/:category/:id" element={<ProductPage />} />
-        <Route path="/research" element={<ResearchLibrary />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/about/edit" element={<Aboutedit />} />
+        <Route path="/articles" element={<ArticleList />} />
+        <Route path="/addarticles" element={<UploadArticle />} />
+        <Route path="/articles/:id" element={<ArticlePage />} />
 
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/products" element={<AdminProducts />} />

@@ -1,0 +1,52 @@
+/* === ArticleList.css === */
+.article-list {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #fffef9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  direction: rtl;
+  text-align: right;
+}
+
+.article-list h2 {
+  color: #055033;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.tag-search {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.article-item {
+  background-color: #f4ede2;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.article-item:hover {
+  background-color: #e8e0d1;
+}
+
+.article-item h4 {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.article-item p {
+  margin: 0 0 0.5rem;
+  color: #555;
+}
+
+.article-item small {
+  color: #777;
+}
