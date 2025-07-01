@@ -20,33 +20,31 @@
   margin-left: 1rem;
   transition: transform 0.2s ease, color 0.2s ease;
 }
-p{
+p {
   color: #333;
   font-size: 0.5rem;
   margin-left: 1rem;
   transition: transform 0.2s ease, color 0.2s ease;
-
 }
 
 .footer-left {
   flex-direction: column;
- line-height: 0px;
+  line-height: 0px;
 }
 
 .footer-left a {
-  color: #333;
-  font-size: 0.5rem;
-margin: 0;
+
+  margin: 0 1rem;
+  line-height: 0.5rem;
   transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .footer a:hover {
   transform: scale(1.2);
-  color:#4E643B;
+  color: #4e643b;
 }
 
-.footer-right
- {
+.footer-right {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
@@ -57,22 +55,21 @@ margin: 0;
 }
 
 .footer-center img {
-  height:8vh;
+  height: 8vh;
   width: auto;
   object-fit: cover;
- 
 }
 
 .footer-center {
-  height:5vh;
+  height: 5vh;
   width: auto;
   object-fit: cover;
   display: flex;
   justify-content: center;
   align-items: center;
- }
+}
 
- .facebook-icon {
+.facebook-icon {
   height: 2vh;
   width: auto;
   object-fit: cover;
@@ -83,14 +80,14 @@ margin: 0;
   height: 2vh;
   width: auto;
   object-fit: cover;
-  color: #25D366;
+  color: #25d366;
 }
 
 .email-icon {
   height: 2vh;
   width: auto;
   object-fit: cover;
-  color:#8A5A42
+  color: #8a5a42;
 }
 
 @media (max-width: 768px) {

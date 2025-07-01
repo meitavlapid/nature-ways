@@ -112,10 +112,9 @@ function Navbar() {
       {/* צד שמאל: אייקונים */}
       <div className="nav-icons">
         <a
-          href="https://wa.me/972501234567"
+          href="https://wa.me/972558829222?text=היי%20אני%20פונה%20אלייך%20דרך%20אתר%20נייצר%20וויז"
           target="_blank"
           rel="noopener noreferrer"
-          title="צ'אט ווטסאפ"
         >
           <FaWhatsapp size={24} color="#25D366" />
         </a>

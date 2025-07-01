@@ -21,13 +21,9 @@ function Footer() {
         >
           <FaWhatsapp className="whatsapp-icon" />
         </a>
-        <a
-          href="mailto:shimrit@sweetvictory-gum.com?subject=פנייה%20מאתר%20נייצר%20וויז"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link to="/contact">
           <FaEnvelope className="email-icon" />
-        </a>
+        </Link>
       </div>
 
       <div className="footer-center">
