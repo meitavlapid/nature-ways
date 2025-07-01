@@ -11,7 +11,7 @@
 
 .upload-article-container h2 {
   margin-bottom: 2rem;
-  color: #055033;
+  color: #4e643b;
   text-align: center;
 }
 
@@ -60,7 +60,17 @@
   margin-top: 1rem;
   padding: 0.6rem 1.5rem;
   border: none;
-  background-color: #055033;
+  background-color: #4e643b;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.tag-preview button {
+  border: none;
+  padding: 0;
+  margin: 0.2rem;
+  background-color: #4e643b00;
   color: #fff;
   border-radius: 8px;
   cursor: pointer;
@@ -68,5 +78,18 @@
 }
 
 .upload-article-container button:hover {
-  background-color: #033a24;
+  background-color: #d7b98b00;
+}
+
+.tag-preview {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag-preview .tag-label {
+  background-color: #8a5a42;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
 }

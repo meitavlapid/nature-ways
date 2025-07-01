@@ -101,11 +101,12 @@ function Navbar() {
           <li>
             <Link to="/articles">תוכן ומחקר</Link>
           </li>
-          <li>
-            <Link to="/contact">צור קשר</Link>
-          </li>
+
           <li>
             <Link to="/about">אודות</Link>
+          </li>
+          <li>
+            <Link to="/contact">צור קשר</Link>
           </li>
         </ul>
       </div>

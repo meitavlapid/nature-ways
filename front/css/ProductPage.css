@@ -45,7 +45,6 @@
   text-align: right;
 }
 
-
 .img {
   float: left; /* או left אם מעדיפה */
   width: 300px;
@@ -64,6 +63,7 @@
   justify-content: flex-end;
   gap: 1rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .product-bg .btn {
   width: 10%;
@@ -71,7 +71,6 @@
   left: 22%;
   top: 12%;
   transform: translateX(-50%);
-  
 }
 /* ===== רספונסיבי ===== */
 @media (max-width: 768px) {
