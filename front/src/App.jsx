@@ -20,6 +20,7 @@ import Aboutedit from "../pages/Aboutedit";
 import ArticlePage from "../pages/ArticlePage";
 import UploadArticle from "../pages/UploadArticle";
 import ArticleList from "../pages/ArticleList";
+import EditArticle from "../pages/EditArticle";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/articles" element={<ArticleList />} />
         <Route path="/addarticles" element={<UploadArticle />} />
         <Route path="/articles/:id" element={<ArticlePage />} />
+        <Route path="/articles/edit/:id" element={<EditArticle />} />
 
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/products" element={<AdminProducts />} />
