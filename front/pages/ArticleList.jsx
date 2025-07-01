@@ -76,10 +76,10 @@ function ArticleList() {
                 <div className="article-card-content">
                   <h4>{article.title}</h4>
                   <p>{article.summary}</p>
-                  <div className="btn-group">
+                  <div className="btn-container">
                     <Link
                       to={`/articles/${article._id}`}
-                      className="btn btn-view"
+                      className="btn"
                     >
                       לצפייה
                     </Link>
@@ -87,13 +87,13 @@ function ArticleList() {
                       <>
                         <Link
                           to={`/articles/edit/${article._id}`}
-                          className="btn btn-edit"
+                          className="btn "
                         >
                           עריכה
                         </Link>
                         <button
                           onClick={() => handleDelete(article._id)}
-                          className="btn btn-delete"
+                          className="btn"
                         >
                           מחיקה
                         </button>

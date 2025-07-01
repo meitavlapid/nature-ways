@@ -9,7 +9,7 @@
 }
 
 .article-list h2 {
-  color: #055033;
+  color:#4E643B;
   margin-bottom: 2rem;
   text-align: center;
 }
@@ -63,7 +63,7 @@
 }
 
 .article-tags span {
-  background-color: #055033;
+  background-color:#4E643B;
   color: #fff;
   padding: 4px 10px;
   border-radius: 20px;
@@ -78,27 +78,25 @@
 }
 
 .article-card-content h4 {
-  color: #333;
   margin-bottom: 0.5rem;
 }
 
 .article-card-content p {
-  color: #555;
   font-size: 0.95rem;
   flex: 1;
 }
 
-.article-card-content .btn-group {
+.article-card-content .btn-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 1rem;
-  border-radius: 18px;
+  border-radius: 25px;
   gap: 1rem;
   width: 100%;
 }
 
-.article-card-content .btn-group button {
+.article-card-content .btn-container button {
   padding: 0.5rem 1rem;
   border-radius: 10px;
   font-size: 0.9rem;
@@ -106,4 +104,3 @@
   transition: background-color 0.3s ease;
   width: 100%;
 }
-
