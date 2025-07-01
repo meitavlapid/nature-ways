@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../css/Contact.css";
 import axios from "axios";
+import api from "../src/services/api";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -18,8 +19,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // בעתיד אפשר לשלוח את זה לשרת:
-      // await axios.post("/api/contact", formData);
+      await axios.post("/api/contact", formData);
       console.log("Form submitted:", formData);
       setStatus("success");
       alert("ההודעה נשלחה בהצלחה!");
@@ -37,8 +37,6 @@ const Contact = () => {
         נשמח לשמוע מכם! אם יש לכם שאלות, בקשות או שתרצו להזמין מוצרים במיתוג
         אישי – אנחנו כאן בשבילכם.
       </p>
-
-      
 
       <form onSubmit={handleSubmit} className="contact-form">
         <label htmlFor="fullname">שם מלא:</label>
@@ -80,19 +78,21 @@ const Contact = () => {
           onChange={handleChange}
           required
         />
-
-        <button type="submit">שלח</button>
-        {status === "success" && (
-          <p className="success-message">ההודעה נשלחה בהצלחה!</p>
-        )}
-        {status === "error" && (
-          <p className="error-message">אירעה שגיאה. נסה שוב מאוחר יותר.</p>
-        )}
+        <div className="btn-container">
+          <button type="submit">שלח</button>
+          {status === "success" && (
+            <p className="success-message">ההודעה נשלחה בהצלחה!</p>
+          )}
+          {status === "error" && (
+            <p className="error-message">אירעה שגיאה. נסה שוב מאוחר יותר.</p>
+          )}
+        </div>
       </form>
       <div className="contact-info">
-        <p> נייצ’ר וויז – פתרונות מהטבע |
-         השקדים 1, קרית טבעון |
-         ח"פ: 516020898</p>
+        <p>
+          {" "}
+          נייצ’ר וויז – פתרונות מהטבע | השקדים 1, קרית טבעון | ח"פ: 516020898
+        </p>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ const uploadRoutes = require("./routes/upload");
 const researchRoutes = require("./routes/research");
 const imageRoutes = require("./routes/images");
 const aboutRoutes = require("./routes/about");
+const contactRoutes = require("./routes/contact");
 
 const authRoutes = require("./routes/auth");
 const productsRoutes = require("./routes/products");
@@ -22,6 +23,7 @@ app.use("/api/research", researchRoutes);
 app.use("/api/images", imageRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/videos", videoRoutes);
+app.use("/api/contact", contactRoutes);
 
 app.use("/api/about", aboutRoutes);
 app.use("/api/auth", authRoutes);

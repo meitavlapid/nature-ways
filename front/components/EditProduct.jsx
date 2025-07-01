@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import api from "../src/services/api";
+import "../css/EditProduct.css";
 
 function EditProduct() {
   const { id } = useParams();
@@ -109,7 +110,7 @@ function EditProduct() {
   if (!product) return <p>טוען...</p>;
 
   return (
-    <div className="container mt-5" dir="rtl">
+    <div className="edit-product-container">
       <h2>עריכת מוצר: {product.name}</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -211,8 +212,22 @@ function EditProduct() {
                 </button>
               </div>
             ))}
-          </div>
+         
+          <button
+          type="button"
+          className="btn add-row-button"
+          onClick={() =>
+            setFormData((prev) => ({
+              ...prev,
+              [field]: [...(prev[field] || []), ""],
+            }))
+          }
+        >
+          ➕ הוסף שורה
+        </button>
+         </div>
         ))}
+     
 
         <hr />
         <h4>כותרות ותוכן נוסף</h4>
@@ -271,15 +286,11 @@ function EditProduct() {
           </div>
         ))}
 
-        <button
-          type="button"
-          className="btn btn-outline-success mb-3"
-          onClick={handleAddSection}
-        >
+        <button type="button" className="add-section" onClick={handleAddSection}>
           הוסף כותרת
         </button>
 
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="save-button">
           שמור
         </button>
       </form>

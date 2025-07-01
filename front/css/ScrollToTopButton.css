@@ -1,8 +1,11 @@
 .scroll-to-top {
     position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     bottom:20%;
-    left: 7%;
-    background-color: #6c9a8b;
+    left: 4%;
+    background-color: #4E643B;
     color: white;
     border: none;
     border-radius: 50%;
@@ -16,6 +19,8 @@
   }
   
   .scroll-to-top:hover {
-    background-color: #5d8c7b;
-    color: #333;  }
+    background-color:#D7B98B;
+    color: #000000;
+  }
+      
   

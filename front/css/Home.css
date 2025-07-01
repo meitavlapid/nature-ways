@@ -38,6 +38,8 @@
   width: 48%;
   aspect-ratio: 1 / 1;
   position: relative;
+  margin: 0 auto;
+  padding: 0;
 }
 
 .flip-inner {
@@ -102,13 +104,21 @@
 .text-container {
   padding: 1rem;
   direction: rtl;
+  font-size: 1.2rem;
   text-align: center;
-  margin-top: 2rem;
+  margin: 2rem auto;
+
   height: auto;
   background-color: #f4ede2;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.text-container p {
+  text-align: center;
+  font-size: 1rem;
+}
+
 .video-carousel {
   direction: ltr;
   max-width: 900px;

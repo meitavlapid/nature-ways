@@ -27,95 +27,92 @@ function ProductPage() {
   return (
     <div className="container" dir="rtl">
       <div className="product-bg">
-        <div className="d-flex justify-content-between">
-          <button className="btn btn-custom-back" onClick={() => navigate(-1)}>
-            חזרה
-          </button>
-          {isAdmin && (
+          <div className="product-buttons">
             <button
               className="btn"
-              onClick={() =>
-                navigate(`/admin/edit/${product._id}?category=${category}`)
-              }
+              onClick={() => navigate(-1)}
             >
-              עריכת מוצר
+              חזרה
             </button>
-          )}
+            {isAdmin && (
+              <button
+                className="btn"
+                onClick={() =>
+                  navigate(`/admin/edit/${product._id}?category=${category}`)
+                }
+              >
+                עריכת מוצר
+              </button>
+            )}
         </div>
 
-        <div className="row mt-4">
-          <div className="col-md-6 mb-4">
-            <h2 className=" text-center">{product.name}</h2>
-            <p className="lead text-muted">{product.shortDescription}</p>
+        <div className="product-text">
+          <h2 className=" text-center">{product.name}</h2>
+          <p className="lead text-muted">{product.shortDescription}</p>
+          <img src={product.image} alt={product.name} className="img" />
+          <div>
+            <h5>תיאור מלא:</h5>
+            <p>{product.fullDescription}</p>
 
-            <div>
-              <h5>תיאור מלא:</h5>
-              <p>{product.fullDescription}</p>
-
-              {product.mechanism?.length > 0 && (
-                <>
-                  <h5>מנגנון פעולה:</h5>
-                  <ul>
-                    {product.mechanism.map((item, idx) => (
-                      <li key={idx}>{item}</li>
-                    ))}
-                  </ul>
-                </>
-              )}
-
-              {product.activeIngredients?.length > 0 && (
-                <>
-                  <h5>רכיבים פעילים:</h5>
-                  <ul>
-                    {product.activeIngredients.map((item, idx) => (
-                      <li key={idx}>{item}</li>
-                    ))}
-                  </ul>
-                </>
-              )}
-
-              {product.instructions?.length > 0 && (
-                <>
-                  <h5>המלצות שימוש:</h5>
-                  <ul>
-                    {product.instructions.map((item, idx) => (
-                      <li key={idx}>{item}</li>
-                    ))}
-                  </ul>
-                </>
-              )}
-
-              {product.suitableFor?.length > 0 && (
-                <>
-                  <h5>למי זה מתאים:</h5>
-                  <ul>
-                    {product.suitableFor.map((item, idx) => (
-                      <li key={idx}>{item}</li>
-                    ))}
-                  </ul>
-                </>
-              )}
-
-              {product.sections?.length > 0 && (
-                <>
-                  <h5>מידע נוסף:</h5>
-                  {product.sections.map((section, i) => (
-                    <div key={i} className="mb-3">
-                      <h6>{section.title}</h6>
-                      <ul>
-                        {section.items.map((item, j) => (
-                          <li key={j}>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
+            {product.mechanism?.length > 0 && (
+              <>
+                <h5>מנגנון פעולה:</h5>
+                <ul>
+                  {product.mechanism.map((item, idx) => (
+                    <li key={idx}>{item}</li>
                   ))}
-                </>
-              )}
-            </div>
-          </div>
+                </ul>
+              </>
+            )}
 
-          <div className="col ">
-            <img src={product.image} alt={product.name} className="img" />
+            {product.activeIngredients?.length > 0 && (
+              <>
+                <h5>רכיבים פעילים:</h5>
+                <ul>
+                  {product.activeIngredients.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            {product.instructions?.length > 0 && (
+              <>
+                <h5>המלצות שימוש:</h5>
+                <ul>
+                  {product.instructions.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            {product.suitableFor?.length > 0 && (
+              <>
+                <h5>למי זה מתאים:</h5>
+                <ul>
+                  {product.suitableFor.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            {product.sections?.length > 0 && (
+              <>
+                <h5>מידע נוסף:</h5>
+                {product.sections.map((section, i) => (
+                  <div key={i} className="mb-3">
+                    <h6>{section.title}</h6>
+                    <ul>
+                      {section.items.map((item, j) => (
+                        <li key={j}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>
