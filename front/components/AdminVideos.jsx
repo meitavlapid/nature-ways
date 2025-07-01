@@ -30,7 +30,7 @@ function AdminVideos() {
     try {
       await api.post("/api/videos", formData, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${user?.token}`,
           "Content-Type": "multipart/form-data",
         },
       });

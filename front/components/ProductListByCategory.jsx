@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useUser } from "../hooks/UserContext";
 import api from "../src/services/api";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Pencil, Trash, Plus, Info } from "react-bootstrap-icons";
+import { Pencil, Trash} from "react-bootstrap-icons";
 
 const CATEGORY_LABELS = {
   acne: "מוצרים לטיפול באקנה",

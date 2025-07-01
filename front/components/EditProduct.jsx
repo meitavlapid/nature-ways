@@ -205,7 +205,7 @@ function EditProduct() {
                 />
                 <button
                   type="button"
-                  className="btn btn-outline-danger"
+                  className="btn"
                   onClick={() => handleRemoveListItem(field, index)}
                 >
                   ✖
@@ -215,7 +215,7 @@ function EditProduct() {
          
           <button
           type="button"
-          className="btn add-row-button"
+          className="btn"
           onClick={() =>
             setFormData((prev) => ({
               ...prev,
@@ -223,7 +223,7 @@ function EditProduct() {
             }))
           }
         >
-          ➕ הוסף שורה
+          הוסף שורה
         </button>
          </div>
         ))}
@@ -237,7 +237,6 @@ function EditProduct() {
               כותרת {sectionIndex + 1}
               <button
                 type="button"
-                className="btn btn-sm btn-danger ms-2"
                 onClick={() => handleRemoveSection(sectionIndex)}
               >
                 מחק כותרת
@@ -267,7 +266,6 @@ function EditProduct() {
                 />
                 <button
                   type="button"
-                  className="btn btn-outline-danger"
                   onClick={() =>
                     handleRemoveSectionItem(sectionIndex, itemIndex)
                   }
@@ -278,7 +276,6 @@ function EditProduct() {
             ))}
             <button
               type="button"
-              className="btn btn-sm btn-outline-primary"
               onClick={() => handleAddItemToSection(sectionIndex)}
             >
               הוסף שורה
@@ -287,10 +284,10 @@ function EditProduct() {
         ))}
 
         <button type="button" className="add-section" onClick={handleAddSection}>
-          הוסף כותרת
+        הוסף כותרת
         </button>
 
-        <button type="submit" className="save-button">
+        <button type="submit" >
           שמור
         </button>
       </form>

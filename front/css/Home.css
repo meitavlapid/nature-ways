@@ -7,7 +7,7 @@
 .main-image {
   width: 100%;
   height: auto;
-  max-height: 400px;
+  max-height: 500px;
   object-fit: cover;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -106,7 +106,7 @@
   padding: 2rem;
   direction: rtl;
   font-size: 1.2rem;
-  margin: 4rem auto;
+  margin: 6rem auto;
   text-align: center;
   background-color: #f4ede2;
   border-radius: 12px;

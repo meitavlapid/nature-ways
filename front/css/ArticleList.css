@@ -85,22 +85,3 @@
   font-size: 0.95rem;
   flex: 1;
 }
-
-.article-card-content .btn-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 1rem;
-  border-radius: 25px;
-  gap: 1rem;
-  width: 100%;
-}
-
-.article-card-content .btn-container button {
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%;
-}

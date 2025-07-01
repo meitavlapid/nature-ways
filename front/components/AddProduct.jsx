@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useUser } from "../hooks/UserContext";
 import api from "../src/services/api";
+import "../css/EditProduct.css";
 
 function AddProduct() {
   const navigate = useNavigate();
@@ -113,7 +114,7 @@ function AddProduct() {
   };
 
   return (
-    <div className="container mt-5" dir="rtl">
+    <div className="edit-product-container" dir="rtl">
       <h2>הוספת מוצר חדש</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -204,18 +205,13 @@ function AddProduct() {
                 />
                 <button
                   type="button"
-                  className="btn btn-outline-danger"
                   onClick={() => removeListItem(field, index)}
                 >
                   ✖
                 </button>
               </div>
             ))}
-            <button
-              type="button"
-              className="btn btn-sm btn-outline-primary"
-              onClick={() => addListItem(field)}
-            >
+            <button type="button" onClick={() => addListItem(field)}>
               הוסף
             </button>
           </div>
@@ -241,40 +237,25 @@ function AddProduct() {
                 />
                 <button
                   type="button"
-                  className="btn btn-outline-danger"
                   onClick={() => handleRemoveSectionItem(i, j)}
                 >
                   ✖
                 </button>
               </div>
             ))}
-            <button
-              type="button"
-              className="btn btn-sm btn-outline-secondary me-2"
-              onClick={() => handleAddItemToSection(i)}
-            >
+            <button type="button" onClick={() => handleAddItemToSection(i)}>
               הוסף שורה
             </button>
-            <button
-              type="button"
-              className="btn btn-sm btn-outline-danger"
-              onClick={() => handleRemoveSection(i)}
-            >
+            <button type="button" onClick={() => handleRemoveSection(i)}>
               מחק כותרת
             </button>
           </div>
         ))}
-        <button
-          type="button"
-          className="btn btn-outline-success mb-3"
-          onClick={handleAddSection}
-        >
+        <button type="button" onClick={handleAddSection}>
           הוסף כותרת
         </button>
 
-        <button type="submit" className="btn btn-primary">
-          שמור מוצר
-        </button>
+        <button type="submit">שמור מוצר</button>
       </form>
     </div>
   );

@@ -77,10 +77,6 @@
   transition: background-color 0.3s ease;
 }
 
-.upload-article-container button:hover {
-  background-color: #d7b98b00;
-}
-
 .tag-preview {
   display: flex;
   flex-wrap: wrap;
