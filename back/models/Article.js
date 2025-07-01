@@ -14,7 +14,7 @@ const articleSchema = new mongoose.Schema(
     sections: [{ subtitle: String, paragraph: String }],
     conclusion: String,
     bibliography: String,
-    tag: String,
+    tags: [String],
   },
   { timestamps: true }
 );

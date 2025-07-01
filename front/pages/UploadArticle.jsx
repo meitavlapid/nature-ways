@@ -10,9 +10,25 @@ function UploadArticle() {
     sections: [{ subtitle: "", paragraph: "" }],
     conclusion: "",
     bibliography: "",
-    tag: "",
-  });
+    tags: [], 
+  });;
+  const [newTag, setNewTag] = useState("");
+  const handleAddTag = () => {
+    if (newTag.trim() && !formData.tags.includes(newTag.trim())) {
+      setFormData((prev) => ({
+        ...prev,
+        tags: [...prev.tags, newTag.trim()],
+      }));
+      setNewTag("");
+    }
+  };
 
+  const handleRemoveTag = (index) => {
+    const updatedTags = [...formData.tags];
+    updatedTags.splice(index, 1);
+    setFormData((prev) => ({ ...prev, tags: updatedTags }));
+  };
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -138,8 +154,55 @@ function UploadArticle() {
           required
         />
 
-        <label>תגית</label>
-        <input name="tag" value={formData.tag} onChange={handleChange} />
+        <label>תגיות</label>
+        <div
+          style={{
+            display: "flex",
+            gap: "0.5rem",
+            flexWrap: "wrap",
+            marginBottom: "1rem",
+          }}
+        >
+          {formData.tags.map((tag, index) => (
+            <span
+              key={index}
+              style={{
+                backgroundColor: "#d1e7dd",
+                padding: "5px 10px",
+                borderRadius: "15px",
+                display: "inline-flex",
+                alignItems: "center",
+              }}
+            >
+              {tag}
+              <button
+                type="button"
+                onClick={() => handleRemoveTag(index)}
+                style={{
+                  background: "none",
+                  border: "none",
+                  marginLeft: "8px",
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                }}
+              >
+                ×
+              </button>
+            </span>
+          ))}
+        </div>
+
+        <div style={{ display: "flex", gap: "0.5rem" }}>
+          <input
+            type="text"
+            value={newTag}
+            onChange={(e) => setNewTag(e.target.value)}
+            placeholder="הוסיפי תגית"
+          />
+          <button type="button" onClick={handleAddTag}>
+            הוסף
+          </button>
+        </div>
 
         <button type="submit">שמור מאמר</button>
       </form>
