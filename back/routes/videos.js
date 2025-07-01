@@ -67,7 +67,7 @@ router.post(
     } catch (err) {
       console.error("❌ שגיאה בהעלאה ל־Cloudinary:", err);
       if (!res.headersSent) {
-        res.status(500).json({ error: "שגיאה בהעלאת הסרטון" });
+        res.status(500).json({ error: err.message });
       }
     }
   }
