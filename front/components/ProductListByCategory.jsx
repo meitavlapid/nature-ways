@@ -58,9 +58,7 @@ function ProductListByCategory() {
         <div>
           <button
             type="button"
-          
             className="btn mb-4"
-
             onClick={() => navigate(`/admin/add?category=${category}`)}
           >
             הוספת מוצר חדש
@@ -74,7 +72,10 @@ function ProductListByCategory() {
         <div className="row g-4">
           {products.map((product) => (
             <div className="col-md-6 col-lg-4 px-2" key={product._id}>
-              <div className="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+              <div
+                className="card h-100 shadow-sm border-0 rounded-4 overflow-hidden"
+                style={{ backgroundColor: "#F4EDE2" }}
+              >
                 <img
                   src={product.image || `/images/${category}-default.jpg`}
                   className="card-img-top"
