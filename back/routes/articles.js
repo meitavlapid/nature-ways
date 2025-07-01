@@ -43,4 +43,14 @@ router.put("/:id", async (req, res) => {
     res.status(500).json({ error: "שגיאה בעדכון המאמר" });
   }
 });
+router.delete("/:id", async (req, res) => {
+  try {
+    const deleted = await Article.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).json({ message: "מאמר לא נמצא" });
+    res.json({ message: "המאמר נמחק בהצלחה" });
+  } catch (err) {
+    console.error("שגיאה במחיקת מאמר:", err.message);
+    res.status(500).json({ message: "שגיאה במחיקת מאמר" });
+  }
+});
 module.exports = router;
