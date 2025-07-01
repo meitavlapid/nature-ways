@@ -58,11 +58,12 @@ function ProductListByCategory() {
         <div>
           <button
             type="button"
-            style={{ top: "80px", left: "20px" }}
-            className="btn btn-success"
+          
+            className="btn mb-4"
+
             onClick={() => navigate(`/admin/add?category=${category}`)}
           >
-            <Plus /> הוספת מוצר חדש
+            הוספת מוצר חדש
           </button>
         </div>
       )}
@@ -86,7 +87,7 @@ function ProductListByCategory() {
                     {product.shortDescription}
                   </p>
 
-                  <div className="btn-container d-flex text-center mb-4">
+                  <div className="btn-container d-flex text-center mb-4 mt-auto">
                     <button
                       to={`/${category}/${product._id}`}
                       className="btn"
