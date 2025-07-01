@@ -31,5 +31,16 @@ router.get("/:id", async (req, res) => {
     res.status(500).json({ error: "שגיאה בטעינה" });
   }
 });
-
+router.put("/:id", async (req, res) => {
+  try {
+    const updated = await Article.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!updated) return res.status(404).json({ error: "מאמר לא נמצא" });
+    res.json(updated);
+  } catch (err) {
+    console.error("שגיאה בעדכון:", err);
+    res.status(500).json({ error: "שגיאה בעדכון המאמר" });
+  }
+});
 module.exports = router;
