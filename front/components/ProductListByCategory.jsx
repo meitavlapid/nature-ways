@@ -4,6 +4,8 @@ import { useUser } from "../hooks/UserContext";
 import api from "../src/services/api";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Pencil, Trash} from "react-bootstrap-icons";
+import "../css/ProductListByCategory.css";
+
 
 const CATEGORY_LABELS = {
   acne: "מוצרים לטיפול באקנה",
@@ -51,8 +53,8 @@ function ProductListByCategory() {
   const title = CATEGORY_LABELS[category] || `מוצרים בקטגוריה: ${category}`;
 
   return (
-    <div className="container py-4" dir="rtl">
-      <h1 className="text-center">{title}</h1>
+    <div className="container" dir="rtl">
+      <h1>{title}</h1>
 
       {isAdmin && (
         <div>
@@ -74,7 +76,7 @@ function ProductListByCategory() {
             <div className="col-md-6 col-lg-4 px-2" key={product._id}>
               <div
                 className="card h-100 shadow-sm border-0 rounded-4 overflow-hidden"
-                style={{ backgroundColor: "#F4EDE2" }}
+                
               >
                 <img
                   src={product.image || `/images/${category}-default.jpg`}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useUser } from "../hooks/UserContext";
 import api from "../src/services/api";
+import "../css/AdminVideos.css";
 
 function AdminVideos() {
   const { user } = useUser();
@@ -60,11 +61,11 @@ function AdminVideos() {
   };
 
   return (
-    <div className="container mt-5" dir="rtl">
-      <h2 className="mb-4">ניהול סרטונים</h2>
+    <div className="container" dir="rtl">
+      <h2 >ניהול סרטונים</h2>
 
-      <div className="mb-4">
-        <label htmlFor="videoFile" className="form-label">
+      <div >
+        <label htmlFor="videoFile" >
           העלאת סרטון
         </label>
         <input
@@ -75,22 +76,22 @@ function AdminVideos() {
         />
 
         <button
-          className="btn btn-success mt-2"
+         
           onClick={handleUpload}
           disabled={uploading || !videoFile}
         >
-          {uploading ? "מעלה..." : "+ הוסף וידאו"}
+          {uploading ? "מעלה..." : " הוסף וידאו"}
         </button>
       </div>
 
-      <div className="row">
+      <div>
         {videos.map((video) => (
-          <div className="col-md-6 mb-3" key={video._id}>
+          <div  key={video._id}>
             <div className="card">
               <div className="card-body">
                 <video src={video.url} controls width="100%" height="240" />
                 <button
-                  className="btn btn-danger mt-2"
+                 
                   onClick={() => handleDelete(video._id)}
                 >
                   מחק
