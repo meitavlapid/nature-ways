@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import axios from "axios";
-
 import "../css/RegisterForm.css";
 
 const roles = [
@@ -23,46 +24,36 @@ const interests = [
   "חדשנות ומוצרים מוכחים קלינית",
 ];
 
+const validationSchema = Yup.object({
+  name: Yup.string().required("שדה חובה").min(2, "לפחות 2 תווים"),
+  email: Yup.string().email("אימייל לא תקין").required("שדה חובה"),
+  phone: Yup.string()
+    .matches(/^[0-9\s\-+()]*$/, "מספר לא תקין")
+    .optional(),
+  role: Yup.string().required("יש לבחור תפקיד"),
+  interests: Yup.array()
+    .min(1, "בחר לפחות תחום אחד")
+    .max(5, "ניתן לבחור עד 5 תחומים בלבד"),
+  password: Yup.string().min(6, "לפחות 6 תווים").required("סיסמה חובה"),
+});
+
 function RegisterForm() {
-  const [formData, setFormData] = useState({
+  const initialValues = {
     name: "",
     email: "",
     phone: "",
     role: "",
     interests: [],
-  });
-
-  const handleInterestChange = (interest) => {
-    setFormData((prev) => {
-      const selected = prev.interests.includes(interest)
-        ? prev.interests.filter((i) => i !== interest)
-        : prev.interests.length < 5
-        ? [...prev.interests, interest]
-        : prev.interests;
-      return { ...prev, interests: selected };
-    });
+    password: "",
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async (values, { resetForm }) => {
     try {
-      const res = await fetch("/api/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        alert("תודה! בקרוב נשלח לך תכנים מותאמים 🎯");
-      } else {
-        alert("שגיאה: " + data.msg);
-      }
+      await axios.post("/api/register", values);
+      alert("נרשמת בהצלחה!");
+      resetForm();
     } catch (err) {
-      alert("שגיאה בשליחה לשרת");
-      console.error(err.message);
+      alert("שגיאה: " + (err.response?.data?.msg || "שגיאה כללית"));
     }
   };
 
@@ -74,81 +65,96 @@ function RegisterForm() {
         לעשות את זה בול, נשמח להכיר אותך קצת יותר:
       </p>
 
-      <form onSubmit={handleSubmit}>
-        <div className="section">
-          <h4>1. מי את.ה?</h4>
-          {roles.map((role) => (
-            <label key={role} className="checkbox-label">
-              <input
-                type="radio"
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ values, setFieldValue }) => (
+          <Form>
+            <div className="section">
+              <h4>1. מי את.ה?</h4>
+              {roles.map((role) => (
+                <label key={role} className="checkbox-label">
+                  <Field type="radio" name="role" value={role} />
+                  {role}
+                </label>
+              ))}
+              <ErrorMessage
                 name="role"
-                value={role}
-                checked={formData.role === role}
-                onChange={(e) =>
-                  setFormData({ ...formData, role: e.target.value })
-                }
+                component="div"
+                className="error-text"
               />
-              {role}
-            </label>
-          ))}
-        </div>
+            </div>
 
-        <div className="section">
-          <h4>2. אילו תחומים מעניינים אותך? (עד 5)</h4>
-          {interests.map((interest) => (
-            <label key={interest} className="checkbox-label">
-              <input
-                type="checkbox"
-                value={interest}
-                checked={formData.interests.includes(interest)}
-                onChange={() => handleInterestChange(interest)}
+            <div className="section">
+              <h4>2. אילו תחומים מעניינים אותך? (עד 5)</h4>
+              {interests.map((interest) => (
+                <label key={interest} className="checkbox-label">
+                  <input
+                    type="checkbox"
+                    name="interests"
+                    value={interest}
+                    checked={values.interests.includes(interest)}
+                    onChange={() => {
+                      const selected = values.interests.includes(interest)
+                        ? values.interests.filter((i) => i !== interest)
+                        : values.interests.length < 5
+                        ? [...values.interests, interest]
+                        : values.interests;
+                      setFieldValue("interests", selected);
+                    }}
+                  />
+                  {interest}
+                </label>
+              ))}
+              <ErrorMessage
+                name="interests"
+                component="div"
+                className="error-text"
               />
-              {interest}
-            </label>
-          ))}
-        </div>
+            </div>
 
-        <div className="section">
-          <label>שם מלא *</label>
-          <input
-            required
-            type="text"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          />
+            <div className="section">
+              <label>שם מלא *</label>
+              <Field type="text" name="name" />
+              <ErrorMessage
+                name="name"
+                component="div"
+                className="error-text"
+              />
 
-          <label>אימייל *</label>
-          <input
-            required
-            type="email"
-            value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
-          />
+              <label>אימייל *</label>
+              <Field type="email" name="email" />
+              <ErrorMessage
+                name="email"
+                component="div"
+                className="error-text"
+              />
 
-          <label>טלפון (לא חובה)</label>
-          <input
-            type="tel"
-            value={formData.phone}
-            onChange={(e) =>
-              setFormData({ ...formData, phone: e.target.value })
-            }
-          />
-          <label>סיסמה</label>
-          <input
-            type="password"
-            value={formData.password}
-            onChange={(e) =>
-              setFormData({ ...formData, password: e.target.value })
-            }
-          />
-        </div>
+              <label>טלפון (לא חובה)</label>
+              <Field type="tel" name="phone" />
+              <ErrorMessage
+                name="phone"
+                component="div"
+                className="error-text"
+              />
 
-        <button type="submit" className="submit-button">
-          יאללה תתאימו לי תוכן
-        </button>
-      </form>
+              <label>סיסמה *</label>
+              <Field type="password" name="password" />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="error-text"
+              />
+            </div>
+
+            <button type="submit" className="submit-button">
+              יאללה תתאימו לי תוכן
+            </button>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 }
