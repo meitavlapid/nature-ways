@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
   try {
     const { name, email, phone, position, interests, password } = req.body;
 
-    if (!name || !email || position) {
+    if (!name || !email || !position) {
       return res.status(400).json({ msg: "שדות חובה חסרים" });
     }
 
@@ -32,6 +32,7 @@ router.post("/", async (req, res) => {
     });
 
     await newUser.save();
+    console.log("👤 נשמר משתמש:", newUser);
     await sendWelcomeEmail(email, name);
 
     res.status(201).json({ msg: "נרשמת בהצלחה!" });
