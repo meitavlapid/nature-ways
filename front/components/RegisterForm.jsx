@@ -30,7 +30,7 @@ const validationSchema = Yup.object({
   phone: Yup.string()
     .matches(/^[0-9\s\-+()]*$/, "מספר לא תקין")
     .optional(),
-  role: Yup.string().required("יש לבחור תפקיד"),
+  position: Yup.string().required("יש לבחור תפקיד"),
   interests: Yup.array()
     .min(1, "בחר לפחות תחום אחד")
     .max(5, "ניתן לבחור עד 5 תחומים בלבד"),
@@ -42,7 +42,7 @@ function RegisterForm() {
     name: "",
     email: "",
     phone: "",
-    role: "",
+    position: "",
     interests: [],
     password: "",
   };
@@ -76,12 +76,12 @@ function RegisterForm() {
               <h4>1. מי את.ה?</h4>
               {roles.map((role) => (
                 <label key={role} className="checkbox-label">
-                  <Field type="radio" name="role" value={role} />
+                  <Field type="radio" name="position" value={role} />
                   {role}
                 </label>
               ))}
               <ErrorMessage
-                name="role"
+                name="position"
                 component="div"
                 className="error-text"
               />
