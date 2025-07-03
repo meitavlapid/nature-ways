@@ -13,6 +13,12 @@
   margin-bottom: 1.5rem;
   display: inline-block;
   padding-bottom: 0.5rem;
+  width: 100%;
+}
+
+.about-container h4 {
+  margin-bottom: 1.5rem;
+  font-weight: bold;
 }
 
 .about-container p {

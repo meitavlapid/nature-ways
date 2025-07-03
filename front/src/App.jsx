@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import Contact from "../pages/Contact";
 import Admin from "../pages/Admin";
 import Login from "../components/Login";
-import Register from "../components/Register";
+import Register from "../components/RegisterForm";
 import AdminProducts from "../pages/AdminProducts";
 import AddProduct from "../components/AddProduct";
 import AdminVideos from "../components/AdminVideos";
@@ -48,7 +48,7 @@ function App() {
         <Route path="/admin/users" element={<AdminUsers />} />
 
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Registerform />} />
 
         <Route path="*" element={<Home />} />
       </Routes>

@@ -7,23 +7,36 @@ import { Trash, ShieldLock } from "react-bootstrap-icons";
 function AdminUsers() {
   const [users, setUsers] = useState([]);
   const { user } = useUser();
+  const [activeTab, setActiveTab] = useState("users"); 
+  const [registered, setRegistered] = useState([]);
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
 
-  const fetchUsers = async () => {
-    try {
-      const res = await api.get("/api/users", {
-        headers: {
-          Authorization: `Bearer ${user?.token}`,
-        },
-      });
-      setUsers(res.data);
-    } catch (err) {
-      console.error("שגיאה בטעינת משתמשים:", err.message);
-    }
-  };
+ useEffect(() => {
+   const fetchUsers = async () => {
+     try {
+       const res = await api.get("/api/users", {
+         headers: { Authorization: `Bearer ${user?.token}` },
+       });
+       setUsers(res.data);
+     } catch (err) {
+       console.error("שגיאה בטעינת משתמשים:", err.message);
+     }
+   };
+
+   const fetchRegistered = async () => {
+     try {
+       const res = await api.get("/api/register/all", {
+         headers: { Authorization: `Bearer ${user?.token}` },
+       });
+       setRegistered(res.data);
+     } catch (err) {
+       console.error("שגיאה בטעינת נרשמים:", err.message);
+     }
+   };
+
+   fetchUsers();
+   fetchRegistered();
+ }, []);
 
   const handleDelete = async (id) => {
     if (user._id === id) return alert("לא ניתן למחוק את עצמך");
@@ -44,7 +57,7 @@ function AdminUsers() {
     try {
       await api.put(
         `/api/users/${id}/role`,
-        { role: isAdmin ? "user" : "admin" },
+        { role: isAdminNow ? "user" : "admin" },
         {
           headers: {
             Authorization: `Bearer ${user?.token}`,
@@ -54,6 +67,7 @@ function AdminUsers() {
       fetchUsers();
     } catch (err) {
       alert("שגיאה בשינוי תפקיד");
+      console.error(err.message);
     }
   };
 
@@ -67,6 +81,9 @@ function AdminUsers() {
           <div className="table-header">
             <span>שם</span>
             <span>אימייל</span>
+            <span>תפקיד</span>
+            <span>טלפון</span>
+            <span>תחומי עניין</span>
             <span>הרשאות</span>
             <span>פעולות</span>
           </div>
@@ -74,6 +91,9 @@ function AdminUsers() {
             <div className="table-row" key={u._id}>
               <span>{u.name}</span>
               <span>{u.email}</span>
+              <span>{u.role}</span>
+              <span>{u.phone || "-"}</span>
+              <span>{u.interests?.join(", ")}</span>
               <span>{u.role === "admin" ? "אדמין" : "משתמש"}</span>
               <span className="actions">
                 {u._id !== user._id && (
@@ -85,7 +105,7 @@ function AdminUsers() {
                       }
                     >
                       <ShieldLock className="mb-1" />
-                      {u.isAdmin ? "הסר אדמין" : "הפוך לאדמין"}
+                      {u.role === "admin" ? "הסר אדמין" : "הפוך לאדמין"}
                     </button>
                     <button
                       className="btn-delete"

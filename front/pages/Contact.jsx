@@ -35,8 +35,8 @@ const Contact = () => {
       <h1>צור קשר</h1>
       <div className="contact-container">
       <p>
-        נשמח לשמוע מכם! אם יש לכם שאלות, בקשות או שתרצו להזמין מוצרים במיתוג
-        אישי – אנחנו כאן בשבילכם.
+        נשמח לשמוע מכם! <br />אם יש לכם שאלות, בקשות או שתרצו להזמין מוצרים במיתוג
+        אישי <br /> אנחנו כאן בשבילכם.
       </p>
 
       <form onSubmit={handleSubmit} className="contact-form">
@@ -80,7 +80,7 @@ const Contact = () => {
           required
         />
         <div className="btn-container">
-          <button type="submit">שלח</button>
+          <button type="submit">בואו נדבר</button>
           {status === "success" && (
             <p className="success-message">ההודעה נשלחה בהצלחה!</p>
           )}
