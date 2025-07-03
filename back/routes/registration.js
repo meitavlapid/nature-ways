@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const RegisteredUser = require("../models/RegisteredUser");
+const User = require("../models/User");
 const sendWelcomeEmail = require("../utils/sendWelcomeEmail");
 const { authenticateToken, requireAdmin } = require("../middleware/auth");
 

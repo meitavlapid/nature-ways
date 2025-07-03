@@ -4,8 +4,15 @@ const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    role: { type: String, enum: ["user", "admin"], default: "user" },
+    password: { type: String, default: "" }, // לרשומים ללא סיסמה
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
+    },
+    phone: String,
+    interests: [String], // תחומי עניין לבחירה
+    source: { type: String, default: "registration" }, // או "admin", "manual"
   },
   { timestamps: true }
 );

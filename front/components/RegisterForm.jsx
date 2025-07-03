@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import api from "../src/services/api";
+
 import "../css/RegisterForm.css";
 
 const roles = [
@@ -134,6 +133,14 @@ function RegisterForm() {
             value={formData.phone}
             onChange={(e) =>
               setFormData({ ...formData, phone: e.target.value })
+            }
+          />
+          <label>סיסמה</label>
+          <input
+            type="password"
+            value={formData.password}
+            onChange={(e) =>
+              setFormData({ ...formData, password: e.target.value })
             }
           />
         </div>

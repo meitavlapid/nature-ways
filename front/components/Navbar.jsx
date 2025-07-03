@@ -108,6 +108,11 @@ function Navbar() {
           <li>
             <Link to="/contact">צור קשר</Link>
           </li>
+          {!user && (
+            <li>
+              <Link to="/register">הרשמה</Link>
+            </li>
+          )}
         </ul>
       </div>
       {/* צד שמאל: אייקונים */}
