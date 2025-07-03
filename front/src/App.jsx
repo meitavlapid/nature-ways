@@ -6,6 +6,10 @@ import Footer from "../components/Footer";
 import Contact from "../pages/Contact";
 import Admin from "../pages/Admin";
 import Login from "../components/Login";
+<<<<<<< HEAD
+=======
+import Register from "../components/RegisterForm";
+>>>>>>> 25bd0ca8d4646a9e8ce69b2479bc3d4d80dce801
 import AdminProducts from "../pages/AdminProducts";
 import AddProduct from "../components/AddProduct";
 import AdminVideos from "../components/AdminVideos";
@@ -48,7 +52,11 @@ function App() {
         <Route path="/admin/users" element={<AdminUsers />} />
 
         <Route path="/login" element={<Login />} />
+<<<<<<< HEAD
         <Route path="/register" element={<RegisterForm/>} />
+=======
+        <Route path="/register" element={<Registerform />} />
+>>>>>>> 25bd0ca8d4646a9e8ce69b2479bc3d4d80dce801
 
         <Route path="*" element={<Home />} />
       </Routes>
