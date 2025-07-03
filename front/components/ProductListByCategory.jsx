@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useUser } from "../hooks/UserContext";
 import api from "../src/services/api";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Pencil, Trash} from "react-bootstrap-icons";
+import { Pencil, Trash } from "react-bootstrap-icons";
 import "../css/ProductListByCategory.css";
-
 
 const CATEGORY_LABELS = {
   acne: "מוצרים לטיפול באקנה",
@@ -60,7 +58,7 @@ function ProductListByCategory() {
         <div>
           <button
             type="button"
-            className="btn mb-4"
+            className="btn"
             onClick={() => navigate(`/admin/add?category=${category}`)}
           >
             הוספת מוצר חדש
@@ -71,34 +69,26 @@ function ProductListByCategory() {
       {products.length === 0 ? (
         <p className="text-center">לא נמצאו מוצרים בקטגוריה זו.</p>
       ) : (
-        <div className="row g-4">
+        <div className="row">
           {products.map((product) => (
-            <div className="col-md-6 col-lg-4 px-2" key={product._id}>
-              <div
-                className="card h-100 shadow-sm border-0 rounded-4 overflow-hidden"
-                
-              >
+            <div className="col" key={product._id}>
+              <div className="card-product">
                 <img
                   src={product.image || `/images/${category}-default.jpg`}
                   className="card-img-top"
                   alt={product.name}
-                  style={{ objectFit: "cover" }}
+           
                 />
-                <div className="card-body d-flex flex-column">
+                <div className="card-column">
                   <h5 className="card-title text-center">{product.name}</h5>
-                  <p className="card-text small text-muted text-center">
+                  <p className="card-text">
                     {product.shortDescription}
                   </p>
 
-                  <div className="btn-container d-flex text-center mb-4 mt-auto">
+                  <div className="btn-container">
                     <button
                       to={`/${category}/${product._id}`}
                       className="btn"
-                      style={{
-                        bottom: "10px",
-                        left: "60%",
-                        padding: "0.5rem 0.5rem",
-                      }}
                       onClick={() => navigate(`/${category}/${product._id}`)}
                     >
                       לקרוא עלי עוד
@@ -107,24 +97,12 @@ function ProductListByCategory() {
                       <>
                         <button
                           type="button"
-                          style={{
-                            bottom: "10px",
-                            left: "2%",
-                            padding: "0.5rem 0.5rem",
-                          }}
-                          className="btn btn-warning btn-sm me-2"
                           onClick={() => handleEdit(product._id)}
                         >
                           <Pencil className="mb-1" /> עריכה
                         </button>
 
                         <button
-                          style={{
-                            bottom: "10px",
-                            left: "30%",
-                            padding: "0.5rem 0.5rem",
-                          }}
-                          className="btn btn-danger btn-sm me-2"
                           onClick={() => handleDelete(product._id)}
                         >
                           <Trash className="mb-1" /> מחיקה

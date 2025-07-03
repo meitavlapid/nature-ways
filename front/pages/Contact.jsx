@@ -31,8 +31,9 @@ const Contact = () => {
   };
 
   return (
-    <div className="contact-container">
-      <h2>צור קשר</h2>
+    <div className="container">
+      <h1>צור קשר</h1>
+      <div className="contact-container">
       <p>
         נשמח לשמוע מכם! אם יש לכם שאלות, בקשות או שתרצו להזמין מוצרים במיתוג
         אישי – אנחנו כאן בשבילכם.
@@ -90,10 +91,10 @@ const Contact = () => {
       </form>
       <div className="contact-info">
         <p>
-          {" "}
+          
           נייצ’ר וויז – פתרונות מהטבע | השקדים 1, קרית טבעון | ח"פ: 516020898
         </p>
-      </div>
+      </div></div>
     </div>
   );
 };
