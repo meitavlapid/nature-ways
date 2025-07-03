@@ -31,17 +31,16 @@ router.delete("/:id", authenticateToken, requireAdmin, async (req, res) => {
 
 router.put("/:id/role", authenticateToken, requireAdmin, async (req, res) => {
   const { id } = req.params;
-  const { isAdmin } = req.body;
-
-  if (id === req.user._id.toString()) {
-    return res.status(400).json({ error: "לא ניתן לשנות את ההרשאות שלך עצמך" });
+  const { role } = req.body;
+  if (!["admin", "user"].includes(role)) {
+    return res.status(400).json({ error: "ערך הרשאה לא חוקי" });
   }
 
   try {
     const user = await User.findById(id);
     if (!user) return res.status(404).json({ error: "משתמש לא נמצא" });
 
-    user.isAdmin = isAdmin;
+    user.role = role;
     await user.save();
     res.json({ message: "הרשאות עודכנו" });
   } catch (err) {

@@ -44,7 +44,7 @@ function AdminUsers() {
     try {
       await api.put(
         `/api/users/${id}/role`,
-        { isAdmin: !isAdminNow },
+        { role: isAdmin ? "user" : "admin" },
         {
           headers: {
             Authorization: `Bearer ${user?.token}`,
@@ -74,13 +74,15 @@ function AdminUsers() {
             <div className="table-row" key={u._id}>
               <span>{u.name}</span>
               <span>{u.email}</span>
-              <span>{u.isAdmin ? "אדמין" : "משתמש"}</span>
+              <span>{u.role === "admin" ? "אדמין" : "משתמש"}</span>
               <span className="actions">
                 {u._id !== user._id && (
                   <>
                     <button
                       className="btn-admin"
-                      onClick={() => handleToggleAdmin(u._id, u.isAdmin)}
+                      onClick={() =>
+                        handleToggleAdmin(u._id, u.role === "admin")
+                      }
                     >
                       <ShieldLock className="mb-1" />
                       {u.isAdmin ? "הסר אדמין" : "הפוך לאדמין"}
