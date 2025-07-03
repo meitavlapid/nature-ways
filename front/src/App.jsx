@@ -21,6 +21,7 @@ import ArticlePage from "../pages/ArticlePage";
 import UploadArticle from "../pages/UploadArticle";
 import ArticleList from "../pages/ArticleList";
 import EditArticle from "../pages/EditArticle";
+import AdminUsers from "../pages/AdminUsers";
 
 function App() {
   return (
@@ -44,6 +45,8 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/products" element={<AdminProducts />} />
         <Route path="/admin/edit/:id" element={<EditProduct />} />
+        <Route path="/admin/users" element={<AdminUsers />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
