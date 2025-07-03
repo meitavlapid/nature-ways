@@ -4,17 +4,17 @@ const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, default: "" }, // לרשומים ללא סיסמה
+    password: { type: String, default: "" },
     role: {
       type: String,
       enum: ["user", "admin"],
       default: "user",
     },
+    position: { type: String }, // ✅ תפקיד מקצועי מתוך הטופס
     phone: String,
-    interests: [String], // תחומי עניין לבחירה
-    source: { type: String, default: "registration" }, // או "admin", "manual"
+    interests: [String],
+    source: { type: String, default: "registration" },
   },
   { timestamps: true }
 );
-
 module.exports = mongoose.model("User", userSchema);

@@ -7,9 +7,9 @@ const { authenticateToken, requireAdmin } = require("../middleware/auth");
 // POST /api/register
 router.post("/", async (req, res) => {
   try {
-    const { name, email, phone, role, interests } = req.body;
+    const { name, email, phone, position, interests, password } = req.body;
 
-    if (!name || !email || !role) {
+    if (!name || !email || position) {
       return res.status(400).json({ msg: "שדות חובה חסרים" });
     }
 
@@ -23,11 +23,12 @@ router.post("/", async (req, res) => {
     const newUser = new User({
       name,
       email,
-      password: "", // אין צורך בסיסמה בשלב זה
-      role: "user",
-      source: "registration", // אופציונלי לזיהוי מקור
       phone,
+      password,
+      position, // ✅ חדש
+      role: "user",
       interests,
+      source: "registration",
     });
 
     await newUser.save();
@@ -39,14 +40,11 @@ router.post("/", async (req, res) => {
     res.status(500).json({ msg: "שגיאה בשרת" });
   }
 });
-
 router.get("/all", authenticateToken, requireAdmin, async (req, res) => {
-  try {
-    const users = await RegisteredUser.find().sort({ createdAt: -1 });
-    res.json(users);
-  } catch (err) {
-    res.status(500).json({ msg: "שגיאה בקבלת רשומים" });
-  }
+  const users = await User.find({ source: "registration" }).sort({
+    createdAt: -1,
+  });
+  res.json(users);
 });
 
 module.exports = router;
