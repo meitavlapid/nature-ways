@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
+
 const uploadRoutes = require("./routes/upload");
 const imageRoutes = require("./routes/images");
 const aboutRoutes = require("./routes/about");
@@ -17,7 +19,17 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middlewares
-app.use(cors());
+const allowedOrigins = [
+  "http://localhost:5173", // dev
+  "https://nature-ways.onrender.com", // production frontend
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 app.use(express.json({ limit: "200mb" }));
 app.use(express.urlencoded({ extended: true, limit: "200mb" }));
 app.use("/api/images", imageRoutes);
@@ -44,7 +56,22 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("Connecting to:", process.env.MONGO_URI);
-    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+    console.log("✅ מחובר ל־MongoDB:", mongoose.connection.name);
+    app.listen(PORT, () => console.log(`🚀 השרת פועל על פורט ${PORT}`));
   })
-  .catch((err) => console.error("❌ MongoDB connection error:", err));
+  .catch((err) => {
+    console.error("❌ שגיאה בהתחברות ל־MongoDB:", err);
+  });
+  app.use((err, req, res, next) => {
+    console.error("💥 שגיאה כללית:", err.stack);
+    res.status(500).json({ msg: "שגיאה בשרת" });
+  });
+
+  // 🧭 תמיכה ב־React Router (אם רלוונטי)
+  if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "client", "build")));
+
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+    });
+  }
