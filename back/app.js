@@ -43,7 +43,6 @@ app.use("/api/products", productsRoutes);
 app.use("/api/users", usersRouter);
 app.use("/api/register", registrationRoute);
 
-
 // ברירת מחדל
 app.get("/", (req, res) => {
   res.send("API is working");
@@ -62,16 +61,7 @@ mongoose
   .catch((err) => {
     console.error("❌ שגיאה בהתחברות ל־MongoDB:", err);
   });
-  app.use((err, req, res, next) => {
-    console.error("💥 שגיאה כללית:", err.stack);
-    res.status(500).json({ msg: "שגיאה בשרת" });
-  });
-
-  // 🧭 תמיכה ב־React Router (אם רלוונטי)
-  if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "client", "build")));
-
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-    });
-  }
+app.use((err, req, res, next) => {
+  console.error("💥 שגיאה כללית:", err.stack);
+  res.status(500).json({ msg: "שגיאה בשרת" });
+});
