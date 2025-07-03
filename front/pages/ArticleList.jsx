@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../src/services/api";
 import { useUser } from "../hooks/UserContext";
+import { Pencil, Trash } from "react-bootstrap-icons";
+
 import "../css/ArticleList.css";
 
 function ArticleList() {
@@ -35,6 +37,10 @@ function ArticleList() {
       console.error("שגיאה במחיקת מאמר:", err);
       alert("שגיאה במחיקה");
     }
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/articles/edit/${id}`);
   };
 
   return (
@@ -77,25 +83,20 @@ function ArticleList() {
                   <h4>{article.title}</h4>
                   <p>{article.summary}</p>
                   <div className="btn-container">
-                    <Link
-                      to={`/articles/${article._id}`}
-                      className="btn"
-                    >
+                    <Link to={`/articles/${article._id}`} className="btn">
                       לצפייה
                     </Link>
                     {isAdmin && (
                       <>
-                        <Link
-                          to={`/articles/edit/${article._id}`}
-                          className="btn "
-                        >
-                          עריכה
-                        </Link>
                         <button
-                          onClick={() => handleDelete(article._id)}
-                          className="btn"
+                          type="button"
+                          onClick={() => handleEdit(article._id)}
                         >
-                          מחיקה
+                          <Pencil className="mb-1" /> עריכה
+                        </button>
+
+                        <button onClick={() => handleDelete(article._id)}>
+                          <Trash className="mb-1" /> מחיקה
                         </button>
                       </>
                     )}

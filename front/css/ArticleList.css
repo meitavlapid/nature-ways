@@ -9,7 +9,7 @@
 }
 
 .article-list h2 {
-  color:#4E643B;
+  color: #4e643b;
   margin-bottom: 2rem;
   text-align: center;
 }
@@ -35,7 +35,7 @@
   background-color: #f4ede2;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
   position: relative;
   display: flex;
@@ -59,11 +59,11 @@
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  z-index: 2;
+ 
 }
 
 .article-tags span {
-  background-color:#4E643B;
+  background-color: #4e643b;
   color: #fff;
   padding: 4px 10px;
   border-radius: 20px;
@@ -84,4 +84,38 @@
 .article-card-content p {
   font-size: 0.95rem;
   flex: 1;
+}
+
+/* כפתורי אדמין */
+.btn-container {
+  margin-top: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.btn-container button {
+  padding: 0.4rem 0.6rem;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-container .btn:hover {
+  transform: scale(1.05);
+}
+/* כפתורי אדמין */
+.btn-container button:nth-child(2) {
+  background-color: #f3c37d;
+}
+
+.btn-container button:nth-child(2):hover {
+  background-color: #e5b565;
+}
+
+.btn-container button:nth-child(3) {
+  background-color: #ce5f5f;
+}
+
+.btn-container button:nth-child(3):hover {
+  background-color: #b84545;
 }

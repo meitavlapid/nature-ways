@@ -38,12 +38,12 @@ function AdminProducts() {
     if (category === "skinquality") {
       setShowSubcategories((prev) => !prev);
     } else {
-      navigate(`/admin/products/${category}`);
+      navigate(`/${category}`);
     }
   };
 
   const handleSubcategoryClick = (subcategory) => {
-    navigate(`/admin/products/${subcategory}`);
+    navigate(`/${subcategory}`);
   };
 
   return (

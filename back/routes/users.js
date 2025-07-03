@@ -1,19 +1,21 @@
 // routes/users.js
+// routes/users.js
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
-const { authenticate, requireAdmin } = require("../middleware/auth");
+const { authenticateToken, requireAdmin } = require("../middleware/auth");
 
-router.get("/", authenticate , requireAdmin ,  async (req, res) => {
+router.get("/", authenticateToken, requireAdmin, async (req, res) => {
   try {
-    const users = await User.find({}, "-password"); // exclude password
+    const users = await User.find({}, "-password");
     res.json(users);
   } catch (err) {
-    res.status(500).json({ error: "שגיאה בקבלת המשתמשים" });
+    res.status(500).json({ msg: "שגיאה בטעינת המשתמשים" });
   }
 });
 
-router.delete("/:id", authenticate, requireAdmin, async (req, res) => {
+
+router.delete("/:id", authenticateToken, requireAdmin, async (req, res) => {
   const { id } = req.params;
   if (id === req.user._id.toString()) {
     return res.status(400).json({ error: "לא ניתן למחוק את עצמך" });
@@ -27,7 +29,7 @@ router.delete("/:id", authenticate, requireAdmin, async (req, res) => {
   }
 });
 
-router.put("/:id/role", authenticate, isAdmin, async (req, res) => {
+router.put("/:id/role", authenticateToken, requireAdmin, async (req, res) => {
   const { id } = req.params;
   const { isAdmin } = req.body;
 
@@ -46,3 +48,4 @@ router.put("/:id/role", authenticate, isAdmin, async (req, res) => {
     res.status(500).json({ error: "שגיאה בעדכון הרשאות" });
   }
 });
+module.exports = router;

@@ -10,6 +10,7 @@ const articlesRoutes = require("./routes/articles");
 const authRoutes = require("./routes/auth");
 const productsRoutes = require("./routes/products");
 const videoRoutes = require("./routes/videos");
+const usersRouter = require("./routes/users");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -25,6 +26,7 @@ app.use("/api/articles", articlesRoutes);
 app.use("/api/about", aboutRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productsRoutes);
+app.use("/api/users", usersRouter);
 
 // ברירת מחדל
 app.get("/", (req, res) => {

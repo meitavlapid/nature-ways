@@ -42,7 +42,7 @@ function About() {
 
       {/* מקטע "מי אנחנו" */}
       <div className="team-section">
-        <h2>מי אנחנו</h2>
+        <h1>מי אנחנו</h1>
         <div className="team-cards">
           <div className="team-card">
             <img
