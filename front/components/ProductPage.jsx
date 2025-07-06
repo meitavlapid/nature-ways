@@ -27,7 +27,7 @@ function ProductPage() {
   return (
     <div className="container-fluid" dir="rtl">
       <div className="product-bg">
-        <div className="product-buttons d-flex justify-content-between">
+        <div className="product-buttons">
           <div>
             <button
               className="btn btn-secondary me-2"
@@ -46,12 +46,9 @@ function ProductPage() {
                 עריכת מוצר
               </button>
             )}
-          </div>
-
-          <div>
             {product.specFileUrl && (
               <button
-                className="btn btn-success mb-2"
+                className="btn btn-primary"
                 onClick={() => {
                   if (!user && !isAdmin) {
                     if (
@@ -68,8 +65,10 @@ function ProductPage() {
               >
                 הורדת המפרט שלי
               </button>
+             
             )}
           </div>
+ 
         </div>
 
         <div className="product-text">

@@ -60,15 +60,17 @@
 }
 .product-buttons {
   display: flex;
-  position: absolute;
-  
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
 }
+
 .product-bg .btn {
-  width: auto;
-  text-align: center;
-  left: 40%;
-  transform: translateX(-50%);
+  margin: 0 0.5rem;
+  height: 40px;
+  width: 200px;
 }
+
 /* ===== רספונסיבי ===== */
 @media (max-width: 768px) {
   .product-bg {
