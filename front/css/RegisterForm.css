@@ -8,13 +8,15 @@
 
 /* קופסה פנימית */
 .container {
+  width: 80%;
   background-color: #f8f5f0;
   border-radius: 16px;
+  margin: 2rem auto;
   padding: 2.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
- h2 {
+h2 {
   margin-bottom: 2rem;
   text-align: center;
 }
@@ -55,14 +57,12 @@ legend.section-title {
 /* רדיו / צ’קבוקס */
 input[type="radio"],
 input[type="checkbox"] {
-  accent-color:#4e643b;
+  accent-color: #4e643b;
   cursor: pointer;
   width: 18px;
   height: 18px;
   margin: 0;
 }
-
-
 
 /* שדות טקסט */
 input[type="text"],
@@ -88,6 +88,6 @@ input[type="password"] {
 }
 input:focus {
   outline: none;
-  border-color:#4e643b;
+  border-color: #4e643b;
   box-shadow: 0 0 0 2px rgba(127, 166, 109, 0.2);
 }
