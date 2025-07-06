@@ -40,7 +40,21 @@ function EditProduct() {
       alert("העלאת התמונה נכשלה");
     }
   };
+  const handleSpecFileUpload = async (file) => {
+    const formDataFile = new FormData();
+    formDataFile.append("file", file);
 
+    try {
+      const res = await api.post("/api/upload/spec", formDataFile, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      setFormData((prev) => ({ ...prev, specFileUrl: res.data.fileUrl }));
+    } catch (error) {
+      console.error("שגיאה בהעלאת הקובץ:", error.message);
+      alert("העלאת קובץ המפרט נכשלה");
+    }
+  };
+  
   const handleListChange = (field, index, value) => {
     const updatedList = [...formData[field]];
     updatedList[index] = value;
@@ -226,10 +240,28 @@ function EditProduct() {
           הוסף שורה
         </button>
          </div>
+         
         ))}
      
 
-        <hr />
+       
+        <>
+        <label className="form-label">קובץ מפרט (Word או PDF)</label>
+  <input
+    type="file"
+    className="form-control"
+    accept=".doc,.docx,.pdf"
+    onChange={(e) => handleSpecFileUpload(e.target.files[0])}
+  />
+  {formData.specFileUrl && (
+    <div className="mt-2">
+      <a href={formData.specFileUrl} target="_blank" rel="noopener noreferrer">
+        צפייה בקובץ המפרט הקיים
+      </a>
+    </div>
+  )}
+        </>
+         <hr />
         <h4>כותרות ותוכן נוסף</h4>
         {formData.sections?.map((section, sectionIndex) => (
           <div key={sectionIndex} className="mb-4">

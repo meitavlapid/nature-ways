@@ -15,6 +15,7 @@ const productSchema = new mongoose.Schema({
   instructions: [String],
   warnings: [String],
   suitableFor: [String],
+  specFileUrl: { type: String, default: "" },
 });
 
 module.exports = mongoose.model("Product", productSchema);

@@ -27,16 +27,18 @@ function ProductPage() {
   return (
     <div className="container-fluid" dir="rtl">
       <div className="product-bg">
-          <div className="product-buttons">
+        <div className="product-buttons d-flex justify-content-between">
+          <div>
             <button
-              className="btn"
+              className="btn btn-secondary me-2"
               onClick={() => navigate(-1)}
             >
               חזרה
             </button>
+
             {isAdmin && (
               <button
-                className="btn"
+                className="btn btn-warning"
                 onClick={() =>
                   navigate(`/admin/edit/${product._id}?category=${category}`)
                 }
@@ -44,6 +46,30 @@ function ProductPage() {
                 עריכת מוצר
               </button>
             )}
+          </div>
+
+          <div>
+            {product.specFileUrl && (
+              <button
+                className="btn btn-success mb-2"
+                onClick={() => {
+                  if (!user && !isAdmin) {
+                    if (
+                      window.confirm(
+                        "כדי להוריד את המפרט יש להירשם לאתר. רוצים להירשם?"
+                      )
+                    ) {
+                      navigate("/register");
+                    }
+                  } else {
+                    window.open(product.specFileUrl, "_blank");
+                  }
+                }}
+              >
+                הורדת המפרט שלי
+              </button>
+            )}
+          </div>
         </div>
 
         <div className="product-text">

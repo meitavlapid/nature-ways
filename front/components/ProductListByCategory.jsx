@@ -77,13 +77,10 @@ function ProductListByCategory() {
                   src={product.image || `/images/${category}-default.jpg`}
                   className="card-img-top"
                   alt={product.name}
-           
                 />
                 <div className="card-column">
                   <h5 className="card-title text-center">{product.name}</h5>
-                  <p className="card-text">
-                    {product.shortDescription}
-                  </p>
+                  <p className="card-text">{product.shortDescription}</p>
 
                   <div className="btn-container">
                     <button
@@ -91,7 +88,7 @@ function ProductListByCategory() {
                       className="btn"
                       onClick={() => navigate(`/${category}/${product._id}`)}
                     >
-                      לקרוא עלי עוד
+                      הכירו את המוצר
                     </button>
                     {isAdmin && (
                       <>
@@ -102,9 +99,7 @@ function ProductListByCategory() {
                           <Pencil className="mb-1" /> עריכה
                         </button>
 
-                        <button
-                          onClick={() => handleDelete(product._id)}
-                        >
+                        <button onClick={() => handleDelete(product._id)}>
                           <Trash className="mb-1" /> מחיקה
                         </button>
                       </>

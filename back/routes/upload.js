@@ -41,5 +41,12 @@ router.delete("/:public_id", async (req, res) => {
     res.status(500).json({ error: "שגיאה במחיקת תמונה" });
   }
 });
-
+router.post("/spec", upload.single("file"), async (req, res) => {
+  try {
+    res.json({ fileUrl: req.file.path });
+  } catch (err) {
+    console.error("❌ שגיאה בהעלאת קובץ מפרט:", err.message);
+    res.status(500).json({ msg: "שגיאה בהעלאת הקובץ" });
+  }
+});
 module.exports = router;
