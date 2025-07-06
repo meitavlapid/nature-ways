@@ -85,7 +85,7 @@ function RegisterForm() {
     <div className="containe-fluid mt-5 mb-5 " dir="rtl">
       {!submitted ? (
         <>
-          <h2>המממ.. למה אני בכלל צריכ.ה להירשם?</h2>
+          <h1>המממ.. למה אני בכלל צריכ.ה להירשם?</h1>
 
           <div className="container">
             <p>
