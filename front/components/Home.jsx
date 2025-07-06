@@ -41,7 +41,7 @@ function Home() {
   };
 
   return (
-    <div className="container">
+    <div className="container ">
       {/* תמונה ראשית */}
       {getImageUrl("home") && (
         <img
@@ -59,7 +59,7 @@ function Home() {
                 <img src={getImageUrl("nutri")} alt="תמונה 2" />
               </div>
               <div className="flip-back">
-                <span>
+                <span className="flip-text-right">
                   נוטריקוסמטיקה (Nutricosmetics) היא גישה חדשנית המתבססת על
                   מחקרים מדעיים המוכיחים כי עור בריא, מוצק וקורן מתחיל מבפנים .
                   <br />
@@ -76,7 +76,7 @@ function Home() {
                 <img src={getImageUrl("dermo")} alt="תמונה 3" />
               </div>
               <div className="flip-back">
-                <span>
+                <span className="flip-text-left">
                   דרמו-קוסמטיקה (Dermocosmetics) היא גישה מדעית־טיפולית לחידוש
                   העור, מוצרים דרמוקוסמטיים אינם מסתפקים בשיפור זמני של מראה
                   העור – אלא משפיעים על מנגנונים ביולוגיים עמוקים, ומיועדים
