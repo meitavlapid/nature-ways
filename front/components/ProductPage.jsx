@@ -8,7 +8,7 @@ import "../css/ProductPage.css";
 function ProductPage() {
   const { id, category } = useParams();
   const [product, setProduct] = useState(null);
-  const { isAdmin } = useUser();
+  const { isAdmin, user } = useUser();
   const navigate = useNavigate();
 
   useEffect(() => {
