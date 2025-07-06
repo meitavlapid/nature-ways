@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import api from "../src/services/api";
@@ -13,13 +13,24 @@ function Home() {
     arrows: true,
     infinite: true,
     autoplay: false,
-    autoplaySpeed: 5000,
     slidesToShow: 1,
     slidesToScroll: 1,
+    beforeChange: () => {
+      // עוצר את כל הווידאוים שמוצגים כרגע
+      const videos = document.querySelectorAll(".video-slide video");
+      videos.forEach((video) => {
+        if (!video.paused) {
+          video.pause();
+          video.currentTime = 0;
+        }
+      });
+    },
   };
 
   const [images, setImages] = useState([]);
   const [videos, setVideos] = useState([]);
+
+  const videoRefs = useRef([]);
 
   useEffect(() => {
     api
@@ -91,12 +102,9 @@ function Home() {
       </div>
       <div className="text-container">
         <p>עם הזמן הצטברו לא רק מוצרים – גם סיפורים.</p>
+        <p>אספנו בשבילכם רגעים אמיתיים מהשטח ובחרנו לשתף אתכם בכמה מהם</p>
         <p>
-          אספנו בשבילכם רגעים אמיתיים מהשטח ובחרנו לשתף אתכם בכמה מהם 
-        </p>
-        <p>
-           סרטונים
-          אותנטיים שממחישים איך נייצ'ר וויז משתלבת ביום-יום של קליניקות,
+          סרטונים אותנטיים שממחישים איך נייצ'ר וויז משתלבת ביום-יום של קליניקות,
           מטפלים ומטופלים.
         </p>
 
@@ -105,9 +113,15 @@ function Home() {
           {videos.length > 0 && (
             <div className="video-carousel">
               <Slider {...settings}>
-                {videos.map((video) => (
+                {videos.map((video, index) => (
                   <div className="video-slide" key={video._id}>
-                    <video controls src={video.url} width="100%" height="400" />
+                    <video
+                      controls
+                      src={video.url}
+                      width="100%"
+                      height="400"
+                      ref={(el) => (videoRefs.current[index] = el)}
+                    />
                   </div>
                 ))}
               </Slider>
