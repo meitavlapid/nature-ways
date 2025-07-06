@@ -21,19 +21,22 @@ h1 {
 /* כרטיס מוצר */
 .card-product {
   width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 1rem;
-  margin: 2rem auto;
+  margin: 1rem auto;
+
   overflow: hidden;
   background-color: #f4ede2;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
-.col {
-}
 
 .col {
-  border: none;
+  display: flex;
 }
 
 .card:hover {
@@ -55,7 +58,7 @@ h1 {
 
 /* כפתורי פעולה */
 .btn-container {
-  margin-top: 0 auto;
+  margin-top: auto;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;

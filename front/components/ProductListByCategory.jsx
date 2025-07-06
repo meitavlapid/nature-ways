@@ -51,7 +51,7 @@ function ProductListByCategory() {
   const title = CATEGORY_LABELS[category] || `מוצרים בקטגוריה: ${category}`;
 
   return (
-    <div className="container" dir="rtl">
+    <div className="container mt-5 mb-5" dir="rtl">
       <h1>{title}</h1>
 
       {isAdmin && (
@@ -69,7 +69,7 @@ function ProductListByCategory() {
       {products.length === 0 ? (
         <p className="text-center">לא נמצאו מוצרים בקטגוריה זו.</p>
       ) : (
-        <div className="row">
+        <div className="row mt-4 mb-4">
           {products.map((product) => (
             <div className="col" key={product._id}>
               <div className="card-product">

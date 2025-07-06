@@ -25,7 +25,7 @@ function ProductPage() {
   if (!product) return <Loader />;
 
   return (
-    <div className="container" dir="rtl">
+    <div className="container-fluid" dir="rtl">
       <div className="product-bg">
           <div className="product-buttons">
             <button
