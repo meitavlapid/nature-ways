@@ -41,7 +41,7 @@ function Home() {
   };
 
   return (
-    <div className="container ">
+    <div className="home">
       {/* תמונה ראשית */}
       {getImageUrl("home") && (
         <img

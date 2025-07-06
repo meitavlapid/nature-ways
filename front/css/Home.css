@@ -1,15 +1,18 @@
-.container {
-  padding: 1rem;
-  direction: rtl;
-  text-align: center;
+.home {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 2rem 2rem;
+  margin: 0 auto;
+  flex-direction: column;
   justify-content: center;
-  border: none;
+  align-items: center;
+  direction: rtl;
 }
 
 .main-image {
   width: 100%;
-  height: auto;
-  max-height: 500px;
+  height: 100%;
   object-fit: cover;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -80,61 +83,56 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
- 
- 
+
   text-align: center;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
 }
 
-.flip-text-right  {
+.flip-text-right {
   width: 80%;
   margin: 0 auto;
-  font-size: 1.8rem;
   text-align: center;
   justify-content: center;
   align-items: center;
-  
-   color: #f4ede2;
+  color: #f4ede2;
+  font-size: 3vw;
+  line-height: 1.2;
+  word-wrap: break-word;
+  hyphens: auto;
+  overflow-wrap: break-word;
 }
 
-.flip-text-left  {
+.flip-text-left {
   width: 80%;
   margin: 0 auto;
-  font-size: 1.8rem;
   text-align: center;
   justify-content: center;
   align-items: center;
-  
-   color: #f4ede2;
+  color: #f4ede2;
+  font-size: 2.7vw; /* משתנה לפי רוחב המסך */
+  line-height: 1.2;
+  word-wrap: break-word;
+  hyphens: auto;
+  overflow-wrap: break-word;
 }
+
 .flip-back a {
   color: rgba(0, 0, 0, 0.603);
   text-decoration: none;
 }
 .flip-back a:hover {
-  color: #D7B98B;
+  color: #d7b98b;
   text-decoration: none;
 }
 
-/* מובייל: שורת התמונות תהיה אנכית */
-@media (max-width: 768px) {
-  .image-row {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .image-row img {
-    max-width: 100%;
-  }
-}
 .text-container {
   width: 100%;
   padding: 2rem;
   direction: rtl;
   font-size: 1.2rem;
-  margin: 6rem auto;
+  margin: 2rem auto;
   text-align: center;
   background-color: #f4ede2;
   border-radius: 12px;
@@ -189,23 +187,22 @@
 /* החצים של slick */
 .slick-prev,
 .slick-next {
-  font-size: 24px;
   z-index: 10;
-  color: #e0f0ea;
+  color: #4e643b;
+  background: #4e643b;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  top: 50%;
   transform: translateY(-50%);
+  margin: 0 auto;
 }
 
 button.slick-prev {
-  left: 3%;
+  color: #4e643b;
+  background: #4e643b;
 }
 
-.slick-next {
-  left: 95%;
+button.slick-next {
+  color: #4e643b;
+  background: #4e643b;
 }
 
 .slick-prev::before,
@@ -216,11 +213,4 @@ button.slick-prev {
   width: 40px;
   height: 40px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* רספונסיביות */
-@media (max-width: 768px) {
-  .imagehome2 {
-    width: 90%;
-  }
 }
