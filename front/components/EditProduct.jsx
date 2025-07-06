@@ -42,9 +42,10 @@ function EditProduct() {
   };
   const handleSpecFileUpload = async (file) => {
     const formData = new FormData();
-    formData.append("file", selectedSpecFile);
+    formData.append("file", file); // במקום selectedFile
+
     try {
-      await api.post("/api/upload/spec", formData, {
+      const res = await api.post("/api/upload/spec", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setFormData((prev) => ({ ...prev, specFileUrl: res.data.fileUrl }));
@@ -53,6 +54,7 @@ function EditProduct() {
       alert("העלאת קובץ המפרט נכשלה");
     }
   };
+  
 
   const handleListChange = (field, index, value) => {
     const updatedList = [...formData[field]];
