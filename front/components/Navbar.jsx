@@ -1,36 +1,38 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import * as bootstrap from "bootstrap";
 import { useUser } from "../hooks/UserContext";
 import { TbDoorEnter, TbDoorExit } from "react-icons/tb";
 import { FaWhatsapp, FaUserCircle } from "react-icons/fa";
-
 import "../css/Navbar.css";
 
 function Navbar() {
-  const location = useLocation();
   const { user } = useUser();
+  const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef();
+  const navRef = useRef();
+
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setMenuOpen(false);
         setDropdownOpen(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
   const logout = () => {
     localStorage.removeItem("token");
     window.location.reload();
   };
 
   return (
-    <nav className="navbar sticky-top">
-      {/* צד ימין: לוגו */}
+    <nav className="navbar sticky-top" ref={navRef}>
+      {/* לוגו */}
       <div className="logo">
         <Link to="/">
           <img
@@ -39,105 +41,97 @@ function Navbar() {
           />
         </Link>
       </div>
-      {/* מרכז */}
-      <div className="nav-center">
+
+      {/* כפתור המבורגר */}
+      <button className="burger" onClick={toggleMenu} aria-label="תפריט">
+        ☰
+      </button>
+
+      {/* תפריט ניווט */}
+      <div className={`nav-center ${menuOpen ? "open" : ""}`}>
         <ul>
-          <li className="dropdown" ref={dropdownRef}>
-            <span onClick={() => setDropdownOpen(!isDropdownOpen)}>מוצרים</span>
+          <li className="dropdown">
+            <span onClick={() => setDropdownOpen((prev) => !prev)}>מוצרים</span>
             {isDropdownOpen && (
               <ul className="dropdown-menu">
-                <li>
-                  <Link to="/psoriasis" onClick={() => setDropdownOpen(false)}>
-                    פסוריאזיס
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/antiaging" onClick={() => setDropdownOpen(false)}>
-                    אנטי אייג'ינג
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/acne" onClick={() => setDropdownOpen(false)}>
-                    אקנה
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/pigmentation"
-                    onClick={() => setDropdownOpen(false)}
-                  >
-                    פיגמנטציה
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/hairloss" onClick={() => setDropdownOpen(false)}>
-                    התקרחות
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/rehabilitation"
-                    onClick={() => setDropdownOpen(false)}
-                  >
-                    שיקום העור
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/weightloss" onClick={() => setDropdownOpen(false)}>
-                    הרזייה וחיטוב
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/customdevelopment"
-                    onClick={() => setDropdownOpen(false)}
-                  >
-                    פיתוח אישי
-                  </Link>
-                </li>
+                {[
+                  ["פסוריאזיס", "/psoriasis"],
+                  ["אנטי אייג'ינג", "/antiaging"],
+                  ["אקנה", "/acne"],
+                  ["פיגמנטציה", "/pigmentation"],
+                  ["התקרחות", "/hairloss"],
+                  ["שיקום העור", "/rehabilitation"],
+                  ["הרזייה וחיטוב", "/weightloss"],
+                  ["פיתוח אישי", "/customdevelopment"],
+                ].map(([label, path]) => (
+                  <li key={path}>
+                    <Link
+                      to={path}
+                      onClick={() => {
+                        setDropdownOpen(false);
+                        setMenuOpen(false);
+                      }}
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             )}
           </li>
-          <li>
-            <Link to="/articles">תוכן ומחקר</Link>
-          </li>
 
           <li>
-            <Link to="/about">אודות</Link>
+            <Link to="/articles" onClick={() => setMenuOpen(false)}>
+              תוכן ומחקר
+            </Link>
           </li>
           <li>
-            <Link to="/contact">צור קשר</Link>
+            <Link to="/about" onClick={() => setMenuOpen(false)}>
+              אודות
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" onClick={() => setMenuOpen(false)}>
+              צור קשר
+            </Link>
           </li>
           {!user && (
             <li>
-              <Link to="/register">הרשמה</Link>
+              <Link to="/register" onClick={() => setMenuOpen(false)}>
+                הרשמה
+              </Link>
             </li>
           )}
         </ul>
       </div>
-      {/* צד שמאל: אייקונים */}
+
+      {/* אייקונים */}
       <div className="nav-icons">
         <a
           href="https://wa.me/972558829222?text=היי%20אני%20פונה%20אלייך%20דרך%20אתר%20נייצר%20וויז"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FaWhatsapp size={24} color="#25D366" />
+          <FaWhatsapp  color="#25D366" />
         </a>
 
         {!user && (
-          <Link to="/login" title="התחברות">
-            <TbDoorEnter size={24} color="#333" />
+          <Link to="/login" title="התחברות" onClick={() => setMenuOpen(false)}>
+            <TbDoorEnter  color="#333" />
           </Link>
         )}
 
         {user && (
           <>
-            <Link to="/admin" title="אזור אישי">
-              <FaUserCircle size={24} color="#D7B98B" className="user-icon" />
+            <Link
+              to="/admin"
+              title="אזור אישי"
+              onClick={() => setMenuOpen(false)}
+            >
+              <FaUserCircle  color="#D7B98B" />
             </Link>
             <Link onClick={logout} title="התנתקות">
-              <TbDoorExit size={24} color="#333" />
+              <TbDoorExit  color="#333" />
             </Link>
           </>
         )}
