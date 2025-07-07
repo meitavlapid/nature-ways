@@ -58,7 +58,7 @@
 }
 
 .footer-center img {
-  height: 10vh;
+  height: 9vh;
   width: auto;
   object-fit: contain;
 }
@@ -88,6 +88,7 @@
 
   .footer-left {
     margin-left: 0;
+    justify-content: end;
   }
   .footer-right {
     flex-direction: row;
