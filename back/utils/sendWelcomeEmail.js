@@ -4,13 +4,13 @@ const sendWelcomeEmail = async (to, name) => {
   const transporter = nodemailer.createTransport({
     service: "gmail", // או SMTP אחר
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASS,
     },
   });
 
   await transporter.sendMail({
-    from: `"Nature Ways" <${process.env.EMAIL_USER}>`,
+    from: `"Nature Ways" <${process.env.MAIL_USER}>`,
     to,
     subject: "ברוכים הבאים!",
     html: `

@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useUser } from "../hooks/UserContext";
-import api from "../src/services/api"; // ✅ שימוש ב־baseURL
+import api from "../src/services/api";
+import ForgotPasswordModal from "./ForgotPasswordModal";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -10,6 +12,7 @@ function Login() {
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
   const { login } = useUser();
+  const [showModal, setShowModal] = useState(false);
 
   const togglePassword = () => setShowPassword(!showPassword);
 
@@ -80,6 +83,28 @@ function Login() {
       </form>
 
       {msg && <div className="alert alert-danger mt-3">{msg}</div>}
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <button
+          type="button"
+          className="btn btn-link p-0"
+          onClick={() => setShowModal(true)}
+          style={{ fontSize: "0.9rem" }}
+        >
+          שכחת סיסמה?
+        </button>
+        <Link
+          to="/register"
+          className="text-secondary"
+          style={{ fontSize: "0.9rem" }}
+        >
+          אין לך חשבון? הירשם עכשיו
+        </Link>
+      </div>
+
+      <ForgotPasswordModal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+      />
     </div>
   );
 }
