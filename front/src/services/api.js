@@ -1,8 +1,10 @@
 import axios from "axios";
 
-// הגדרה אחת של כתובת השרת (אפשר גם לפי סביבה)
 const api = axios.create({
-  baseURL: "https://back-nature-ways.onrender.com", // החלף לכתובת שלך
+  baseURL: "https://back-nature-ways.onrender.com", // כתובת הבקאנד שלך ב-Render
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 export default api;

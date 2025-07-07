@@ -3,7 +3,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-
+const sendEmail = require("../utils/sendEmail");
+const RESET_SECRET = process.env.RESET_SECRET || "secret123";
 const router = express.Router();
 
 // Register
@@ -57,4 +58,24 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.post("/forgot-password", async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+
+  if (!user)
+    return res
+      .status(200)
+      .json({ msg: "אם האימייל קיים – נשלח קישור לאיפוס." });
+
+  const token = jwt.sign({ id: user._id }, RESET_SECRET, { expiresIn: "10m" });
+  const resetLink = `https://nature-ways.onrender.com/reset-password/${token}`;
+
+  await sendEmail({
+    to: email,
+    subject: "איפוס סיסמה",
+    html: `<p>שלום ${user.name},</p><p>לאיפוס סיסמה לחץ כאן:</p><a href="${resetLink}">${resetLink}</a>`,
+  });
+
+  res.json({ msg: "קישור לאיפוס נשלח למייל אם קיים במערכת" });
+});
 module.exports = router;
