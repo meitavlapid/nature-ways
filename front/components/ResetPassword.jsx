@@ -4,21 +4,28 @@ import api from "../src/services/api";
 
 function ResetPassword() {
   const { token } = useParams();
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [msg, setMsg] = useState("");
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirm) return setMsg("הסיסמאות לא תואמות");
+    setMsg("");
+
+    if (password !== confirm) {
+      setMsg("הסיסמאות לא תואמות");
+      return;
+    }
 
     try {
-      await api.post(`/api/auth/reset-password/${token}`, { password });
+      const res = await api.post(`/api/auth/reset-password/${token}`, {
+        password,
+      });
       setMsg("הסיסמה עודכנה בהצלחה");
       setTimeout(() => navigate("/login"), 2000);
     } catch (err) {
-      setMsg("הקישור שגוי או פג תוקף");
+      setMsg(err.response?.data?.msg || "שגיאה באיפוס הסיסמה");
     }
   };
 
