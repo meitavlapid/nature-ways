@@ -14,6 +14,7 @@
   left: 0;
   width: 100%;
   padding: 0.5rem 1rem;
+  z-index: 9999;
 }
 
 .footer a,
@@ -81,25 +82,22 @@
 @media (max-width: 768px) {
   .footer {
     flex-direction: row;
-    
+
     text-align: center;
   }
 
-  .footer-left{
-   
+  .footer-left {
     margin-left: 0;
-   
   }
   .footer-right {
     flex-direction: row;
-    
+    margin-right: 0;
   }
 
   .footer-center {
     display: flex;
   }
 
-    
   .footer-center img {
     height: 5vh;
   }
