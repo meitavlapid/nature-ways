@@ -6,6 +6,7 @@ const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 const sendEmail = require("../utils/sendEmail");
 const RESET_SECRET = process.env.RESET_SECRET || "secret123";
 const router = express.Router();
+const sendWelcomeEmail = require("../utils/sendWelcomeEmail");
 
 // Register
 router.post("/register", async (req, res) => {
@@ -29,7 +30,12 @@ router.post("/register", async (req, res) => {
       position,
       phone,
     });
-
+    try {
+      await sendWelcomeEmail(email, name);
+      console.log("✅ נשלח מייל ברוכים הבאים ל:", email);
+    } catch (mailErr) {
+      console.warn("⚠️ שגיאה בשליחת מייל ברוכים הבאים:", mailErr.message);
+    }
     res.status(201).json({ msg: "User registered successfully" });
   } catch (err) {
     res.status(500).json({ error: err.message });
