@@ -83,9 +83,15 @@ function ArticleList() {
                   <h4>{article.title}</h4>
                   <p>{article.summary}</p>
                   <div className="btn-container">
-                    <Link to={`/articles/${article._id}`} className="btn">
-                      לצפייה
-                    </Link>
+                    {user ? (
+                      <Link to={`/articles/${article._id}`} className="btn">
+                        לצפייה
+                      </Link>
+                    ) : (
+                      <Link to="/register" className="btn btn-warning">
+                        התחבר/י לצפייה
+                      </Link>
+                    )}
                     {isAdmin && (
                       <>
                         <button

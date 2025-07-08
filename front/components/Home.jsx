@@ -74,7 +74,10 @@ function Home() {
                   נוטריקוסמטיקה (Nutricosmetics) היא גישה חדשנית המתבססת על
                   מחקרים מדעיים המוכיחים כי עור בריא, מוצק וקורן מתחיל מבפנים .
                   <br />
-                  <Link to="/research"> למאמר המלא </Link>
+                  <Link to="/articles/6866cf5ef6f004617a06de80">
+                    {" "}
+                    למאמר המלא{" "}
+                  </Link>
                 </span>
               </div>
             </div>
@@ -93,7 +96,9 @@ function Home() {
                   העור – אלא משפיעים על מנגנונים ביולוגיים עמוקים, ומיועדים
                   לטיפול במגוון בעיות.
                   <br />
-                  <Link to="/research"> למאמר המלא </Link>
+                  <Link to="/articles/6866d132f6f004617a06debd">
+                    למאמר המלא
+                  </Link>
                 </span>
               </div>
             </div>

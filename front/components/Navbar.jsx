@@ -112,26 +112,27 @@ function Navbar() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FaWhatsapp  color="#25D366" />
+          <FaWhatsapp color="#25D366" />
         </a>
 
         {!user && (
           <Link to="/login" title="התחברות" onClick={() => setMenuOpen(false)}>
-            <TbDoorEnter  color="#333" />
+            <TbDoorEnter color="#333" />
           </Link>
         )}
-
         {user && (
           <>
-            <Link
-              to="/admin"
-              title="אזור אישי"
-              onClick={() => setMenuOpen(false)}
-            >
-              <FaUserCircle  color="#D7B98B" />
-            </Link>
+            {user.admin && (
+              <Link
+                to="/admin"
+                title="אזור אישי"
+                onClick={() => setMenuOpen(false)}
+              >
+                <FaUserCircle color="#D7B98B" />
+              </Link>
+            )}
             <Link onClick={logout} title="התנתקות">
-              <TbDoorExit  color="#333" />
+              <TbDoorExit color="#333" />
             </Link>
           </>
         )}

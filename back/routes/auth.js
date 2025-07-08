@@ -78,6 +78,7 @@ router.post("/forgot-password", async (req, res) => {
 
   res.json({ msg: "קישור לאיפוס נשלח למייל אם קיים במערכת" });
 });
+
 router.post("/reset-password/:token", async (req, res) => {
   const { token } = req.params;
   const { password } = req.body;

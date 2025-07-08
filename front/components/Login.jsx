@@ -6,6 +6,8 @@ import api from "../src/services/api";
 import ForgotPasswordModal from "./ForgotPasswordModal";
 import { Link } from "react-router-dom";
 
+import "../css/Login.css";
+
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
@@ -35,7 +37,7 @@ function Login() {
   };
 
   return (
-    <div className="container mt-5" dir="rtl" style={{ maxWidth: "500px" }}>
+    <div className="login-card" dir="rtl">
       <h2 className="mb-4">התחברות למערכת</h2>
 
       <form onSubmit={handleSubmit}>
@@ -53,7 +55,7 @@ function Login() {
           />
         </div>
 
-        <div className="mb-3">
+        <div className="password">
           <label htmlFor="password" className="form-label">
             סיסמה
           </label>
@@ -66,24 +68,29 @@ function Login() {
               onChange={handleChange}
               required
             />
-            <button
-              type="button"
-              className="btn btn-outline-secondary"
+            <span
+              className="toggle-password"
               onClick={togglePassword}
+              role="button"
               tabIndex={-1}
+              title={showPassword ? "הסתר סיסמה" : "הצג סיסמה"}
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
-            </button>
+            </span>
           </div>
         </div>
-
-        <button type="submit" className="btn btn-success w-100">
-          התחבר
-        </button>
+        <div className="d-flex justify-content-center">
+          <button
+            type="submit"
+            className="btn btn-success w-100 mx-auto d-block"
+          >
+            התחבר
+          </button>
+        </div>
       </form>
 
       {msg && <div className="alert alert-danger mt-3">{msg}</div>}
-      <div className="d-flex justify-content-between align-items-center mb-3">
+      <div className="bottom-links">
         <button
           type="button"
           className="btn btn-link p-0"
@@ -95,7 +102,7 @@ function Login() {
         <Link
           to="/register"
           className="text-secondary"
-          style={{ fontSize: "0.9rem" }}
+          style={{ fontSize: "0.9rem", color: "#4e643b" }}
         >
           אין לך חשבון? הירשם עכשיו
         </Link>
