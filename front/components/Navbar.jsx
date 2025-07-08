@@ -122,7 +122,7 @@ function Navbar() {
         )}
         {user && (
           <>
-            {user.admin && (
+            {user.role === "admin" && (
               <Link
                 to="/admin"
                 title="אזור אישי"
