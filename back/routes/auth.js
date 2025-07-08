@@ -66,28 +66,36 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
 router.post("/forgot-password", async (req, res) => {
-  const { email } = req.body;
-  const user = await User.findOne({ email });
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
 
-  if (!user)
-    return res
-      .status(200)
-      .json({ msg: "אם האימייל קיים – נשלח קישור לאיפוס." });
+    if (!user)
+      return res
+        .status(200)
+        .json({ msg: "אם האימייל קיים – נשלח קישור לאיפוס." });
 
-  const token = jwt.sign({ id: user._id }, RESET_SECRET, { expiresIn: "10m" });
-  const resetLink = `https://nature-ways.onrender.com/reset-password/${token}`;
+    const token = jwt.sign({ id: user._id }, RESET_SECRET, {
+      expiresIn: "10m",
+    });
+    const resetLink = `https://nature-ways.onrender.com/reset-password/${token}`;
 
-  await sendEmail({
-    to: email,
-    subject: "איפוס סיסמה",
-    html: `<p>שלום ${user.name},</p><p>לאיפוס סיסמה לחץ כאן:</p><a href="${resetLink}">${resetLink}</a>`,
-  });
+    await sendEmail({
+      to: email,
+      subject: "איפוס סיסמה",
+      name: user.name,
+      html: `<p>שלום ${user.name},</p><p>לאיפוס סיסמה לחץ כאן:</p><a href="${resetLink}">${resetLink}</a>`,
+    });
 
-  res.json({ msg: "קישור לאיפוס נשלח למייל אם קיים במערכת" });
+    console.log("📧 קישור איפוס נשלח ל:", email);
+
+    res.json({ msg: "קישור לאיפוס נשלח למייל אם קיים במערכת" });
+  } catch (err) {
+    console.error("❌ שגיאה ב־/forgot-password:", err.message);
+    res.status(500).json({ msg: "שגיאה בשרת" });
+  }
 });
-
 router.post("/reset-password/:token", async (req, res) => {
   const { token } = req.params;
   const { password } = req.body;
