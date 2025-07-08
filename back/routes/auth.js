@@ -84,8 +84,8 @@ router.post("/forgot-password", async (req, res) => {
     await sendEmail({
       to: email,
       subject: "איפוס סיסמה",
-      name: user.name,
-      html: `<p>שלום ${user.name},</p><p>לאיפוס סיסמה לחץ כאן:</p><a href="${resetLink}">${resetLink}</a>`,
+      
+      html: `<p>שלום ,</p><p>לאיפוס סיסמה לחץ כאן:</p><a href="${resetLink}">${resetLink}</a>`,
     });
 
     console.log("📧 קישור איפוס נשלח ל:", email);

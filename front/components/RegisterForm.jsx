@@ -36,7 +36,7 @@ const validationSchema = Yup.object({
   position: Yup.string().required("יש לבחור תפקיד"),
   interests: Yup.array()
     .min(1, "בחר לפחות תחום אחד")
-    .max(5, "ניתן לבחור עד 9 תחומים "),
+    .max(9, "ניתן לבחור עד 9 תחומים "),
   password: Yup.string().min(6, "לפחות 6 תווים").required("סיסמה חובה"),
 });
 
@@ -58,7 +58,7 @@ function RegisterForm() {
     if (submitted) {
       const timer = setTimeout(() => {
         navigate("/login");
-      }, 4000); // 4 שניות
+      }, 4000); 
 
       return () => clearTimeout(timer);
     }
@@ -68,7 +68,7 @@ function RegisterForm() {
     try {
       await api.post("/api/auth/register", values);
 
-      setSubmitted(true); // הצגת מסך תודה
+      setSubmitted(true); 
       resetForm();
     } catch (err) {
       alert("שגיאה: " + (err.response?.data?.msg || "שגיאה כללית"));
