@@ -145,7 +145,7 @@
   .team-card {
     width: 90%;
   }
-  .about-highlight {
+  .about-highlight p {
     font-size: 0.5rem;
   }
 }
