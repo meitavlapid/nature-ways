@@ -90,7 +90,9 @@ select {
     padding: 1rem;
     font-size: small;
   }
-  .btn {
-    width: 100%;
+  .btn, button {
+    width: 95%;
   }
+ 
+  
 }
