@@ -14,17 +14,20 @@ router.get("/", authenticateToken, requireAdmin, async (req, res) => {
   }
 });
 
-
 router.delete("/:id", authenticateToken, requireAdmin, async (req, res) => {
   const { id } = req.params;
-  if (id === req.user._id.toString()) {
+  if (req.user && req.user._id && id === String(req.user._id)) {
     return res.status(400).json({ error: "לא ניתן למחוק את עצמך" });
   }
 
   try {
-    await User.findByIdAndDelete(id);
+    const user = await User.findById(id);
+    if (!user) return res.status(404).json({ error: "משתמש לא נמצא" });
+
+    await user.deleteOne();
     res.json({ message: "המשתמש נמחק בהצלחה" });
   } catch (err) {
+    console.error("❌ שגיאה במחיקת משתמש:", err.message);
     res.status(500).json({ error: "שגיאה במחיקת המשתמש" });
   }
 });
