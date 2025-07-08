@@ -1,77 +1,74 @@
-.admin-users {
-    background-color: #f8f5f0;
-    padding: 2rem;
-    border-radius: 16px;
-    font-family: 'Rubik', sans-serif;
-  }
-  
-  h2 {
-    color: #3b3b3b;
-    border-bottom: 2px solid #c5a880;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
-    text-align: right;
-  }
-  
-  .user-table {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .table-header,
-  .table-row {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr 2fr;
-    padding: 0.8rem;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-    align-items: center;
-  }
-  
-  .table-header {
-    background-color: #e0d9ce;
-    font-weight: bold;
-  }
-  
-  .actions button {
-    margin-left: 0.5rem;
-    border: none;
-    padding: 0.4rem 0.8rem;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    cursor: pointer;
-  }
-  
-  .btn-delete {
-    background-color: #ce5f5f;
-    color: #fff;
-  }
-  
-  .btn-delete:hover {
-    background-color: #b84545;
-  }
-  
-  .btn-admin {
-    background-color: #f3c37d;
-    color: #3d3d3d;
-  }
-  
-  .btn-admin:hover {
-    background-color: #e5b565;
-  }
-  
-  @media (max-width: 768px) {
-    .table-header,
-    .table-row {
-      grid-template-columns: 1fr 1.5fr;
-      grid-template-rows: auto auto;
-      row-gap: 0.4rem;
-    }
-  
-    .actions {
-      grid-column: span 2;
-    }
-  }
-  
+.user-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.user-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  min-height: 300px; /* גובה מינימלי כדי שהכפתורים יהיו למטה */
+}
+.user-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.user-card h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+
+  text-align: center;
+}
+.user-card p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+  white-space: pre-line; /* מאפשר שורות חדשות בטקסט */
+}
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-weight: 200;
+  align-items: center;
+  justify-content: center;
+}
+
+.tag {
+  background-color: #4e643b;
+  color: #fff;
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+.user-card .actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.btn-delete {
+  background-color: #ce5f5f;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.btn-admin {
+  background-color: #f3c37d;
+  color: #3d3d3d;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  flex: 1;
+}

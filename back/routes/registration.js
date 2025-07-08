@@ -53,6 +53,11 @@ router.post("/", async (req, res) => {
     res.status(500).json({ msg: "שגיאה בשרת" });
   }
 });
+
+
+
+
+
 router.get("/all", authenticateToken, requireAdmin, async (req, res) => {
   try {
     const users = await User.find({ source: "registration" }).sort({

@@ -76,25 +76,31 @@ function AdminUsers() {
       {users.length === 0 ? (
         <p>לא נמצאו משתמשים.</p>
       ) : (
-        <div className="user-table">
-          <div className="table-header">
-            <span>שם</span>
-            <span>אימייל</span>
-            <span>תפקיד</span>
-            <span>טלפון</span>
-            <span>תחומי עניין</span>
-            <span>הרשאות</span>
-            <span>פעולות</span>
-          </div>
+        <div className="user-list">
           {users.map((u) => (
-            <div className="table-row" key={u._id}>
-              <span>{u.name}</span>
-              <span>{u.email}</span>
-              <span>{u.role}</span>
-              <span>{u.phone}</span>
-              <span>{u.interests?.join(", ")}</span>
-              <span>{u.role === "admin" ? "אדמין" : "משתמש"}</span>
-              <span className="actions">
+            <div className="user-card" key={u._id}>
+              <h4>{u.name}</h4>
+              <p>
+                <strong>אימייל:</strong> {u.email}
+              </p>
+              <p>
+                <strong>טלפון:</strong> {u.phone || "לא צויין"}
+              </p>
+              <p>
+                <strong>תפקיד:</strong> {u.role === "admin" ? "אדמין" : "משתמש"}
+              </p>
+              <p>
+                <strong>תחומי עניין:</strong>
+              </p>
+              <div className="tag-list">
+                {u.interests?.map((tag, idx) => (
+                  <span key={idx} className="tag">
+                    {tag}
+                  </span>
+                )) || <span>לא נבחרו</span>}
+              </div>
+
+              <div className="actions">
                 {u._id !== user._id && (
                   <>
                     <button
@@ -114,7 +120,7 @@ function AdminUsers() {
                     </button>
                   </>
                 )}
-              </span>
+              </div>
             </div>
           ))}
         </div>
