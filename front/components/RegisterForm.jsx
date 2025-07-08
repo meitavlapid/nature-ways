@@ -65,7 +65,8 @@ function RegisterForm() {
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      await axios.post("/api/register", values);
+      await axios.post("/api/auth/register", values);
+
       setSubmitted(true); // הצגת מסך תודה
       resetForm();
     } catch (err) {
