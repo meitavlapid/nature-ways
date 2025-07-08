@@ -1,4 +1,3 @@
-/* בסיס העמוד */
 .container {
   width: 100%;
   height: 100%;
@@ -10,7 +9,6 @@
   border: none;
 }
 
-/* כותרת קטגוריה */
 h1 {
   border-bottom: 2px solid#8A5A42;
   padding-bottom: 0.5rem;
@@ -18,7 +16,6 @@ h1 {
   text-align: center;
 }
 
-/* כרטיס מוצר */
 .card-product {
   width: 80%;
   height: 100%;
@@ -56,7 +53,6 @@ h1 {
   text-align: center;
 }
 
-/* כפתורי פעולה */
 .btn-container {
   margin-top: auto;
   display: flex;
@@ -74,7 +70,6 @@ h1 {
   transform: scale(1.05);
 }
 
-/* כפתורי אדמין */
 .btn-container button:nth-child(2) {
   background-color: #f3c37d;
 }
@@ -91,7 +86,6 @@ h1 {
   background-color: #b84545;
 }
 
-/* רספונסיביות */
 @media (max-width: 768px) {
   h1 {
     font-size: 1.6rem;

@@ -6,7 +6,6 @@ const User = require("../models/User");
 const sendEmail = require("../utils/sendEmail");
 const RESET_SECRET = process.env.RESET_SECRET || "secret123";
 
-// 🔹 1. בקשת איפוס סיסמה
 router.post("/forgot-password", async (req, res) => {
   const { email } = req.body;
 
@@ -18,7 +17,7 @@ router.post("/forgot-password", async (req, res) => {
 
   const token = jwt.sign({ id: user._id }, RESET_SECRET, { expiresIn: "10m" });
 
-  const resetLink = `https://nature-ways.onrender.com/reset-password/${token}`;
+  const resetLink = `${process.env.CLIENT_URL}/reset-password/${token}`;
 
   await sendEmail({
     to: email,
@@ -33,7 +32,8 @@ router.post("/forgot-password", async (req, res) => {
 
   res.json({ msg: "קישור לאיפוס נשלח למייל אם קיים במערכת" });
 });
-// 🔹 2. איפוס סיסמה בפועל
+
+
 router.post("/reset-password/:token", async (req, res) => {
   const { token } = req.params;
   const { password } = req.body;

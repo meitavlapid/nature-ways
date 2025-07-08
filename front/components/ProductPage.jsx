@@ -10,7 +10,7 @@ function ProductPage() {
   const [product, setProduct] = useState(null);
   const { isAdmin, user } = useUser();
   const navigate = useNavigate();
-
+  const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     api
       .get(`/api/products/${id}?category=${category}`)
@@ -35,7 +35,6 @@ function ProductPage() {
             >
               חזרה
             </button>
-
             {isAdmin && (
               <button
                 className="btn btn-warning"
@@ -51,13 +50,7 @@ function ProductPage() {
                 className="btn btn-primary"
                 onClick={() => {
                   if (!user && !isAdmin) {
-                    if (
-                      window.confirm(
-                        "כדי להוריד את המפרט יש להירשם לאתר. רוצים להירשם?"
-                      )
-                    ) {
-                      navigate("/register");
-                    }
+                    setShowModal(true);
                   } else {
                     window.open(product.specFileUrl, "_blank");
                   }
@@ -65,10 +58,29 @@ function ProductPage() {
               >
                 הורדת המפרט שלי
               </button>
-             
+            )}
+            {showModal && (
+              <div className="custom-modal-backdrop">
+                <div className="custom-modal ">
+                  <h3>כדי להוריד את המפרט, יש להירשם</h3>
+                  <div className="modal-actions">
+                    <button
+                      className="btn btn-success"
+                      onClick={() => navigate("/register")}
+                    >
+                      להרשמה
+                    </button>
+                    <button
+                      className="btn btn-secondary"
+                      onClick={() => setShowModal(false)}
+                    >
+                      ביטול
+                    </button>
+                  </div>
+                </div>
+              </div>
             )}
           </div>
- 
         </div>
 
         <div className="product-text">

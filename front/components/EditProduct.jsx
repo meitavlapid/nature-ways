@@ -42,7 +42,7 @@ function EditProduct() {
   };
   const handleSpecFileUpload = async (file) => {
     const formData = new FormData();
-    formData.append("file", file); // במקום selectedFile
+    formData.append("file", file); 
 
     try {
       const res = await api.post("/api/upload/spec", formData, {

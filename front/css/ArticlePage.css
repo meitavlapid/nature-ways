@@ -1,4 +1,3 @@
-/* === ArticlePage.css – מעוצב לפי שפת המותג === */
 .article-page {
   max-width: 960px;
   margin: 3rem auto;
@@ -15,7 +14,7 @@
 .article-page .article-section p,
 .article-page .article-conclusion p,
 .article-page .article-biblio p {
-  white-space: pre-wrap; /* שומר על שבירות שורה ורווחים */
+  white-space: pre-wrap;
 }
 .article-page h1 {
   font-size: 2rem;

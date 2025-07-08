@@ -32,7 +32,6 @@ function Navbar() {
 
   return (
     <nav className="navbar sticky-top" ref={navRef}>
-      {/* לוגו */}
       <div className="logo">
         <Link to="/">
           <img
@@ -42,12 +41,10 @@ function Navbar() {
         </Link>
       </div>
 
-      {/* כפתור המבורגר */}
       <button className="burger" onClick={toggleMenu} aria-label="תפריט">
         ☰
       </button>
 
-      {/* תפריט ניווט */}
       <div className={`nav-center ${menuOpen ? "open" : ""}`}>
         <ul>
           <li className="dropdown">
@@ -105,7 +102,6 @@ function Navbar() {
         </ul>
       </div>
 
-      {/* אייקונים */}
       <div className="nav-icons">
         <a
           href="https://wa.me/972558829222?text=היי%20אני%20פונה%20אלייך%20דרך%20אתר%20נייצר%20וויז"

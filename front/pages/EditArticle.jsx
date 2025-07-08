@@ -14,7 +14,7 @@ function EditArticle() {
       .get(`/api/articles/${id}`)
       .then((res) => {
         const data = res.data;
-        if (!data.tags) data.tags = []; // תמיכה לאחור
+        if (!data.tags) data.tags = []; 
         setFormData(data);
       })
       .catch(() => {

@@ -5,7 +5,6 @@ const { v2: cloudinary } = require("cloudinary");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const streamifier = require("streamifier");
 
-// הגדרת Cloudinary מה־env
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUD_KEY,
@@ -26,9 +25,8 @@ const uploadImage = multer({ storage: imageStorage });
 const memoryStorage = multer.memoryStorage();
 const uploadSpec = multer({ storage: memoryStorage });
 
-/* =====================
-   📸 העלאת תמונה
-   ===================== */
+
+
 router.post("/", uploadImage.single("image"), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: "קובץ לא התקבל" });
@@ -39,9 +37,7 @@ router.post("/", uploadImage.single("image"), (req, res) => {
   });
 });
 
-/* =====================
-   🧽 מחיקת תמונה לפי public_id
-   ===================== */
+
 router.delete("/:public_id", async (req, res) => {
   try {
     const { public_id } = req.params;
@@ -52,24 +48,22 @@ router.delete("/:public_id", async (req, res) => {
   }
 });
 
-/* =====================
-   📄 העלאת קובץ מפרט (Word / PDF)
-   ===================== */
+
 router.post("/spec", uploadSpec.single("file"), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ msg: "לא נשלח קובץ" });
     }
 
-    // חילוץ שם וסיומת הקובץ המקוריים
-    const ext = req.file.originalname.split(".").pop(); // לדוגמה docx
-    const baseName = req.file.originalname.replace(/\.[^/.]+$/, ""); // בלי סיומת
+  
+    const ext = req.file.originalname.split(".").pop();
+    const baseName = req.file.originalname.replace(/\.[^/.]+$/, ""); 
 
     const stream = cloudinary.uploader.upload_stream(
       {
         resource_type: "raw",
         folder: "product-specs",
-        public_id: `${baseName}-${Date.now()}`, // שם ברור כולל תאריך
+        public_id: `${baseName}-${Date.now()}`, 
         format: ext,
       },
       (error, result) => {
@@ -81,7 +75,6 @@ router.post("/spec", uploadSpec.single("file"), async (req, res) => {
       }
     );
 
-    // שליחה של הקובץ מה־buffer
     streamifier.createReadStream(req.file.buffer).pipe(stream);
   } catch (err) {
     console.error("❌ שגיאה בשרת:", err.message);

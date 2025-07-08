@@ -65,13 +65,13 @@
 }
 
 .password input {
-  padding-left: 40px; /* מרווח לאייקון מצד שמאל (בכיוון RTL) */
+  padding-left: 40px; 
 }
 
 .toggle-password {
   position: absolute;
   top: 45%;
-  left: 20px; /* כיוון RTL – מצד שמאל */
+  left: 20px;
   transform: translateY(-50%);
   color: #4e643b;
   cursor: pointer;

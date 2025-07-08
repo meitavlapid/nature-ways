@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema(
       enum: ["user", "admin"],
       default: "user",
     },
-    position: { type: String }, // ✅ תפקיד מקצועי מתוך הטופס
+    position: { type: String }, 
     phone: String,
     interests: [String],
     source: { type: String, default: "registration" },

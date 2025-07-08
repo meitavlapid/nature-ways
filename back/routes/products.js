@@ -20,7 +20,6 @@ function getModelForCategory(category) {
 
   const modelName = `Product_${category}`;
 
-  // בדיקה אם המודל כבר קיים במאגר המודלים של mongoose
   if (mongoose.models[modelName]) {
     console.log(`🔁 שימוש במודל קיים: ${modelName}`);
     return mongoose.models[modelName];

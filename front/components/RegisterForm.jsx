@@ -237,7 +237,7 @@ function RegisterForm() {
       ) : (
         <div className="thank-you-message">
           <h2>תודה על ההרשמה 💚</h2>
-          <p>
+          <p className="thank-you-text mt-3 mb-3 text-center">
             הטופס נשלח בהצלחה! בקרוב תקבל.י מאיתנו תכנים מותאמים במיוחד עבורך.
           </p>
         </div>

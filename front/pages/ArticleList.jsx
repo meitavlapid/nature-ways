@@ -12,7 +12,7 @@ function ArticleList() {
   const [searchTag, setSearchTag] = useState("");
   const { user, isAdmin } = useUser();
   const navigate = useNavigate();
-
+  const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     api
       .get("/api/articles")
@@ -83,14 +83,44 @@ function ArticleList() {
                   <h4>{article.title}</h4>
                   <p>{article.summary}</p>
                   <div className="btn-container">
-                    {user ? (
-                      <Link to={`/articles/${article._id}`} className="btn">
-                        לצפייה
-                      </Link>
-                    ) : (
-                      <Link to="/register" className="btn btn-warning">
-                        התחבר/י לצפייה
-                      </Link>
+                    <Link
+                      to={`/articles/${article._id}`}
+                      className="btn"
+                      onClick={(e) => {
+                        if (!user) {
+                          e.preventDefault();
+                          setShowModal(true);
+                        }
+                      }}
+                    >
+                      לצפייה
+                    </Link>
+                    {showModal && (
+                      <div className="custom-modal-backdrop">
+                        <div className="custom-modal">
+                          <h5>לצפייה במאמרים יש להתחבר או להירשם</h5>
+                          <div className="modal-actions">
+                            <button
+                              className="btn btn-success"
+                              onClick={() => navigate("/login")}
+                            >
+                              התחברות
+                            </button>
+                            <button
+                              className="btn btn-warning"
+                              onClick={() => navigate("/register")}
+                            >
+                              הרשמה
+                            </button>
+                            <button
+                              className="btn btn-secondary"
+                              onClick={() => setShowModal(false)}
+                            >
+                              ביטול
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     )}
                     {isAdmin && (
                       <>

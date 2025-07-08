@@ -79,7 +79,7 @@ router.post("/forgot-password", async (req, res) => {
     const token = jwt.sign({ id: user._id }, RESET_SECRET, {
       expiresIn: "10m",
     });
-    const resetLink = `https://nature-ways.onrender.com/reset-password/${token}`;
+    const resetLink = `${process.env.CLIENT_URL}/reset-password/${token}`;
 
     await sendEmail({
       to: user.email,

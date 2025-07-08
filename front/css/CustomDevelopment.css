@@ -1,4 +1,3 @@
-/* מבנה כללי */
 .container {
   direction: rtl;
   justify-content: center;
@@ -6,14 +5,12 @@
   text-align: center;
 }
 
-/* כותרת */
 h1 {
   font-family: "Alef", sans-serif;
   font-size: 2rem;
   margin-bottom: 2rem;
 }
 
-/* וידאו */
 video {
   max-width: 60%;
   height: auto;
@@ -23,7 +20,6 @@ video {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* בלוק טקסט */
 .bg {
   background: #f4ede2 !important;
   padding: 2rem;

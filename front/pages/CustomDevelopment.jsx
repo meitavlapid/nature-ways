@@ -28,7 +28,6 @@ function CustomDevelopment() {
           </a>
         
         <div className="video">
-          {/* החלפת iframe ב־<video> */}
           <div className="video-container">
             <video
               controls

@@ -16,7 +16,6 @@ function Home() {
     slidesToShow: 1,
     slidesToScroll: 1,
     beforeChange: () => {
-      // עוצר את כל הווידאוים שמוצגים כרגע
       const videos = document.querySelectorAll(".video-slide video");
       videos.forEach((video) => {
         if (!video.paused) {
@@ -53,7 +52,6 @@ function Home() {
 
   return (
     <div className="home">
-      {/* תמונה ראשית */}
       {getImageUrl("home") && (
         <img
           src={getImageUrl("home")}
@@ -61,7 +59,6 @@ function Home() {
           className="main-image"
         />
       )}
-      {/* שתי תמונות נוספות */}
       <div className="image-row">
         {getImageUrl("nutri") && (
           <div className="flip-card">
@@ -75,8 +72,8 @@ function Home() {
                   מחקרים מדעיים המוכיחים כי עור בריא, מוצק וקורן מתחיל מבפנים.
                   <br />
                   <Link to="/articles/6866cf5ef6f004617a06de80">
-                    {" "}
-                    למאמר המלא{" "}
+                    
+                    למאמר המלא
                   </Link>
                 </span>
               </div>
@@ -113,7 +110,6 @@ function Home() {
           מטפלים ומטופלים.
         </p>
 
-        {/* קרוסלת סרטונים */}
         <div className="video-wrapper">
           {videos.length > 0 && (
             <div className="video-carousel">

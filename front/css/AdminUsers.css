@@ -28,7 +28,7 @@
 .user-card p {
   margin: 0.3rem 0;
   font-size: 0.95rem;
-  white-space: pre-line; /* מאפשר שורות חדשות בטקסט */
+  white-space: pre-line; 
 }
 .tag-list {
   display: flex;

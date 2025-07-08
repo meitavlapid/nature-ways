@@ -9,7 +9,7 @@ const sendWelcomeEmail = async (to, name) => {
     },
   });
 
-  console.log("📤 שולח דרך:", process.env.MAIL_USER);
+  console.log(" שולח דרך:", process.env.MAIL_USER);
 
   try {
     await transporter.sendMail({
@@ -36,9 +36,9 @@ const sendWelcomeEmail = async (to, name) => {
       `,
     });
 
-    console.log("✅ מייל נשלח ל:", to);
+    console.log(" מייל נשלח ל:", to);
   } catch (err) {
-    console.error("❌ שגיאה בשליחת המייל:", err.message);
+    console.error(" שגיאה בשליחת המייל:", err.message);
   }
 };
 

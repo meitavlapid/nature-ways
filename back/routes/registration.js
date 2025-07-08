@@ -13,19 +13,18 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ msg: "שדות חובה חסרים" });
     }
 
-    // 1. אם המשתמש כבר קיים - לא להכניס פעמיים
     const existing = await User.findOne({ email });
     if (existing) {
       return res.status(400).json({ msg: "האימייל כבר רשום במערכת" });
     }
 
-    // 2. צור משתמש בסיסי עם role = user
+   
     const newUser = new User({
       name,
       email,
       phone,
       password,
-      position, // ✅ חדש
+      position,
       role: "user",
       interests,
       source: "registration",
@@ -39,7 +38,6 @@ router.post("/", async (req, res) => {
       return res.status(500).json({ msg: "שגיאה בשמירת המשתמש" });
     }
 
-    // שליחת מייל ברוכים הבאים
     try {
       console.log("➡ שולח מייל ל:", email);
       await sendWelcomeEmail(email, name);
@@ -48,7 +46,6 @@ router.post("/", async (req, res) => {
       console.warn("⚠️ שגיאה בשליחת מייל:", emailErr.message);
     }
 
-    // תשובה ללקוח
     res.status(201).json({ msg: "נרשמת בהצלחה!" });
   } catch (err) {
     console.error("❌ שגיאה בהרשמה:", err);

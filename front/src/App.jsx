@@ -15,7 +15,6 @@ import CustomDevelopment from "../pages/CustomDevelopment";
 import EditProduct from "../components/EditProduct";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import About from "../pages/About";
-import Aboutedit from "../pages/Aboutedit";
 import ArticlePage from "../pages/ArticlePage";
 import UploadArticle from "../pages/UploadArticle";
 import ArticleList from "../pages/ArticleList";
@@ -23,7 +22,6 @@ import EditArticle from "../pages/EditArticle";
 import AdminUsers from "../pages/AdminUsers";
 import RegisterForm from "../components/RegisterForm";
 import ResetPassword from "../components/ResetPassword";
-
 
 function App() {
   return (
@@ -38,7 +36,6 @@ function App() {
         <Route path="/:category/:id" element={<ProductPage />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
-        <Route path="/about/edit" element={<Aboutedit />} />
         <Route path="/articles" element={<ArticleList />} />
         <Route path="/addarticles" element={<UploadArticle />} />
         <Route path="/articles/:id" element={<ArticlePage />} />

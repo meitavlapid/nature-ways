@@ -86,7 +86,6 @@
   flex: 1;
 }
 
-/* כפתורי אדמין */
 .btn-container {
   margin-top: 0 auto;
   display: flex;
@@ -103,7 +102,6 @@
 .btn-container .btn:hover {
   transform: scale(1.05);
 }
-/* כפתורי אדמין */
 .btn-container button:nth-child(2) {
   background-color: #f3c37d;
 }
@@ -118,4 +116,32 @@
 
 .btn-container button:nth-child(3):hover {
   background-color: #b84545;
+}
+
+.custom-modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.267);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-modal {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
 }

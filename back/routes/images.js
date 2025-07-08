@@ -16,17 +16,13 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "about", // ← תמונות יועלו לתיקייה הזו
+    folder: "about",
     allowed_formats: ["jpg", "jpeg", "png", "webp"],
   },
 });
 
 const upload = multer({ storage });
 
-/**
- * GET /api/images?key=about
- * מחזיר את כל התמונות לפי key
- */
 router.get("/", async (req, res) => {
   try {
     const { key } = req.query;
@@ -38,11 +34,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-/**
- * POST /api/images
- * העלאת תמונה ושמירה במסד
- */
-const About = require("../models/About"); // נדרש בראש הקובץ
+const About = require("../models/About"); 
 
 router.post("/", upload.single("image"), async (req, res) => {
   try {
@@ -60,7 +52,6 @@ router.post("/", upload.single("image"), async (req, res) => {
 
     await newImage.save();
 
-    // 👇 אם התמונה שייכת לדף about — נעדכן את img במסמך
     if (key === "about") {
       await About.findOneAndUpdate(
         { key: "about" },

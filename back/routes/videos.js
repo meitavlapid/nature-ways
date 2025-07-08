@@ -10,7 +10,7 @@ const { authenticateToken, requireAdmin } = require("../middleware/auth");
 const storage = multer.memoryStorage();
 const upload = multer({
   storage,
-  limits: { fileSize: 100 * 1024 * 1024 }, // עד 100MB
+  limits: { fileSize: 100 * 1024 * 1024 }, 
 });
 
 // קונפיגורציה של Cloudinary
@@ -20,7 +20,6 @@ cloudinary.config({
   api_secret: process.env.CLOUD_SECRET,
 });
 
-// פונקציית עזר להעלאה בזרימה
 const streamUpload = (buffer) =>
   new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
@@ -79,7 +78,6 @@ router.delete("/:id", authenticateToken, requireAdmin, async (req, res) => {
     const video = await Video.findById(req.params.id);
     if (!video) return res.status(404).json({ error: "וידאו לא נמצא" });
 
-    // מחיקת הווידאו מהענן
     const result = await cloudinary.uploader.destroy(video.publicId, {
       resource_type: "video",
     });
@@ -89,7 +87,6 @@ router.delete("/:id", authenticateToken, requireAdmin, async (req, res) => {
       return res.status(500).json({ error: "מחיקה מהענן נכשלה" });
     }
 
-    // מחיקת הרשומה ממונגו
     await Video.findByIdAndDelete(req.params.id);
 
     res.json({ msg: "וידאו נמחק בהצלחה" });

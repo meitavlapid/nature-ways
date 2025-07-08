@@ -22,7 +22,6 @@
   flex-wrap: wrap;
 }
 
-/* טיפוגרפיה */
 .product-bg h2 {
   margin: 2rem 0;
   align-items: center;
@@ -47,7 +46,7 @@
 }
 
 .img {
-  float: left; /* או left אם מעדיפה */
+  float: left; 
   width: 300px;
   max-width: 45%;
   margin: 0 0 1rem 1rem;
@@ -71,7 +70,6 @@
   width: 200px;
 }
 
-/* ===== רספונסיבי ===== */
 @media (max-width: 768px) {
   .product-bg {
     padding: 1rem;

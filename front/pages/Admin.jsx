@@ -18,7 +18,6 @@ function Admin() {
       <h2 className="mb-4">ניהול המערכת</h2>
 
       <div className="row">
-        {/* ניהול מוצרים */}
         <div className="col-md-4 mb-4">
           <div className="card shadow-sm h-100">
             <div className="card-body d-flex flex-column">
@@ -31,7 +30,6 @@ function Admin() {
           </div>
         </div>
 
-        {/* ניהול משתמשים */}
         <div className="col-md-4 mb-4">
           <div className="card shadow-sm h-100">
             <div className="card-body d-flex flex-column">
@@ -44,7 +42,6 @@ function Admin() {
           </div>
         </div>
 
-        {/* ניהול סרטונים */}
         <div className="col-md-4 mb-4">
           <div className="card shadow-sm h-100">
             <div className="card-body d-flex flex-column">

@@ -23,7 +23,6 @@ function About() {
           ומביאים לתוצאות מוכחות בשטח.
         </p>
 
-        {/* תמונה אחרי הפסקה הראשונה */}
         <img
           src="https://res.cloudinary.com/dt5nnq3ew/image/upload/v1750954379/about/q9bmvrif4h9sqwq8paqq.jpg"
           alt="תמונה אודות"
@@ -43,7 +42,6 @@ function About() {
           אנו ממשיכים לחקור, לשפר ולהוביל חדשנות טבעית.
         </p>
 
-        {/* מקטע "מי אנחנו" */}
         <div className="team-section">
           <h1>מי אנחנו</h1>
           <div className="team-cards">
