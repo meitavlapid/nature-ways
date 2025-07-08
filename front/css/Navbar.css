@@ -114,6 +114,9 @@
 .burger {
   background: none;
   border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  display: none;
 }
 @media (max-width: 700px) {
   .navbar {
