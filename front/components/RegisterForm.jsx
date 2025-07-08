@@ -5,6 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import "../css/RegisterForm.css";
+import api from "../src/services/api";
 
 const roles = [
   "רופא.ה",
@@ -65,7 +66,7 @@ function RegisterForm() {
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      await axios.post("/api/auth/register", values);
+      await api.post("/api/auth/register", values);
 
       setSubmitted(true); // הצגת מסך תודה
       resetForm();

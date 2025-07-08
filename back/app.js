@@ -20,8 +20,8 @@ const PORT = process.env.PORT || 5000;
 
 // Middlewares
 const allowedOrigins = [
-  "http://localhost:5173", // dev
-  "https://nature-ways.onrender.com", // production frontend
+  "http://localhost:5173", 
+  "https://nature-ways.onrender.com", 
 ];
 
 app.use(
