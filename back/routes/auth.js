@@ -82,10 +82,9 @@ router.post("/forgot-password", async (req, res) => {
     const resetLink = `https://nature-ways.onrender.com/reset-password/${token}`;
 
     await sendEmail({
-      to: email,
-      subject: "איפוס סיסמה",
-      
-      html: `<p>שלום ,</p><p>לאיפוס סיסמה לחץ כאן:</p><a href="${resetLink}">${resetLink}</a>`,
+      to: user.email,
+      name: user.name,
+      token,
     });
 
     console.log("📧 קישור איפוס נשלח ל:", email);

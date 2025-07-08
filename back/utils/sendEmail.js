@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-async function sendEmail({ to, subject, html }) {
+async function sendEmail({ to, subject, token, name }) {
   await transporter.sendMail({
     from: `"NatureWays" <${process.env.MAIL_USER}>`,
     to,
@@ -18,7 +18,7 @@ async function sendEmail({ to, subject, html }) {
         <div style="text-align: center; margin-bottom: 20px;">
           <img src="https://res.cloudinary.com/dt5nnq3ew/image/upload/v1750344062/logo_ul47xl.png" alt="Nature Ways Logo" style="max-width: 180px;" />
         </div>
-        <h2>היי ,</h2>
+        <h2>היי ${name || ""},</h2>
         <p>ביקשת לאפס את הסיסמה שלך לנייצ'ר וויז?</p>
         <p>אין בעיה – גם לנו קורה לשכוח.</p>
         <p>לחיצה על הכפתור הבא תיקח אותך לאיפוס סיסמה:</p>
@@ -34,5 +34,6 @@ async function sendEmail({ to, subject, html }) {
     `,
   });
 }
+
 
 module.exports = sendEmail;
