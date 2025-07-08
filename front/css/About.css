@@ -145,4 +145,7 @@
   .team-card {
     width: 90%;
   }
+  .about-highlight {
+    font-size: smaller;
+  }
 }
