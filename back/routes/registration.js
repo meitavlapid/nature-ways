@@ -41,7 +41,9 @@ router.post("/", async (req, res) => {
 
     // שליחת מייל ברוכים הבאים
     try {
+      console.log("➡ שולח מייל ל:", email);
       await sendWelcomeEmail(email, name);
+      console.log("✅ נשלח מייל בהצלחה");
     } catch (emailErr) {
       console.warn("⚠️ שגיאה בשליחת מייל:", emailErr.message);
     }

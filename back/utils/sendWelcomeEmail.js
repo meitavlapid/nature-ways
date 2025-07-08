@@ -8,7 +8,7 @@ const sendWelcomeEmail = async (to, name) => {
       pass: process.env.MAIL_PASS,
     },
   });
-
+  console.log("📤 שולח דרך:", process.env.MAIL_USER);
   await transporter.sendMail({
     from: `"Nature Ways" <${process.env.MAIL_USER}>`,
     to,
