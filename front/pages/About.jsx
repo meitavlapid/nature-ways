@@ -18,7 +18,7 @@ function About() {
         </p>
 
         <img
-          src="https://res.cloudinary.com/dt5nnq3ew/image/upload/v1750954379/about/q9bmvrif4h9sqwq8paqq.jpg"
+          src="https://res.cloudinary.com/dt5nnq3ew/image/upload/v1752126510/about/q9bmvrif4h9sqwq8paqq.png"
           alt="תמונה אודות"
           className="about-main-image"
         />
