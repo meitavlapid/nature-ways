@@ -27,10 +27,7 @@ function Footer() {
       </div>
 
       <div className="footer-center">
-        <img
-          src="https://res.cloudinary.com/dt5nnq3ew/image/upload/v1750344062/logo_ul47xl.png"
-          alt="לוגו האתר"
-        />
+        <img src={`${baseURL}/home/homepage/logo_ul47xl.png`} alt="לוגו האתר" />
       </div>
 
       <div className="footer-left">

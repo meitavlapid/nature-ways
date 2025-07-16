@@ -18,7 +18,7 @@ function About() {
         </p>
 
         <img
-          src="https://res.cloudinary.com/dt5nnq3ew/image/upload/v1752127153/about/q9bmvrif4h9sqwq8paqq.png"
+          src={`${baseURL}/home/about/main.png`}
           alt="תמונה אודות"
           className="about-main-image"
         />
@@ -40,10 +40,7 @@ function About() {
           <h1>מי אנחנו</h1>
           <div className="team-cards">
             <div className="team-card">
-              <img
-                src="https://res.cloudinary.com/dt5nnq3ew/image/upload/v1751368647/Shimrit_BW_tjvd3q.jpg"
-                alt="שימרית לב"
-              />
+              <img src={`${baseURL}/home/about/Shimrit.jpg`} alt="שימרית לב" />
               <h3>שימרית לב</h3>
               <h4>
                 מייסדת שותפה <br />
@@ -58,10 +55,7 @@ function About() {
               </p>
             </div>
             <div className="team-card">
-              <img
-                src="https://res.cloudinary.com/dt5nnq3ew/image/upload/v1751367623/git_BW_kaboyj.jpg"
-                alt="גיתית להב"
-              />
+              <img src={`${baseURL}/home/about/gitit.jpg`} alt="גיתית להב" />
               <h3>גיתית להב</h3>
               <h4>
                 מייסדת שותפה <br />
@@ -77,7 +71,7 @@ function About() {
             </div>
             <div className="team-card">
               <img
-                src="https://res.cloudinary.com/dt5nnq3ew/image/upload/v1751368644/Dr_Dorit_zgiotu.jpg"
+                src={`${baseURL}/home/about/dorit.png`}
                 alt='ד"ר דורית אבני'
               />
               <h3>ד"ר דורית אבני</h3>
@@ -93,7 +87,7 @@ function About() {
             </div>
             <div className="team-card">
               <img
-                src="https://res.cloudinary.com/dt5nnq3ew/image/upload/v1751368646/Dr_Ariel_mqe5r3.jpg"
+                src={`${baseURL}/home/about/Ariel.jpeg`}
                 alt='ד"ר איראל פרנקו'
               />
               <h3>ד"ר אריאל פרנקו</h3>

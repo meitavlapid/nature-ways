@@ -35,7 +35,7 @@ function Navbar() {
       <div className="logo">
         <Link to="/">
           <img
-            src="https://res.cloudinary.com/dt5nnq3ew/image/upload/v1750344062/logo_ul47xl.png"
+          src={`${baseURL}/home/homepage/logo_ul47xl.png`}
             alt="לוגו האתר"
           />
         </Link>
