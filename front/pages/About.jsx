@@ -20,7 +20,7 @@ function About() {
         </p>
 
         <img
-          src={`${baseURL}/home/about/main.png`}
+          src={`${baseURL}/static/home/about/main.png`}
           alt="תמונה אודות"
           className="about-main-image"
         />
@@ -42,7 +42,10 @@ function About() {
           <h1>מי אנחנו</h1>
           <div className="team-cards">
             <div className="team-card">
-              <img src={`${baseURL}/home/about/Shimrit.jpg`} alt="שימרית לב" />
+              <img
+                src={`${baseURL}/static/home/about/Shimrit.jpg`}
+                alt="שימרית לב"
+              />
               <h3>שימרית לב</h3>
               <h4>
                 מייסדת שותפה <br />
@@ -57,7 +60,10 @@ function About() {
               </p>
             </div>
             <div className="team-card">
-              <img src={`${baseURL}/home/about/gitit.jpg`} alt="גיתית להב" />
+              <img
+                src={`${baseURL}/static/home/about/gitit.jpg`}
+                alt="גיתית להב"
+              />
               <h3>גיתית להב</h3>
               <h4>
                 מייסדת שותפה <br />
@@ -73,7 +79,7 @@ function About() {
             </div>
             <div className="team-card">
               <img
-                src={`${baseURL}/home/about/dorit.png`}
+                src={`${baseURL}/static/home/about/dorit.png`}
                 alt='ד"ר דורית אבני'
               />
               <h3>ד"ר דורית אבני</h3>
@@ -89,7 +95,7 @@ function About() {
             </div>
             <div className="team-card">
               <img
-                src={`${baseURL}/home/about/Ariel.jpeg`}
+                src={`${baseURL}/static/home/about/Ariel.jpeg`}
                 alt='ד"ר איראל פרנקו'
               />
               <h3>ד"ר אריאל פרנקו</h3>

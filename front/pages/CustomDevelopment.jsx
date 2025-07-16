@@ -33,7 +33,7 @@ function CustomDevelopment() {
           <div className="video-container">
             <video
               controls
-              src={`${baseURL}/home/CustomDevelopment/Tailor-Made formulas.mp4`}
+              src={`${baseURL}/static/home/CustomDevelopment/Tailor-Made formulas.mp4`}
             />
           </div>
         </div>

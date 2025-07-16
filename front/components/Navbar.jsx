@@ -37,7 +37,7 @@ function Navbar() {
       <div className="logo">
         <Link to="/">
           <img
-          src={`${baseURL}/home/homepage/logo_ul47xl.png`}
+            src={`${baseURL}/static/home/homepage/logo_ul47xl.png`}
             alt="לוגו האתר"
           />
         </Link>
