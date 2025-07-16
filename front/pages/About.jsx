@@ -1,5 +1,5 @@
 import React from "react";
-import { baseURL } from "../services/api";
+import { baseURL } from "../src/services/api";
 
 import "../css/About.css";
 

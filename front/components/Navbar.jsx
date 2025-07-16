@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useUser } from "../hooks/UserContext";
 import { TbDoorEnter, TbDoorExit } from "react-icons/tb";
-import { baseURL } from "../services/api";
+import { baseURL } from "../src/services/api";
 
 import { FaWhatsapp, FaUserCircle } from "react-icons/fa";
 import "../css/Navbar.css";
