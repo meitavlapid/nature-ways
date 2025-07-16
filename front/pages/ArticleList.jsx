@@ -19,9 +19,17 @@ function ArticleList() {
       .catch((err) => console.error("שגיאה בטעינת מאמרים:", err));
   }, []);
   useEffect(() => {
-    document.body.style.overflow = showModal ? "hidden" : "auto";
-    return () => (document.body.style.overflow = "auto");
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [showModal]);
+
 
   const filtered = searchTag
     ? articles.filter((a) =>
@@ -98,37 +106,7 @@ function ArticleList() {
                     >
                       לצפייה
                     </Link>
-                    {showModal && (
-                      <div
-                        className={`custom-modal-backdrop ${
-                          showModal ? "show" : ""
-                        }`}
-                      >
-                        <div className="custom-modal">
-                          <h5>לצפייה במאמרים יש להתחבר או להירשם</h5>
-                          <div className="modal-actions">
-                            <button
-                              className="btn btn-success"
-                              onClick={() => navigate("/login")}
-                            >
-                              התחברות
-                            </button>
-                            <button
-                              className="btn btn-warning"
-                              onClick={() => navigate("/register")}
-                            >
-                              הרשמה
-                            </button>
-                            <button
-                              className="btn btn-secondary"
-                              onClick={() => setShowModal(false)}
-                            >
-                              ביטול
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    )}
+
                     {isAdmin && (
                       <>
                         <button
@@ -149,6 +127,33 @@ function ArticleList() {
             ))}
           </div>
         </ul>
+      )}
+      {showModal && (
+        <div className={`custom-modal-backdrop ${showModal ? "show" : ""}`}>
+          <div className="custom-modal">
+            <h5>לצפייה במאמרים יש להתחבר או להירשם</h5>
+            <div className="modal-actions">
+              <button
+                className="btn btn-success"
+                onClick={() => navigate("/login")}
+              >
+                התחברות
+              </button>
+              <button
+                className="btn btn-warning"
+                onClick={() => navigate("/register")}
+              >
+                הרשמה
+              </button>
+              <button
+                className="btn btn-secondary"
+                onClick={() => setShowModal(false)}
+              >
+                ביטול
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

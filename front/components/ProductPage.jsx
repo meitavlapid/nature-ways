@@ -11,6 +11,11 @@ function ProductPage() {
   const { isAdmin, user } = useUser();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = showModal ? "hidden" : "auto";
+    return () => (document.body.style.overflow = "auto");
+  }, [showModal]);
   useEffect(() => {
     api
       .get(`/api/products/${id}?category=${category}`)
@@ -21,8 +26,10 @@ function ProductPage() {
         navigate(`/${category}`);
       });
   }, [id, category, navigate]);
-
+ 
   if (!product) return <Loader />;
+ 
+  console.log("showModal:", showModal);
 
   return (
     <div className="container-fluid" dir="rtl">
@@ -51,34 +58,13 @@ function ProductPage() {
                 onClick={() => {
                   if (!user && !isAdmin) {
                     setShowModal(true);
-                  } else {
-                    window.open(product.specFileUrl, "_blank");
+                    return;
                   }
+                  window.open(product.specFileUrl, "_blank");
                 }}
               >
                 הורדת המפרט שלי
               </button>
-            )}
-            {showModal && (
-              <div className="custom-modal-backdrop">
-                <div className="custom-modal ">
-                  <h3>כדי להוריד את המפרט, יש להירשם</h3>
-                  <div className="modal-actions">
-                    <button
-                      className="btn btn-success"
-                      onClick={() => navigate("/register")}
-                    >
-                      להרשמה
-                    </button>
-                    <button
-                      className="btn btn-secondary"
-                      onClick={() => setShowModal(false)}
-                    >
-                      ביטול
-                    </button>
-                  </div>
-                </div>
-              </div>
             )}
           </div>
         </div>
@@ -149,6 +135,35 @@ function ProductPage() {
                   </div>
                 ))}
               </>
+            )}
+            {showModal && (
+              <div
+                className={`custom-modal-backdrop ${showModal ? "show" : ""}`}
+              >
+                <div className="custom-modal">
+                  <h5>לצפייה במאמרים יש להתחבר או להירשם</h5>
+                  <div className="modal-actions">
+                    <button
+                      className="btn btn-success"
+                      onClick={() => navigate("/login")}
+                    >
+                      התחברות
+                    </button>
+                    <button
+                      className="btn btn-warning"
+                      onClick={() => navigate("/register")}
+                    >
+                      הרשמה
+                    </button>
+                    <button
+                      className="btn btn-secondary"
+                      onClick={() => setShowModal(false)}
+                    >
+                      ביטול
+                    </button>
+                  </div>
+                </div>
+              </div>
             )}
           </div>
         </div>

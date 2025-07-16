@@ -46,7 +46,7 @@
 }
 
 .img {
-  float: left; 
+  float: left;
   width: 300px;
   max-width: 45%;
   margin: 0 0 1rem 1rem;
@@ -70,6 +70,45 @@
   width: 200px;
 }
 
+.custom-modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.37);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.custom-modal {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.507);
+  transform: scale(0.95);
+  opacity: 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.custom-modal-backdrop.show .custom-modal {
+  transform: scale(1);
+  opacity: 1;
+}
 @media (max-width: 768px) {
   .product-bg {
     padding: 1rem;

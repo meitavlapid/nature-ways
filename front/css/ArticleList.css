@@ -124,7 +124,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.267);
+  background: rgba(0, 0, 0, 0.247);
   z-index: 999;
   display: flex;
   justify-content: center;
@@ -137,7 +137,7 @@
   border-radius: 12px;
   max-width: 400px;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.664);
    transform: scale(0.95);
   opacity: 0;
   transition: all 0.2s ease-in-out;
