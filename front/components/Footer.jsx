@@ -2,6 +2,7 @@ import React from "react";
 import { FaFacebook, FaWhatsapp, FaEnvelope } from "react-icons/fa";
 import "../css/Footer.css";
 import { Link } from "react-router-dom";
+import { baseURL } from "../services/api";
 
 function Footer() {
   return (
