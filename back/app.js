@@ -20,9 +20,11 @@ const PORT = process.env.PORT || 5000;
 
 // Middlewares
 const allowedOrigins = [
+  "https://natureways.co.il",
+
   "https://www.natureways.co.il",
-  "http://localhost:5173", 
-  "https://nature-ways.onrender.com", 
+  "http://localhost:5173",
+  "https://nature-ways.onrender.com",
 ];
 
 app.use(
