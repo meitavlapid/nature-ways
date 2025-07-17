@@ -26,36 +26,36 @@ function EditProduct() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  onst handleImageUpload = async (file) => {
-  const formDataImage = new FormData();
-  formDataImage.append("file", file);
-  formDataImage.append("folder", "products"); // ← הגדרת תקיית יעד
+  const handleImageUpload = async (file) => {
+    const formDataImage = new FormData();
+    formDataImage.append("file", file);
+    formDataImage.append("folder", "products"); // ← הגדרת תקיית יעד
 
-  try {
-    const res = await api.post("/api/upload", formDataImage, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-    setFormData((prev) => ({ ...prev, image: res.data.url }));
-  } catch (error) {
-    console.error("שגיאה בהעלאת תמונה:", error.message);
-    alert("העלאת התמונה נכשלה");
-  }
-};
+    try {
+      const res = await api.post("/api/upload", formDataImage, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      setFormData((prev) => ({ ...prev, image: res.data.url }));
+    } catch (error) {
+      console.error("שגיאה בהעלאת תמונה:", error.message);
+      alert("העלאת התמונה נכשלה");
+    }
+  };
   const handleSpecFileUpload = async (file) => {
-  const formData = new FormData();
-  formData.append("file", file);
-  formData.append("folder", "product-specs"); // ← יעד חדש
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("folder", "product-specs"); // ← יעד חדש
 
-  try {
-    const res = await api.post("/api/upload", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-    setFormData((prev) => ({ ...prev, specFileUrl: res.data.url }));
-  } catch (error) {
-    console.error("שגיאה בהעלאת הקובץ:", error.message);
-    alert("העלאת קובץ המפרט נכשלה");
-  }
-};
+    try {
+      const res = await api.post("/api/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      setFormData((prev) => ({ ...prev, specFileUrl: res.data.url }));
+    } catch (error) {
+      console.error("שגיאה בהעלאת הקובץ:", error.message);
+      alert("העלאת קובץ המפרט נכשלה");
+    }
+  };
 
   const handleListChange = (field, index, value) => {
     const updatedList = [...formData[field]];
