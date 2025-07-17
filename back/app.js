@@ -35,6 +35,7 @@ app.use(
 );
 app.use(express.json({ limit: "200mb" }));
 app.use(express.urlencoded({ extended: true, limit: "200mb" }));
+app.use("/static", express.static(path.join("/home/sysop/cloudinary/home")));
 app.use("/api/images", imageRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/videos", videoRoutes);

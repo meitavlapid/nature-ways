@@ -1,28 +1,24 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const { v2: cloudinary } = require("cloudinary");
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const path = require("path");
 const Image = require("../models/Image");
+const About = require("../models/About");
 
-// קונפיגורציית Cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUD_KEY,
-  api_secret: process.env.CLOUD_SECRET,
-});
-
-// הגדרת אחסון Multer עם Cloudinary
-const storage = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: "about",
-    allowed_formats: ["jpg", "jpeg", "png", "webp"],
+// הגדרת אחסון בשרת מקומי
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/"); // תיקייה יחסית
+  },
+  filename: function (req, file, cb) {
+    const uniqueName = Date.now() + "-" + file.originalname;
+    cb(null, uniqueName);
   },
 });
 
 const upload = multer({ storage });
 
+// קבלת תמונות לפי key
 router.get("/", async (req, res) => {
   try {
     const { key } = req.query;
@@ -34,8 +30,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-const About = require("../models/About"); 
-
+// העלאת תמונה ושמירה במסד
 router.post("/", upload.single("image"), async (req, res) => {
   try {
     const { key } = req.body;
@@ -44,9 +39,11 @@ router.post("/", upload.single("image"), async (req, res) => {
       return res.status(400).json({ error: "חובה לשלוח תמונה ו־key" });
     }
 
+    const imageUrl = `/uploads/${req.file.filename}`;
+
     const newImage = new Image({
       key,
-      url: req.file.path,
+      url: imageUrl,
       public_id: req.file.filename,
     });
 
@@ -55,7 +52,7 @@ router.post("/", upload.single("image"), async (req, res) => {
     if (key === "about") {
       await About.findOneAndUpdate(
         { key: "about" },
-        { img: req.file.path },
+        { img: imageUrl },
         { new: true }
       );
     }
