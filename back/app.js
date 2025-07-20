@@ -21,7 +21,6 @@ const PORT = process.env.PORT || 5000;
 // Middlewares
 const allowedOrigins = [
   "https://natureways.co.il",
-
   "https://www.natureways.co.il",
   "http://localhost:5173",
   "https://nature-ways.onrender.com",
@@ -35,7 +34,7 @@ app.use(
 );
 app.use(express.json({ limit: "200mb" }));
 app.use(express.urlencoded({ extended: true, limit: "200mb" }));
-app.use("/static", express.static(path.join("/home/sysop/cloudinary/home")));
+
 app.use("/api/images", imageRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/videos", videoRoutes);

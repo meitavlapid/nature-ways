@@ -20,7 +20,7 @@ function About() {
         </p>
 
         <img
-          src={`${baseURL}/static/home/about/main.png`}
+          src={`${baseURL}/static/home/about/main1.png`}
           alt="תמונה אודות"
           className="about-main-image"
         />

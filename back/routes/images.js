@@ -40,6 +40,7 @@ router.post("/", upload.single("image"), async (req, res) => {
     }
 
     const imageUrl = `/uploads/${req.file.filename}`;
+    console.log(imageUrl, "imageUrl");
 
     const newImage = new Image({
       key,
