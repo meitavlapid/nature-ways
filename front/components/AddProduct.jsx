@@ -89,15 +89,21 @@ function AddProduct() {
     if (!file) return;
 
     const data = new FormData();
-    data.append("file", file);
-    data.append("folder", "products");
+    data.append("file", file); // ← שם השדה חייב להיות בדיוק כמו בצד השרת!
+    data.append("folder", "products"); // ← חובה אם השרת מצפה לזה
 
     try {
-      const res = await api.post("/api/upload", data);
+      const res = await api.post("/api/upload", data, {
+        headers: {
+          "Content-Type": "multipart/form-data", // ← חשוב!
+        },
+      });
+
       if (res.data?.url) {
         setFormData((prev) => ({ ...prev, image: res.data.url }));
+        console.log("✅ תמונה הועלתה:", res.data.url);
       } else {
-        alert("העלאה נכשלה – לא התקבל URL");
+        alert("⚠️ העלאה נכשלה – לא התקבל URL מהשרת");
       }
     } catch (err) {
       console.error("❌ שגיאה בהעלאת תמונה:", err);
