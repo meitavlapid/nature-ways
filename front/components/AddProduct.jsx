@@ -86,17 +86,21 @@ function AddProduct() {
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
+    if (!file) return;
+
     const data = new FormData();
-    data.append("image", file);
+    data.append("file", file);
+    data.append("folder", "products");
+
     try {
       const res = await api.post("/api/upload", data);
-      setFormData((prev) => ({ ...prev, image: res.data.imageUrl }));
+      const imageUrl = res.data.url; // כתובת מלאה ציבורית
+      setFormData((prev) => ({ ...prev, image: imageUrl }));
     } catch (err) {
-      console.error("שגיאה בהעלאת תמונה:", err);
+      console.error("❌ שגיאה בהעלאת תמונה:", err);
       alert("שגיאה בהעלאת תמונה");
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

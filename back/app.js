@@ -45,7 +45,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/products", productsRoutes);
 app.use("/api/users", usersRouter);
 app.use("/api/register", registrationRoute);
-
+app.use(
+  "/static/home/products",
+  express.static("/home/sysop/cloudinary/home/products")
+);
 // ברירת מחדל
 app.get("/", (req, res) => {
   res.send("API is working");

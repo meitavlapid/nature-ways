@@ -4,30 +4,26 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 
-// ✨ בסיס תקיית יעד חדש:
-const BASE_UPLOAD_PATH = "/home"; // ← במקום /home/sysop/cloudinary/home
+const BASE_UPLOAD_PATH = "/home/sysop/cloudinary/home";
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const folder = req.body.folder; // products, about וכו'
+    const folder = req.body.folder;
     const targetPath = path.join(BASE_UPLOAD_PATH, folder);
-
-    // יצירת התיקייה אם לא קיימת
-    if (!fs.existsSync(targetPath)) {
-      fs.mkdirSync(targetPath, { recursive: true });
-    }
-
+    fs.mkdirSync(targetPath, { recursive: true });
     cb(null, targetPath);
   },
   filename: function (req, file, cb) {
-    const uniqueName = Date.now() + "-" + file.originalname;
+    const cleanName = file.originalname
+      .replace(/\s+/g, "_")
+      .replace(/[^\w.-]/g, "");
+    const uniqueName = Date.now() + "-" + cleanName;
     cb(null, uniqueName);
   },
 });
 
 const upload = multer({ storage });
 
-// ✔️ העלאת קובץ
 router.post("/", upload.single("file"), (req, res) => {
   try {
     const { folder } = req.body;
@@ -36,12 +32,11 @@ router.post("/", upload.single("file"), (req, res) => {
       return res.status(400).json({ error: "חובה לצרף קובץ ו־folder" });
     }
 
-    // URL ציבורי: תלוי איפה אתה משרת את תיקיית /home
     const fileName = req.file.filename;
-    const url = `/static/${folder}/${fileName}`; // ← אם static מפנה ל /home
+    const url = `https://www.natureways.co.il/static/home/${folder}/${fileName}`;
 
     res.status(201).json({
-      message: "קובץ נשמר בהצלחה",
+      message: "הקובץ נשמר בהצלחה",
       url,
       fileName,
     });
