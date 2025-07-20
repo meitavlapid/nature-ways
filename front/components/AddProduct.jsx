@@ -94,13 +94,17 @@ function AddProduct() {
 
     try {
       const res = await api.post("/api/upload", data);
-      const imageUrl = res.data.url; // כתובת מלאה ציבורית
-      setFormData((prev) => ({ ...prev, image: imageUrl }));
+      if (res.data?.url) {
+        setFormData((prev) => ({ ...prev, image: res.data.url }));
+      } else {
+        alert("העלאה נכשלה – לא התקבל URL");
+      }
     } catch (err) {
       console.error("❌ שגיאה בהעלאת תמונה:", err);
       alert("שגיאה בהעלאת תמונה");
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -180,7 +184,7 @@ function AddProduct() {
           />
           {formData.image && (
             <img
-              src={formData.image}
+              src={product.image}
               alt="תצוגה"
               className="img-fluid mt-2"
               style={{ maxWidth: "200px" }}
